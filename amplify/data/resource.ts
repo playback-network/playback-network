@@ -1,4 +1,4 @@
-import { type ClientSchema, a, defineData } from "@aws-amplify/backend";
+import { type ClientSchema, a, defineData } from '@aws-amplify/backend';
 
 /*== STEP 1 ===============================================================
 The section below creates a Todo database table with a "content" field. Try
@@ -11,7 +11,83 @@ const schema = a.schema({
     .model({
       content: a.string(),
       isDone: a.boolean(),
-      timestamp: a.datetime(),
+      createdAt: a.timestamp(),
+    })
+    .authorization((allow) => [allow.publicApiKey()]),
+  Account: a
+    .model({
+      wallet: a.string(),
+      ens: a.string(),
+      balance: a.float(),
+      nftAddresses: a.json(),
+      verified: a.boolean(),
+      createdAt: a.timestamp(),
+    })
+    .authorization((allow) => [allow.publicApiKey()]),
+  NFT: a
+    .model({
+      ownersWallet: a.string(),
+      blockAddress: a.string(),
+      cid: a.string(),
+      sizeGb: a.float(),
+      metadata: a.json(),
+      price: a.float(),
+      createdAt: a.timestamp(),
+    })
+    .authorization((allow) => [allow.publicApiKey()]),
+  AIModel: a
+    .model({
+      name: a.string(),
+      ownersWallet: a.string(),
+      description: a.string(),
+      accuracy: a.float(),
+      app: a.string(),
+      price: a.float(),
+      status: a.string(),
+      serialisedConfig: a.json(),
+      published: a.boolean(),
+      createdAt: a.timestamp(),
+    })
+    .authorization((allow) => [allow.publicApiKey()]),
+  Media: a
+    .model({
+      ownersWallet: a.string(),
+      type: a.string(),
+      description: a.string(),
+      sizeGb: a.float(),
+      status: a.string(),
+      createdAt: a.timestamp(),
+    })
+    .authorization((allow) => [allow.publicApiKey()]),
+  Task: a
+    .model({
+      mediaId: a.string(),
+      aiModelId: a.string(),
+      ownersWallet: a.string(),
+      name: a.string(),
+      description: a.string(),
+      difficulty: a.float(),
+      app: a.string(),
+      priceListed: a.float(),
+      status: a.string(),
+      published: a.boolean(),
+      createdAt: a.timestamp(),
+    })
+    .authorization((allow) => [allow.publicApiKey()]),
+  Sale: a
+    .model({
+      taskId: a.string(),
+      aiModelId: a.string(),
+      priceListed: a.float(), // Listing price
+      pricePaid: a.float(), // Price paid in case of Auctions - biddings - isAuction=true
+      isAuction: a.boolean(),
+      app: a.string(),
+      sellerssWallet: a.string(),
+      buyersWallet: a.string(),
+      transactionLedgerId: a.string(),
+      status: a.string(),
+      published: a.boolean(),
+      createdAt: a.timestamp(),
     })
     .authorization((allow) => [allow.publicApiKey()]),
 });
@@ -21,7 +97,7 @@ export type Schema = ClientSchema<typeof schema>;
 export const data = defineData({
   schema,
   authorizationModes: {
-    defaultAuthorizationMode: "apiKey",
+    defaultAuthorizationMode: 'apiKey',
     // API Key is used for a.allow.public() rules
     apiKeyAuthorizationMode: {
       expiresInDays: 30,
