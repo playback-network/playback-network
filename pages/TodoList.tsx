@@ -1,15 +1,17 @@
-import { useState, useEffect } from "react";
-import type { Schema } from "../amplify/data/resource";
-import { generateClient } from "aws-amplify/data";
+import { useState, useEffect } from 'react';
+import type { Schema } from '../amplify/data/resource';
+import { generateClient } from 'aws-amplify/data';
 
 const client = generateClient<Schema>();
 
 export default function TodoList() {
-  const [todos, setTodos] = useState<Schema["Todo"]["type"][]>([]);
+  const [todos, setTodos] = useState<Schema['Todo']['type'][]>([]);
 
+  // This is implementing a gql fetch: The amplify client performs a GraphQL getList call
   const fetchTodos = async () => {
     const { data: items, errors } = await client.models.Todo.list();
     setTodos(items);
+    console.log('TODOS fetched with the client', todos);
   };
 
   useEffect(() => {
@@ -18,12 +20,12 @@ export default function TodoList() {
 
   const createTodo = async () => {
     await client.models.Todo.create({
-      content: window.prompt("Todo content?"),
+      content: window.prompt('Todo content?'),
       isDone: false,
     });
 
     fetchTodos();
-  }
+  };
 
   return (
     <div>

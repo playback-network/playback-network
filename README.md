@@ -1,25 +1,20 @@
-## AWS Amplify Next.js (Pages) Starter Template
-
-This repository provides a starter template for creating applications using Next.js (Pages) and AWS Amplify, emphasizing easy setup for authentication, API, and database capabilities.
+# Playback Network Backend-Frontend on AWS Amplify Gen2
 
 ## Overview
 
-This template equips you with a foundational Next.js application integrated with AWS Amplify, streamlined for scalability and performance. It is ideal for developers looking to jumpstart their project with pre-configured AWS services like Cognito, AppSync, and DynamoDB.
+This project contains both the backend and frontend in one repo.
+The Backend uses a serverless approach combining tablesin DynamoDB (noSQL), Graphql endpoints, REST endpoints, and AWS Lambdas. Amplify Gen2 leverages the CDK (see amplify_outputs.json)
 
-## Features
-
-- **Authentication**: Setup with Amazon Cognito for secure user authentication.
-- **API**: Ready-to-use GraphQL endpoint with AWS AppSync.
-- **Database**: Real-time database powered by Amazon DynamoDB.
+## Getting started
+```
+npm i
+npm run dev
+```
+This should start a local dev server at http://localhost:3000.
 
 ## Deploying to AWS
 
 For detailed instructions on deploying your application, refer to the [deployment section](https://docs.amplify.aws/nextjs/start/quickstart/nextjs-pages-router/#deploy-a-fullstack-app-to-aws) of our documentation.
 
-## Security
-
-See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
-
-## License
-
-This library is licensed under the MIT-0 License. See the LICENSE file.
+## Further reading
+https://docs.amplify.aws/nextjs/start/quickstart/nextjs-pages-router/
