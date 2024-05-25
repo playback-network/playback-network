@@ -11,9 +11,15 @@ export default function App() {
     client.models.Todo.delete({ id });
   }
 
+  // This is implementing GraphQL Subscriptions.
+  // This is useful wnen we want to see changes in the DB reflected in the
+  // UI in real time
   function listTodos() {
     client.models.Todo.observeQuery().subscribe({
-      next: (data) => setTodos([...data.items]),
+      next: (data) => {
+        console.log('TODOS retrieved via subscriptions', todos);
+        setTodos([...data.items]);
+      },
     });
   }
 
