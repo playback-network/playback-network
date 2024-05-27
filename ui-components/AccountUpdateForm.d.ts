@@ -22,7 +22,7 @@ export declare type AccountUpdateFormInputValues = {
     balance?: number;
     nftAddresses?: string;
     verified?: boolean;
-    createdAt?: number;
+    createdAt?: string;
 };
 export declare type AccountUpdateFormValidationValues = {
     wallet?: ValidationFunction<string>;
@@ -30,7 +30,7 @@ export declare type AccountUpdateFormValidationValues = {
     balance?: ValidationFunction<number>;
     nftAddresses?: ValidationFunction<string>;
     verified?: ValidationFunction<boolean>;
-    createdAt?: ValidationFunction<number>;
+    createdAt?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type AccountUpdateFormOverridesProps = {

@@ -18,12 +18,12 @@ export declare type ValidationFunction<T> = (value: T, validationResponse: Valid
 export declare type TodoCreateFormInputValues = {
     content?: string;
     isDone?: boolean;
-    createdAt?: number;
+    createdAt?: string;
 };
 export declare type TodoCreateFormValidationValues = {
     content?: ValidationFunction<string>;
     isDone?: ValidationFunction<boolean>;
-    createdAt?: ValidationFunction<number>;
+    createdAt?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type TodoCreateFormOverridesProps = {

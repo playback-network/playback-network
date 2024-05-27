@@ -1,5 +1,5 @@
 import * as React from "react";
-import { GridProps, SwitchFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { GridProps, SwitchFieldProps, TextAreaFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
 import { Task } from "./graphql/types";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;
@@ -23,11 +23,11 @@ export declare type TaskUpdateFormInputValues = {
     name?: string;
     description?: string;
     difficulty?: number;
-    app?: string;
     priceListed?: number;
     status?: string;
+    apps?: string;
     published?: boolean;
-    createdAt?: number;
+    createdAt?: string;
 };
 export declare type TaskUpdateFormValidationValues = {
     mediaId?: ValidationFunction<string>;
@@ -36,11 +36,11 @@ export declare type TaskUpdateFormValidationValues = {
     name?: ValidationFunction<string>;
     description?: ValidationFunction<string>;
     difficulty?: ValidationFunction<number>;
-    app?: ValidationFunction<string>;
     priceListed?: ValidationFunction<number>;
     status?: ValidationFunction<string>;
+    apps?: ValidationFunction<string>;
     published?: ValidationFunction<boolean>;
-    createdAt?: ValidationFunction<number>;
+    createdAt?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type TaskUpdateFormOverridesProps = {
@@ -51,9 +51,9 @@ export declare type TaskUpdateFormOverridesProps = {
     name?: PrimitiveOverrideProps<TextFieldProps>;
     description?: PrimitiveOverrideProps<TextFieldProps>;
     difficulty?: PrimitiveOverrideProps<TextFieldProps>;
-    app?: PrimitiveOverrideProps<TextFieldProps>;
     priceListed?: PrimitiveOverrideProps<TextFieldProps>;
     status?: PrimitiveOverrideProps<TextFieldProps>;
+    apps?: PrimitiveOverrideProps<TextAreaFieldProps>;
     published?: PrimitiveOverrideProps<SwitchFieldProps>;
     createdAt?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;

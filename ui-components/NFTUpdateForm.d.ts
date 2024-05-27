@@ -23,7 +23,7 @@ export declare type NFTUpdateFormInputValues = {
     sizeGb?: number;
     metadata?: string;
     price?: number;
-    createdAt?: number;
+    createdAt?: string;
 };
 export declare type NFTUpdateFormValidationValues = {
     ownersWallet?: ValidationFunction<string>;
@@ -32,7 +32,7 @@ export declare type NFTUpdateFormValidationValues = {
     sizeGb?: ValidationFunction<number>;
     metadata?: ValidationFunction<string>;
     price?: ValidationFunction<number>;
-    createdAt?: ValidationFunction<number>;
+    createdAt?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type NFTUpdateFormOverridesProps = {

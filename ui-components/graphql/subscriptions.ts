@@ -36,6 +36,22 @@ export const onCreateAccount = /* GraphQL */ `
     }
   }
 `;
+export const onCreateApp = /* GraphQL */ `
+  subscription OnCreateApp($filter: ModelSubscriptionAppFilterInput) {
+    onCreateApp(filter: $filter) {
+      createdAt
+      description
+      id
+      name
+      published
+      rank
+      status
+      tasks
+      updatedAt
+      __typename
+    }
+  }
+`;
 export const onCreateMedia = /* GraphQL */ `
   subscription OnCreateMedia($filter: ModelSubscriptionMediaFilterInput) {
     onCreateMedia(filter: $filter) {
@@ -92,7 +108,7 @@ export const onCreateTask = /* GraphQL */ `
   subscription OnCreateTask($filter: ModelSubscriptionTaskFilterInput) {
     onCreateTask(filter: $filter) {
       aiModelId
-      app
+      apps
       createdAt
       description
       difficulty
@@ -154,6 +170,22 @@ export const onDeleteAccount = /* GraphQL */ `
     }
   }
 `;
+export const onDeleteApp = /* GraphQL */ `
+  subscription OnDeleteApp($filter: ModelSubscriptionAppFilterInput) {
+    onDeleteApp(filter: $filter) {
+      createdAt
+      description
+      id
+      name
+      published
+      rank
+      status
+      tasks
+      updatedAt
+      __typename
+    }
+  }
+`;
 export const onDeleteMedia = /* GraphQL */ `
   subscription OnDeleteMedia($filter: ModelSubscriptionMediaFilterInput) {
     onDeleteMedia(filter: $filter) {
@@ -210,7 +242,7 @@ export const onDeleteTask = /* GraphQL */ `
   subscription OnDeleteTask($filter: ModelSubscriptionTaskFilterInput) {
     onDeleteTask(filter: $filter) {
       aiModelId
-      app
+      apps
       createdAt
       description
       difficulty
@@ -272,6 +304,22 @@ export const onUpdateAccount = /* GraphQL */ `
     }
   }
 `;
+export const onUpdateApp = /* GraphQL */ `
+  subscription OnUpdateApp($filter: ModelSubscriptionAppFilterInput) {
+    onUpdateApp(filter: $filter) {
+      createdAt
+      description
+      id
+      name
+      published
+      rank
+      status
+      tasks
+      updatedAt
+      __typename
+    }
+  }
+`;
 export const onUpdateMedia = /* GraphQL */ `
   subscription OnUpdateMedia($filter: ModelSubscriptionMediaFilterInput) {
     onUpdateMedia(filter: $filter) {
@@ -328,7 +376,7 @@ export const onUpdateTask = /* GraphQL */ `
   subscription OnUpdateTask($filter: ModelSubscriptionTaskFilterInput) {
     onUpdateTask(filter: $filter) {
       aiModelId
-      app
+      apps
       createdAt
       description
       difficulty

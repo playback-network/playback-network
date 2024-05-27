@@ -6,6 +6,7 @@ import {
   Flex,
   Grid,
   SwitchField,
+  TextAreaField,
   TextField,
 } from "@aws-amplify/ui-react";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
@@ -32,9 +33,9 @@ export default function TaskUpdateForm(props) {
     name: "",
     description: "",
     difficulty: "",
-    app: "",
     priceListed: "",
     status: "",
+    apps: "",
     published: false,
     createdAt: "",
   };
@@ -48,11 +49,11 @@ export default function TaskUpdateForm(props) {
     initialValues.description
   );
   const [difficulty, setDifficulty] = React.useState(initialValues.difficulty);
-  const [app, setApp] = React.useState(initialValues.app);
   const [priceListed, setPriceListed] = React.useState(
     initialValues.priceListed
   );
   const [status, setStatus] = React.useState(initialValues.status);
+  const [apps, setApps] = React.useState(initialValues.apps);
   const [published, setPublished] = React.useState(initialValues.published);
   const [createdAt, setCreatedAt] = React.useState(initialValues.createdAt);
   const [errors, setErrors] = React.useState({});
@@ -66,9 +67,13 @@ export default function TaskUpdateForm(props) {
     setName(cleanValues.name);
     setDescription(cleanValues.description);
     setDifficulty(cleanValues.difficulty);
-    setApp(cleanValues.app);
     setPriceListed(cleanValues.priceListed);
     setStatus(cleanValues.status);
+    setApps(
+      typeof cleanValues.apps === "string" || cleanValues.apps === null
+        ? cleanValues.apps
+        : JSON.stringify(cleanValues.apps)
+    );
     setPublished(cleanValues.published);
     setCreatedAt(cleanValues.createdAt);
     setErrors({});
@@ -96,9 +101,9 @@ export default function TaskUpdateForm(props) {
     name: [],
     description: [],
     difficulty: [],
-    app: [],
     priceListed: [],
     status: [],
+    apps: [{ type: "JSON" }],
     published: [],
     createdAt: [],
   };
@@ -118,12 +123,6 @@ export default function TaskUpdateForm(props) {
     }
     setErrors((errors) => ({ ...errors, [fieldName]: validationResponse }));
     return validationResponse;
-  };
-  const convertTimeStampToDate = (ts) => {
-    if (Math.abs(Date.now() - ts) < Math.abs(Date.now() - ts * 1000)) {
-      return new Date(ts);
-    }
-    return new Date(ts * 1000);
   };
   const convertToLocal = (date) => {
     const df = new Intl.DateTimeFormat("default", {
@@ -157,9 +156,9 @@ export default function TaskUpdateForm(props) {
           name: name ?? null,
           description: description ?? null,
           difficulty: difficulty ?? null,
-          app: app ?? null,
           priceListed: priceListed ?? null,
           status: status ?? null,
+          apps: apps ?? null,
           published: published ?? null,
           createdAt: createdAt ?? null,
         };
@@ -228,9 +227,9 @@ export default function TaskUpdateForm(props) {
               name,
               description,
               difficulty,
-              app,
               priceListed,
               status,
+              apps,
               published,
               createdAt,
             };
@@ -262,9 +261,9 @@ export default function TaskUpdateForm(props) {
               name,
               description,
               difficulty,
-              app,
               priceListed,
               status,
+              apps,
               published,
               createdAt,
             };
@@ -296,9 +295,9 @@ export default function TaskUpdateForm(props) {
               name,
               description,
               difficulty,
-              app,
               priceListed,
               status,
+              apps,
               published,
               createdAt,
             };
@@ -330,9 +329,9 @@ export default function TaskUpdateForm(props) {
               name: value,
               description,
               difficulty,
-              app,
               priceListed,
               status,
+              apps,
               published,
               createdAt,
             };
@@ -364,9 +363,9 @@ export default function TaskUpdateForm(props) {
               name,
               description: value,
               difficulty,
-              app,
               priceListed,
               status,
+              apps,
               published,
               createdAt,
             };
@@ -402,9 +401,9 @@ export default function TaskUpdateForm(props) {
               name,
               description,
               difficulty: value,
-              app,
               priceListed,
               status,
+              apps,
               published,
               createdAt,
             };
@@ -420,40 +419,6 @@ export default function TaskUpdateForm(props) {
         errorMessage={errors.difficulty?.errorMessage}
         hasError={errors.difficulty?.hasError}
         {...getOverrideProps(overrides, "difficulty")}
-      ></TextField>
-      <TextField
-        label="App"
-        isRequired={false}
-        isReadOnly={false}
-        value={app}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              mediaId,
-              aiModelId,
-              ownersWallet,
-              name,
-              description,
-              difficulty,
-              app: value,
-              priceListed,
-              status,
-              published,
-              createdAt,
-            };
-            const result = onChange(modelFields);
-            value = result?.app ?? value;
-          }
-          if (errors.app?.hasError) {
-            runValidationTasks("app", value);
-          }
-          setApp(value);
-        }}
-        onBlur={() => runValidationTasks("app", app)}
-        errorMessage={errors.app?.errorMessage}
-        hasError={errors.app?.hasError}
-        {...getOverrideProps(overrides, "app")}
       ></TextField>
       <TextField
         label="Price listed"
@@ -474,9 +439,9 @@ export default function TaskUpdateForm(props) {
               name,
               description,
               difficulty,
-              app,
               priceListed: value,
               status,
+              apps,
               published,
               createdAt,
             };
@@ -508,9 +473,9 @@ export default function TaskUpdateForm(props) {
               name,
               description,
               difficulty,
-              app,
               priceListed,
               status: value,
+              apps,
               published,
               createdAt,
             };
@@ -527,6 +492,40 @@ export default function TaskUpdateForm(props) {
         hasError={errors.status?.hasError}
         {...getOverrideProps(overrides, "status")}
       ></TextField>
+      <TextAreaField
+        label="Apps"
+        isRequired={false}
+        isReadOnly={false}
+        value={apps}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              mediaId,
+              aiModelId,
+              ownersWallet,
+              name,
+              description,
+              difficulty,
+              priceListed,
+              status,
+              apps: value,
+              published,
+              createdAt,
+            };
+            const result = onChange(modelFields);
+            value = result?.apps ?? value;
+          }
+          if (errors.apps?.hasError) {
+            runValidationTasks("apps", value);
+          }
+          setApps(value);
+        }}
+        onBlur={() => runValidationTasks("apps", apps)}
+        errorMessage={errors.apps?.errorMessage}
+        hasError={errors.apps?.hasError}
+        {...getOverrideProps(overrides, "apps")}
+      ></TextAreaField>
       <SwitchField
         label="Published"
         defaultChecked={false}
@@ -542,9 +541,9 @@ export default function TaskUpdateForm(props) {
               name,
               description,
               difficulty,
-              app,
               priceListed,
               status,
+              apps,
               published: value,
               createdAt,
             };
@@ -566,10 +565,10 @@ export default function TaskUpdateForm(props) {
         isRequired={false}
         isReadOnly={false}
         type="datetime-local"
-        value={createdAt && convertToLocal(convertTimeStampToDate(createdAt))}
+        value={createdAt && convertToLocal(new Date(createdAt))}
         onChange={(e) => {
           let value =
-            e.target.value === "" ? "" : Number(new Date(e.target.value));
+            e.target.value === "" ? "" : new Date(e.target.value).toISOString();
           if (onChange) {
             const modelFields = {
               mediaId,
@@ -578,9 +577,9 @@ export default function TaskUpdateForm(props) {
               name,
               description,
               difficulty,
-              app,
               priceListed,
               status,
+              apps,
               published,
               createdAt: value,
             };

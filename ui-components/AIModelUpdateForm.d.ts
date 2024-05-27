@@ -26,7 +26,7 @@ export declare type AIModelUpdateFormInputValues = {
     status?: string;
     serialisedConfig?: string;
     published?: boolean;
-    createdAt?: number;
+    createdAt?: string;
 };
 export declare type AIModelUpdateFormValidationValues = {
     name?: ValidationFunction<string>;
@@ -38,7 +38,7 @@ export declare type AIModelUpdateFormValidationValues = {
     status?: ValidationFunction<string>;
     serialisedConfig?: ValidationFunction<string>;
     published?: ValidationFunction<boolean>;
-    createdAt?: ValidationFunction<number>;
+    createdAt?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type AIModelUpdateFormOverridesProps = {

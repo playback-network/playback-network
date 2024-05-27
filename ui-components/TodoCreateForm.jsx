@@ -60,12 +60,6 @@ export default function TodoCreateForm(props) {
     setErrors((errors) => ({ ...errors, [fieldName]: validationResponse }));
     return validationResponse;
   };
-  const convertTimeStampToDate = (ts) => {
-    if (Math.abs(Date.now() - ts) < Math.abs(Date.now() - ts * 1000)) {
-      return new Date(ts);
-    }
-    return new Date(ts * 1000);
-  };
   const convertToLocal = (date) => {
     const df = new Intl.DateTimeFormat("default", {
       year: "numeric",
@@ -205,10 +199,10 @@ export default function TodoCreateForm(props) {
         isRequired={false}
         isReadOnly={false}
         type="datetime-local"
-        value={createdAt && convertToLocal(convertTimeStampToDate(createdAt))}
+        value={createdAt && convertToLocal(new Date(createdAt))}
         onChange={(e) => {
           let value =
-            e.target.value === "" ? "" : Number(new Date(e.target.value));
+            e.target.value === "" ? "" : new Date(e.target.value).toISOString();
           if (onChange) {
             const modelFields = {
               content,

@@ -21,7 +21,7 @@ export declare type MediaCreateFormInputValues = {
     description?: string;
     sizeGb?: number;
     status?: string;
-    createdAt?: number;
+    createdAt?: string;
 };
 export declare type MediaCreateFormValidationValues = {
     ownersWallet?: ValidationFunction<string>;
@@ -29,7 +29,7 @@ export declare type MediaCreateFormValidationValues = {
     description?: ValidationFunction<string>;
     sizeGb?: ValidationFunction<number>;
     status?: ValidationFunction<string>;
-    createdAt?: ValidationFunction<number>;
+    createdAt?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type MediaCreateFormOverridesProps = {
