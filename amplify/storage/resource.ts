@@ -11,7 +11,7 @@ export const storage = defineStorage({
       allow.entity('identity').to(['read', 'write', 'delete']),
 
       // admins can also delete:
-      allow.authenticated.to(['read', 'write', 'delete']),
+      // allow.authenticated.to(['read', 'write', 'delete']),
     ],
   }),
 });

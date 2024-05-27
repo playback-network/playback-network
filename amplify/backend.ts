@@ -7,10 +7,12 @@ import {
   RestApi,
 } from 'aws-cdk-lib/aws-apigateway';
 import { myApiFunction } from './functions/api-function/resource';
+import { auth } from './auth/resource';
 import { data } from './data/resource';
 import { storage } from './storage/resource';
 
 const backend = defineBackend({
+  auth,
   data,
   myApiFunction,
   storage,
@@ -36,9 +38,9 @@ const lambdaIntegration = new LambdaIntegration(
 );
 
 // create a new resource path with IAM authorization
-const itemsPath = myRestApi.root.addResource('items', {
+const itemsPath = myRestApi.root.addResource('Todo', {
   defaultMethodOptions: {
-    authorizationType: AuthorizationType.IAM,
+    authorizationType: AuthorizationType.NONE,
   },
 });
 
@@ -47,6 +49,18 @@ itemsPath.addMethod('GET', lambdaIntegration);
 itemsPath.addMethod('POST', lambdaIntegration);
 itemsPath.addMethod('DELETE', lambdaIntegration);
 itemsPath.addMethod('PUT', lambdaIntegration);
+
+const accountPath = myRestApi.root.addResource('Account', {
+  defaultMethodOptions: {
+    authorizationType: AuthorizationType.NONE,
+  },
+});
+
+// add methods you would like to create to the resource path
+accountPath.addMethod('GET', lambdaIntegration);
+accountPath.addMethod('POST', lambdaIntegration);
+accountPath.addMethod('DELETE', lambdaIntegration);
+accountPath.addMethod('PUT', lambdaIntegration);
 
 // add outputs to the configuration file
 backend.addOutput({
