@@ -11,7 +11,7 @@ const schema = a.schema({
     .model({
       content: a.string(),
       isDone: a.boolean(),
-      createdAt: a.timestamp(),
+      createdAt: a.datetime(),
     })
     .authorization((allow) => [allow.publicApiKey()]),
   Account: a
@@ -21,7 +21,7 @@ const schema = a.schema({
       balance: a.float(),
       nftAddresses: a.json(),
       verified: a.boolean(),
-      createdAt: a.timestamp(),
+      createdAt: a.datetime(),
     })
     .authorization((allow) => [allow.publicApiKey()]),
   NFT: a
@@ -32,7 +32,7 @@ const schema = a.schema({
       sizeGb: a.float(),
       metadata: a.json(),
       price: a.float(),
-      createdAt: a.timestamp(),
+      createdAt: a.datetime(),
     })
     .authorization((allow) => [allow.publicApiKey()]),
   AIModel: a
@@ -46,7 +46,7 @@ const schema = a.schema({
       status: a.string(),
       serialisedConfig: a.json(),
       published: a.boolean(),
-      createdAt: a.timestamp(),
+      createdAt: a.datetime(),
     })
     .authorization((allow) => [allow.publicApiKey()]),
   Media: a
@@ -56,7 +56,7 @@ const schema = a.schema({
       description: a.string(),
       sizeGb: a.float(),
       status: a.string(),
-      createdAt: a.timestamp(),
+      createdAt: a.datetime(),
     })
     .authorization((allow) => [allow.publicApiKey()]),
   Task: a
@@ -67,11 +67,11 @@ const schema = a.schema({
       name: a.string(),
       description: a.string(),
       difficulty: a.float(),
-      app: a.string(),
       priceListed: a.float(),
       status: a.string(),
+      apps: a.json(),
       published: a.boolean(),
-      createdAt: a.timestamp(),
+      createdAt: a.datetime(),
     })
     .authorization((allow) => [allow.publicApiKey()]),
   Sale: a
@@ -87,7 +87,18 @@ const schema = a.schema({
       transactionLedgerId: a.string(),
       status: a.string(),
       published: a.boolean(),
-      createdAt: a.timestamp(),
+      createdAt: a.datetime(),
+    })
+    .authorization((allow) => [allow.publicApiKey()]),
+  App: a
+    .model({
+      name: a.string(),
+      description: a.string(),
+      rank: a.float(),
+      tasks: a.json(),
+      status: a.string(),
+      published: a.boolean(),
+      createdAt: a.datetime(),
     })
     .authorization((allow) => [allow.publicApiKey()]),
 });
