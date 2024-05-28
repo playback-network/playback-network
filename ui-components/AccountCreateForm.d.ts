@@ -21,7 +21,7 @@ export declare type AccountCreateFormInputValues = {
     balance?: number;
     nftAddresses?: string;
     verified?: boolean;
-    createdAt?: number;
+    createdAt?: string;
 };
 export declare type AccountCreateFormValidationValues = {
     wallet?: ValidationFunction<string>;
@@ -29,7 +29,7 @@ export declare type AccountCreateFormValidationValues = {
     balance?: ValidationFunction<number>;
     nftAddresses?: ValidationFunction<string>;
     verified?: ValidationFunction<boolean>;
-    createdAt?: ValidationFunction<number>;
+    createdAt?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type AccountCreateFormOverridesProps = {

@@ -36,6 +36,22 @@ export const getAccount = /* GraphQL */ `
     }
   }
 `;
+export const getApp = /* GraphQL */ `
+  query GetApp($id: ID!) {
+    getApp(id: $id) {
+      createdAt
+      description
+      id
+      name
+      published
+      rank
+      status
+      tasks
+      updatedAt
+      __typename
+    }
+  }
+`;
 export const getMedia = /* GraphQL */ `
   query GetMedia($id: ID!) {
     getMedia(id: $id) {
@@ -92,7 +108,7 @@ export const getTask = /* GraphQL */ `
   query GetTask($id: ID!) {
     getTask(id: $id) {
       aiModelId
-      app
+      apps
       createdAt
       description
       difficulty
@@ -163,6 +179,30 @@ export const listAccounts = /* GraphQL */ `
         updatedAt
         verified
         wallet
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const listApps = /* GraphQL */ `
+  query ListApps(
+    $filter: ModelAppFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listApps(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        createdAt
+        description
+        id
+        name
+        published
+        rank
+        status
+        tasks
+        updatedAt
         __typename
       }
       nextToken
@@ -255,7 +295,7 @@ export const listTasks = /* GraphQL */ `
     listTasks(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         aiModelId
-        app
+        apps
         createdAt
         description
         difficulty

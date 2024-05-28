@@ -11,11 +11,13 @@ import {
 } from "@aws-amplify/ui-react";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
 import { generateClient } from "aws-amplify/api";
-import { createAccount } from "./graphql/mutations";
+import { getApp } from "./graphql/queries";
+import { updateApp } from "./graphql/mutations";
 const client = generateClient();
-export default function AccountCreateForm(props) {
+export default function AppUpdateForm(props) {
   const {
-    clearOnSuccess = true,
+    id: idProp,
+    app: appModelProp,
     onSuccess,
     onError,
     onSubmit,
@@ -25,37 +27,64 @@ export default function AccountCreateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    wallet: "",
-    ens: "",
-    balance: "",
-    nftAddresses: "",
-    verified: false,
+    name: "",
+    description: "",
+    rank: "",
+    tasks: "",
+    status: "",
+    published: false,
     createdAt: "",
   };
-  const [wallet, setWallet] = React.useState(initialValues.wallet);
-  const [ens, setEns] = React.useState(initialValues.ens);
-  const [balance, setBalance] = React.useState(initialValues.balance);
-  const [nftAddresses, setNftAddresses] = React.useState(
-    initialValues.nftAddresses
+  const [name, setName] = React.useState(initialValues.name);
+  const [description, setDescription] = React.useState(
+    initialValues.description
   );
-  const [verified, setVerified] = React.useState(initialValues.verified);
+  const [rank, setRank] = React.useState(initialValues.rank);
+  const [tasks, setTasks] = React.useState(initialValues.tasks);
+  const [status, setStatus] = React.useState(initialValues.status);
+  const [published, setPublished] = React.useState(initialValues.published);
   const [createdAt, setCreatedAt] = React.useState(initialValues.createdAt);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    setWallet(initialValues.wallet);
-    setEns(initialValues.ens);
-    setBalance(initialValues.balance);
-    setNftAddresses(initialValues.nftAddresses);
-    setVerified(initialValues.verified);
-    setCreatedAt(initialValues.createdAt);
+    const cleanValues = appRecord
+      ? { ...initialValues, ...appRecord }
+      : initialValues;
+    setName(cleanValues.name);
+    setDescription(cleanValues.description);
+    setRank(cleanValues.rank);
+    setTasks(
+      typeof cleanValues.tasks === "string" || cleanValues.tasks === null
+        ? cleanValues.tasks
+        : JSON.stringify(cleanValues.tasks)
+    );
+    setStatus(cleanValues.status);
+    setPublished(cleanValues.published);
+    setCreatedAt(cleanValues.createdAt);
     setErrors({});
   };
+  const [appRecord, setAppRecord] = React.useState(appModelProp);
+  React.useEffect(() => {
+    const queryData = async () => {
+      const record = idProp
+        ? (
+            await client.graphql({
+              query: getApp.replaceAll("__typename", ""),
+              variables: { id: idProp },
+            })
+          )?.data?.getApp
+        : appModelProp;
+      setAppRecord(record);
+    };
+    queryData();
+  }, [idProp, appModelProp]);
+  React.useEffect(resetStateValues, [appRecord]);
   const validations = {
-    wallet: [],
-    ens: [],
-    balance: [],
-    nftAddresses: [{ type: "JSON" }],
-    verified: [],
+    name: [],
+    description: [],
+    rank: [],
+    tasks: [{ type: "JSON" }],
+    status: [],
+    published: [],
     createdAt: [],
   };
   const runValidationTasks = async (
@@ -101,12 +130,13 @@ export default function AccountCreateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          wallet,
-          ens,
-          balance,
-          nftAddresses,
-          verified,
-          createdAt,
+          name: name ?? null,
+          description: description ?? null,
+          rank: rank ?? null,
+          tasks: tasks ?? null,
+          status: status ?? null,
+          published: published ?? null,
+          createdAt: createdAt ?? null,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -137,18 +167,16 @@ export default function AccountCreateForm(props) {
             }
           });
           await client.graphql({
-            query: createAccount.replaceAll("__typename", ""),
+            query: updateApp.replaceAll("__typename", ""),
             variables: {
               input: {
+                id: appRecord.id,
                 ...modelFields,
               },
             },
           });
           if (onSuccess) {
             onSuccess(modelFields);
-          }
-          if (clearOnSuccess) {
-            resetStateValues();
           }
         } catch (err) {
           if (onError) {
@@ -157,156 +185,192 @@ export default function AccountCreateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "AccountCreateForm")}
+      {...getOverrideProps(overrides, "AppUpdateForm")}
       {...rest}
     >
       <TextField
-        label="Wallet"
+        label="Name"
         isRequired={false}
         isReadOnly={false}
-        value={wallet}
+        value={name}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              wallet: value,
-              ens,
-              balance,
-              nftAddresses,
-              verified,
+              name: value,
+              description,
+              rank,
+              tasks,
+              status,
+              published,
               createdAt,
             };
             const result = onChange(modelFields);
-            value = result?.wallet ?? value;
+            value = result?.name ?? value;
           }
-          if (errors.wallet?.hasError) {
-            runValidationTasks("wallet", value);
+          if (errors.name?.hasError) {
+            runValidationTasks("name", value);
           }
-          setWallet(value);
+          setName(value);
         }}
-        onBlur={() => runValidationTasks("wallet", wallet)}
-        errorMessage={errors.wallet?.errorMessage}
-        hasError={errors.wallet?.hasError}
-        {...getOverrideProps(overrides, "wallet")}
+        onBlur={() => runValidationTasks("name", name)}
+        errorMessage={errors.name?.errorMessage}
+        hasError={errors.name?.hasError}
+        {...getOverrideProps(overrides, "name")}
       ></TextField>
       <TextField
-        label="Ens"
+        label="Description"
         isRequired={false}
         isReadOnly={false}
-        value={ens}
+        value={description}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              wallet,
-              ens: value,
-              balance,
-              nftAddresses,
-              verified,
+              name,
+              description: value,
+              rank,
+              tasks,
+              status,
+              published,
               createdAt,
             };
             const result = onChange(modelFields);
-            value = result?.ens ?? value;
+            value = result?.description ?? value;
           }
-          if (errors.ens?.hasError) {
-            runValidationTasks("ens", value);
+          if (errors.description?.hasError) {
+            runValidationTasks("description", value);
           }
-          setEns(value);
+          setDescription(value);
         }}
-        onBlur={() => runValidationTasks("ens", ens)}
-        errorMessage={errors.ens?.errorMessage}
-        hasError={errors.ens?.hasError}
-        {...getOverrideProps(overrides, "ens")}
+        onBlur={() => runValidationTasks("description", description)}
+        errorMessage={errors.description?.errorMessage}
+        hasError={errors.description?.hasError}
+        {...getOverrideProps(overrides, "description")}
       ></TextField>
       <TextField
-        label="Balance"
+        label="Rank"
         isRequired={false}
         isReadOnly={false}
         type="number"
         step="any"
-        value={balance}
+        value={rank}
         onChange={(e) => {
           let value = isNaN(parseFloat(e.target.value))
             ? e.target.value
             : parseFloat(e.target.value);
           if (onChange) {
             const modelFields = {
-              wallet,
-              ens,
-              balance: value,
-              nftAddresses,
-              verified,
+              name,
+              description,
+              rank: value,
+              tasks,
+              status,
+              published,
               createdAt,
             };
             const result = onChange(modelFields);
-            value = result?.balance ?? value;
+            value = result?.rank ?? value;
           }
-          if (errors.balance?.hasError) {
-            runValidationTasks("balance", value);
+          if (errors.rank?.hasError) {
+            runValidationTasks("rank", value);
           }
-          setBalance(value);
+          setRank(value);
         }}
-        onBlur={() => runValidationTasks("balance", balance)}
-        errorMessage={errors.balance?.errorMessage}
-        hasError={errors.balance?.hasError}
-        {...getOverrideProps(overrides, "balance")}
+        onBlur={() => runValidationTasks("rank", rank)}
+        errorMessage={errors.rank?.errorMessage}
+        hasError={errors.rank?.hasError}
+        {...getOverrideProps(overrides, "rank")}
       ></TextField>
       <TextAreaField
-        label="Nft addresses"
+        label="Tasks"
         isRequired={false}
         isReadOnly={false}
+        value={tasks}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              wallet,
-              ens,
-              balance,
-              nftAddresses: value,
-              verified,
+              name,
+              description,
+              rank,
+              tasks: value,
+              status,
+              published,
               createdAt,
             };
             const result = onChange(modelFields);
-            value = result?.nftAddresses ?? value;
+            value = result?.tasks ?? value;
           }
-          if (errors.nftAddresses?.hasError) {
-            runValidationTasks("nftAddresses", value);
+          if (errors.tasks?.hasError) {
+            runValidationTasks("tasks", value);
           }
-          setNftAddresses(value);
+          setTasks(value);
         }}
-        onBlur={() => runValidationTasks("nftAddresses", nftAddresses)}
-        errorMessage={errors.nftAddresses?.errorMessage}
-        hasError={errors.nftAddresses?.hasError}
-        {...getOverrideProps(overrides, "nftAddresses")}
+        onBlur={() => runValidationTasks("tasks", tasks)}
+        errorMessage={errors.tasks?.errorMessage}
+        hasError={errors.tasks?.hasError}
+        {...getOverrideProps(overrides, "tasks")}
       ></TextAreaField>
+      <TextField
+        label="Status"
+        isRequired={false}
+        isReadOnly={false}
+        value={status}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              name,
+              description,
+              rank,
+              tasks,
+              status: value,
+              published,
+              createdAt,
+            };
+            const result = onChange(modelFields);
+            value = result?.status ?? value;
+          }
+          if (errors.status?.hasError) {
+            runValidationTasks("status", value);
+          }
+          setStatus(value);
+        }}
+        onBlur={() => runValidationTasks("status", status)}
+        errorMessage={errors.status?.errorMessage}
+        hasError={errors.status?.hasError}
+        {...getOverrideProps(overrides, "status")}
+      ></TextField>
       <SwitchField
-        label="Verified"
+        label="Published"
         defaultChecked={false}
         isDisabled={false}
-        isChecked={verified}
+        isChecked={published}
         onChange={(e) => {
           let value = e.target.checked;
           if (onChange) {
             const modelFields = {
-              wallet,
-              ens,
-              balance,
-              nftAddresses,
-              verified: value,
+              name,
+              description,
+              rank,
+              tasks,
+              status,
+              published: value,
               createdAt,
             };
             const result = onChange(modelFields);
-            value = result?.verified ?? value;
+            value = result?.published ?? value;
           }
-          if (errors.verified?.hasError) {
-            runValidationTasks("verified", value);
+          if (errors.published?.hasError) {
+            runValidationTasks("published", value);
           }
-          setVerified(value);
+          setPublished(value);
         }}
-        onBlur={() => runValidationTasks("verified", verified)}
-        errorMessage={errors.verified?.errorMessage}
-        hasError={errors.verified?.hasError}
-        {...getOverrideProps(overrides, "verified")}
+        onBlur={() => runValidationTasks("published", published)}
+        errorMessage={errors.published?.errorMessage}
+        hasError={errors.published?.hasError}
+        {...getOverrideProps(overrides, "published")}
       ></SwitchField>
       <TextField
         label="Created at"
@@ -319,11 +383,12 @@ export default function AccountCreateForm(props) {
             e.target.value === "" ? "" : new Date(e.target.value).toISOString();
           if (onChange) {
             const modelFields = {
-              wallet,
-              ens,
-              balance,
-              nftAddresses,
-              verified,
+              name,
+              description,
+              rank,
+              tasks,
+              status,
+              published,
               createdAt: value,
             };
             const result = onChange(modelFields);
@@ -344,13 +409,14 @@ export default function AccountCreateForm(props) {
         {...getOverrideProps(overrides, "CTAFlex")}
       >
         <Button
-          children="Clear"
+          children="Reset"
           type="reset"
           onClick={(event) => {
             event.preventDefault();
             resetStateValues();
           }}
-          {...getOverrideProps(overrides, "ClearButton")}
+          isDisabled={!(idProp || appModelProp)}
+          {...getOverrideProps(overrides, "ResetButton")}
         ></Button>
         <Flex
           gap="15px"
@@ -360,7 +426,10 @@ export default function AccountCreateForm(props) {
             children="Submit"
             type="submit"
             variation="primary"
-            isDisabled={Object.values(errors).some((e) => e?.hasError)}
+            isDisabled={
+              !(idProp || appModelProp) ||
+              Object.values(errors).some((e) => e?.hasError)
+            }
             {...getOverrideProps(overrides, "SubmitButton")}
           ></Button>
         </Flex>

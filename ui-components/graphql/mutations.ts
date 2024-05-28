@@ -42,6 +42,25 @@ export const createAccount = /* GraphQL */ `
     }
   }
 `;
+export const createApp = /* GraphQL */ `
+  mutation CreateApp(
+    $condition: ModelAppConditionInput
+    $input: CreateAppInput!
+  ) {
+    createApp(condition: $condition, input: $input) {
+      createdAt
+      description
+      id
+      name
+      published
+      rank
+      status
+      tasks
+      updatedAt
+      __typename
+    }
+  }
+`;
 export const createMedia = /* GraphQL */ `
   mutation CreateMedia(
     $condition: ModelMediaConditionInput
@@ -110,7 +129,7 @@ export const createTask = /* GraphQL */ `
   ) {
     createTask(condition: $condition, input: $input) {
       aiModelId
-      app
+      apps
       createdAt
       description
       difficulty
@@ -177,6 +196,25 @@ export const deleteAccount = /* GraphQL */ `
       updatedAt
       verified
       wallet
+      __typename
+    }
+  }
+`;
+export const deleteApp = /* GraphQL */ `
+  mutation DeleteApp(
+    $condition: ModelAppConditionInput
+    $input: DeleteAppInput!
+  ) {
+    deleteApp(condition: $condition, input: $input) {
+      createdAt
+      description
+      id
+      name
+      published
+      rank
+      status
+      tasks
+      updatedAt
       __typename
     }
   }
@@ -249,7 +287,7 @@ export const deleteTask = /* GraphQL */ `
   ) {
     deleteTask(condition: $condition, input: $input) {
       aiModelId
-      app
+      apps
       createdAt
       description
       difficulty
@@ -316,6 +354,25 @@ export const updateAccount = /* GraphQL */ `
       updatedAt
       verified
       wallet
+      __typename
+    }
+  }
+`;
+export const updateApp = /* GraphQL */ `
+  mutation UpdateApp(
+    $condition: ModelAppConditionInput
+    $input: UpdateAppInput!
+  ) {
+    updateApp(condition: $condition, input: $input) {
+      createdAt
+      description
+      id
+      name
+      published
+      rank
+      status
+      tasks
+      updatedAt
       __typename
     }
   }
@@ -388,7 +445,7 @@ export const updateTask = /* GraphQL */ `
   ) {
     updateTask(condition: $condition, input: $input) {
       aiModelId
-      app
+      apps
       createdAt
       description
       difficulty

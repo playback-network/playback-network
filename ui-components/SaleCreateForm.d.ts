@@ -27,7 +27,7 @@ export declare type SaleCreateFormInputValues = {
     transactionLedgerId?: string;
     status?: string;
     published?: boolean;
-    createdAt?: number;
+    createdAt?: string;
 };
 export declare type SaleCreateFormValidationValues = {
     taskId?: ValidationFunction<string>;
@@ -41,7 +41,7 @@ export declare type SaleCreateFormValidationValues = {
     transactionLedgerId?: ValidationFunction<string>;
     status?: ValidationFunction<string>;
     published?: ValidationFunction<boolean>;
-    createdAt?: ValidationFunction<number>;
+    createdAt?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type SaleCreateFormOverridesProps = {
