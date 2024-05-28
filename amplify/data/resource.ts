@@ -20,6 +20,7 @@ const schema = a.schema({
       ens: a.string(),
       balance: a.float(),
       nftAddresses: a.json(),
+      medias: a.json(),
       verified: a.boolean(),
       createdAt: a.datetime(),
     })
@@ -51,9 +52,11 @@ const schema = a.schema({
     .authorization((allow) => [allow.publicApiKey()]),
   Media: a
     .model({
-      ownersWallet: a.string(),
-      type: a.string(),
-      description: a.string(),
+      walletAddress: a.string(),
+      taskId: a.string(),
+      dataURL: a.string(),
+      ocr: a.string(),
+      format: a.string(),
       sizeGb: a.float(),
       status: a.string(),
       createdAt: a.datetime(),
@@ -63,13 +66,14 @@ const schema = a.schema({
     .model({
       mediaId: a.string(),
       aiModelId: a.string(),
-      ownersWallet: a.string(),
+      walletAddress: a.string(),
+      medias: a.json(),
       name: a.string(),
       description: a.string(),
       difficulty: a.float(),
+      apps: a.json(),
       priceListed: a.float(),
       status: a.string(),
-      apps: a.json(),
       published: a.boolean(),
       createdAt: a.datetime(),
     })
