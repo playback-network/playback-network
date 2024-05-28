@@ -38,17 +38,17 @@ const lambdaIntegration = new LambdaIntegration(
 );
 
 // create a new resource path with IAM authorization
-const itemsPath = myRestApi.root.addResource('Todo', {
+const todosPath = myRestApi.root.addResource('Todo', {
   defaultMethodOptions: {
     authorizationType: AuthorizationType.NONE,
   },
 });
 
 // add methods you would like to create to the resource path
-itemsPath.addMethod('GET', lambdaIntegration);
-itemsPath.addMethod('POST', lambdaIntegration);
-itemsPath.addMethod('DELETE', lambdaIntegration);
-itemsPath.addMethod('PUT', lambdaIntegration);
+todosPath.addMethod('GET', lambdaIntegration);
+todosPath.addMethod('POST', lambdaIntegration);
+todosPath.addMethod('DELETE', lambdaIntegration);
+todosPath.addMethod('PUT', lambdaIntegration);
 
 const accountPath = myRestApi.root.addResource('Account', {
   defaultMethodOptions: {
@@ -61,6 +61,18 @@ accountPath.addMethod('GET', lambdaIntegration);
 accountPath.addMethod('POST', lambdaIntegration);
 accountPath.addMethod('DELETE', lambdaIntegration);
 accountPath.addMethod('PUT', lambdaIntegration);
+
+const taskPath = myRestApi.root.addResource('Task', {
+  defaultMethodOptions: {
+    authorizationType: AuthorizationType.NONE,
+  },
+});
+
+// add methods you would like to create to the resource path
+taskPath.addMethod('GET', lambdaIntegration);
+taskPath.addMethod('POST', lambdaIntegration);
+taskPath.addMethod('DELETE', lambdaIntegration);
+taskPath.addMethod('PUT', lambdaIntegration);
 
 // add outputs to the configuration file
 backend.addOutput({
