@@ -74,6 +74,18 @@ taskPath.addMethod('POST', lambdaIntegration);
 taskPath.addMethod('DELETE', lambdaIntegration);
 taskPath.addMethod('PUT', lambdaIntegration);
 
+const mediaPath = myRestApi.root.addResource('Media', {
+  defaultMethodOptions: {
+    authorizationType: AuthorizationType.NONE,
+  },
+});
+
+// add methods you would like to create to the resource path
+mediaPath.addMethod('GET', lambdaIntegration);
+mediaPath.addMethod('POST', lambdaIntegration);
+mediaPath.addMethod('DELETE', lambdaIntegration);
+mediaPath.addMethod('PUT', lambdaIntegration);
+
 // add outputs to the configuration file
 backend.addOutput({
   custom: {
