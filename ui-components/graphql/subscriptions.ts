@@ -28,6 +28,7 @@ export const onCreateAccount = /* GraphQL */ `
       createdAt
       ens
       id
+      medias
       nftAddresses
       updatedAt
       verified
@@ -56,13 +57,15 @@ export const onCreateMedia = /* GraphQL */ `
   subscription OnCreateMedia($filter: ModelSubscriptionMediaFilterInput) {
     onCreateMedia(filter: $filter) {
       createdAt
-      description
+      dataURL
+      format
       id
-      ownersWallet
+      ocr
       sizeGb
       status
-      type
+      taskId
       updatedAt
+      walletAddress
       __typename
     }
   }
@@ -108,18 +111,20 @@ export const onCreateTask = /* GraphQL */ `
   subscription OnCreateTask($filter: ModelSubscriptionTaskFilterInput) {
     onCreateTask(filter: $filter) {
       aiModelId
-      apps
+      app
+      appImage
       createdAt
       description
       difficulty
       id
       mediaId
+      medias
       name
-      ownersWallet
       priceListed
       published
       status
       updatedAt
+      walletAddress
       __typename
     }
   }
@@ -162,6 +167,7 @@ export const onDeleteAccount = /* GraphQL */ `
       createdAt
       ens
       id
+      medias
       nftAddresses
       updatedAt
       verified
@@ -190,13 +196,15 @@ export const onDeleteMedia = /* GraphQL */ `
   subscription OnDeleteMedia($filter: ModelSubscriptionMediaFilterInput) {
     onDeleteMedia(filter: $filter) {
       createdAt
-      description
+      dataURL
+      format
       id
-      ownersWallet
+      ocr
       sizeGb
       status
-      type
+      taskId
       updatedAt
+      walletAddress
       __typename
     }
   }
@@ -242,18 +250,20 @@ export const onDeleteTask = /* GraphQL */ `
   subscription OnDeleteTask($filter: ModelSubscriptionTaskFilterInput) {
     onDeleteTask(filter: $filter) {
       aiModelId
-      apps
+      app
+      appImage
       createdAt
       description
       difficulty
       id
       mediaId
+      medias
       name
-      ownersWallet
       priceListed
       published
       status
       updatedAt
+      walletAddress
       __typename
     }
   }
@@ -296,6 +306,7 @@ export const onUpdateAccount = /* GraphQL */ `
       createdAt
       ens
       id
+      medias
       nftAddresses
       updatedAt
       verified
@@ -324,13 +335,15 @@ export const onUpdateMedia = /* GraphQL */ `
   subscription OnUpdateMedia($filter: ModelSubscriptionMediaFilterInput) {
     onUpdateMedia(filter: $filter) {
       createdAt
-      description
+      dataURL
+      format
       id
-      ownersWallet
+      ocr
       sizeGb
       status
-      type
+      taskId
       updatedAt
+      walletAddress
       __typename
     }
   }
@@ -376,18 +389,20 @@ export const onUpdateTask = /* GraphQL */ `
   subscription OnUpdateTask($filter: ModelSubscriptionTaskFilterInput) {
     onUpdateTask(filter: $filter) {
       aiModelId
-      apps
+      app
+      appImage
       createdAt
       description
       difficulty
       id
       mediaId
+      medias
       name
-      ownersWallet
       priceListed
       published
       status
       updatedAt
+      walletAddress
       __typename
     }
   }

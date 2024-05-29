@@ -20,6 +20,7 @@ export declare type AccountCreateFormInputValues = {
     ens?: string;
     balance?: number;
     nftAddresses?: string;
+    medias?: string;
     verified?: boolean;
     createdAt?: string;
 };
@@ -28,6 +29,7 @@ export declare type AccountCreateFormValidationValues = {
     ens?: ValidationFunction<string>;
     balance?: ValidationFunction<number>;
     nftAddresses?: ValidationFunction<string>;
+    medias?: ValidationFunction<string>;
     verified?: ValidationFunction<boolean>;
     createdAt?: ValidationFunction<string>;
 };
@@ -38,6 +40,7 @@ export declare type AccountCreateFormOverridesProps = {
     ens?: PrimitiveOverrideProps<TextFieldProps>;
     balance?: PrimitiveOverrideProps<TextFieldProps>;
     nftAddresses?: PrimitiveOverrideProps<TextAreaFieldProps>;
+    medias?: PrimitiveOverrideProps<TextAreaFieldProps>;
     verified?: PrimitiveOverrideProps<SwitchFieldProps>;
     createdAt?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;

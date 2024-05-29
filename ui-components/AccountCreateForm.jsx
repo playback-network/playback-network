@@ -29,6 +29,7 @@ export default function AccountCreateForm(props) {
     ens: "",
     balance: "",
     nftAddresses: "",
+    medias: "",
     verified: false,
     createdAt: "",
   };
@@ -38,6 +39,7 @@ export default function AccountCreateForm(props) {
   const [nftAddresses, setNftAddresses] = React.useState(
     initialValues.nftAddresses
   );
+  const [medias, setMedias] = React.useState(initialValues.medias);
   const [verified, setVerified] = React.useState(initialValues.verified);
   const [createdAt, setCreatedAt] = React.useState(initialValues.createdAt);
   const [errors, setErrors] = React.useState({});
@@ -46,6 +48,7 @@ export default function AccountCreateForm(props) {
     setEns(initialValues.ens);
     setBalance(initialValues.balance);
     setNftAddresses(initialValues.nftAddresses);
+    setMedias(initialValues.medias);
     setVerified(initialValues.verified);
     setCreatedAt(initialValues.createdAt);
     setErrors({});
@@ -55,6 +58,7 @@ export default function AccountCreateForm(props) {
     ens: [],
     balance: [],
     nftAddresses: [{ type: "JSON" }],
+    medias: [{ type: "JSON" }],
     verified: [],
     createdAt: [],
   };
@@ -105,6 +109,7 @@ export default function AccountCreateForm(props) {
           ens,
           balance,
           nftAddresses,
+          medias,
           verified,
           createdAt,
         };
@@ -173,6 +178,7 @@ export default function AccountCreateForm(props) {
               ens,
               balance,
               nftAddresses,
+              medias,
               verified,
               createdAt,
             };
@@ -202,6 +208,7 @@ export default function AccountCreateForm(props) {
               ens: value,
               balance,
               nftAddresses,
+              medias,
               verified,
               createdAt,
             };
@@ -235,6 +242,7 @@ export default function AccountCreateForm(props) {
               ens,
               balance: value,
               nftAddresses,
+              medias,
               verified,
               createdAt,
             };
@@ -263,6 +271,7 @@ export default function AccountCreateForm(props) {
               ens,
               balance,
               nftAddresses: value,
+              medias,
               verified,
               createdAt,
             };
@@ -279,6 +288,35 @@ export default function AccountCreateForm(props) {
         hasError={errors.nftAddresses?.hasError}
         {...getOverrideProps(overrides, "nftAddresses")}
       ></TextAreaField>
+      <TextAreaField
+        label="Medias"
+        isRequired={false}
+        isReadOnly={false}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              wallet,
+              ens,
+              balance,
+              nftAddresses,
+              medias: value,
+              verified,
+              createdAt,
+            };
+            const result = onChange(modelFields);
+            value = result?.medias ?? value;
+          }
+          if (errors.medias?.hasError) {
+            runValidationTasks("medias", value);
+          }
+          setMedias(value);
+        }}
+        onBlur={() => runValidationTasks("medias", medias)}
+        errorMessage={errors.medias?.errorMessage}
+        hasError={errors.medias?.hasError}
+        {...getOverrideProps(overrides, "medias")}
+      ></TextAreaField>
       <SwitchField
         label="Verified"
         defaultChecked={false}
@@ -292,6 +330,7 @@ export default function AccountCreateForm(props) {
               ens,
               balance,
               nftAddresses,
+              medias,
               verified: value,
               createdAt,
             };
@@ -323,6 +362,7 @@ export default function AccountCreateForm(props) {
               ens,
               balance,
               nftAddresses,
+              medias,
               verified,
               createdAt: value,
             };

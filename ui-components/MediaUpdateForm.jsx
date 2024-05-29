@@ -20,20 +20,22 @@ export default function MediaUpdateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    ownersWallet: "",
-    type: "",
-    description: "",
+    walletAddress: "",
+    taskId: "",
+    dataURL: "",
+    ocr: "",
+    format: "",
     sizeGb: "",
     status: "",
     createdAt: "",
   };
-  const [ownersWallet, setOwnersWallet] = React.useState(
-    initialValues.ownersWallet
+  const [walletAddress, setWalletAddress] = React.useState(
+    initialValues.walletAddress
   );
-  const [type, setType] = React.useState(initialValues.type);
-  const [description, setDescription] = React.useState(
-    initialValues.description
-  );
+  const [taskId, setTaskId] = React.useState(initialValues.taskId);
+  const [dataURL, setDataURL] = React.useState(initialValues.dataURL);
+  const [ocr, setOcr] = React.useState(initialValues.ocr);
+  const [format, setFormat] = React.useState(initialValues.format);
   const [sizeGb, setSizeGb] = React.useState(initialValues.sizeGb);
   const [status, setStatus] = React.useState(initialValues.status);
   const [createdAt, setCreatedAt] = React.useState(initialValues.createdAt);
@@ -42,9 +44,11 @@ export default function MediaUpdateForm(props) {
     const cleanValues = mediaRecord
       ? { ...initialValues, ...mediaRecord }
       : initialValues;
-    setOwnersWallet(cleanValues.ownersWallet);
-    setType(cleanValues.type);
-    setDescription(cleanValues.description);
+    setWalletAddress(cleanValues.walletAddress);
+    setTaskId(cleanValues.taskId);
+    setDataURL(cleanValues.dataURL);
+    setOcr(cleanValues.ocr);
+    setFormat(cleanValues.format);
     setSizeGb(cleanValues.sizeGb);
     setStatus(cleanValues.status);
     setCreatedAt(cleanValues.createdAt);
@@ -67,9 +71,11 @@ export default function MediaUpdateForm(props) {
   }, [idProp, mediaModelProp]);
   React.useEffect(resetStateValues, [mediaRecord]);
   const validations = {
-    ownersWallet: [],
-    type: [],
-    description: [],
+    walletAddress: [],
+    taskId: [],
+    dataURL: [],
+    ocr: [],
+    format: [],
     sizeGb: [],
     status: [],
     createdAt: [],
@@ -117,9 +123,11 @@ export default function MediaUpdateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          ownersWallet: ownersWallet ?? null,
-          type: type ?? null,
-          description: description ?? null,
+          walletAddress: walletAddress ?? null,
+          taskId: taskId ?? null,
+          dataURL: dataURL ?? null,
+          ocr: ocr ?? null,
+          format: format ?? null,
           sizeGb: sizeGb ?? null,
           status: status ?? null,
           createdAt: createdAt ?? null,
@@ -175,91 +183,159 @@ export default function MediaUpdateForm(props) {
       {...rest}
     >
       <TextField
-        label="Owners wallet"
+        label="Wallet address"
         isRequired={false}
         isReadOnly={false}
-        value={ownersWallet}
+        value={walletAddress}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              ownersWallet: value,
-              type,
-              description,
+              walletAddress: value,
+              taskId,
+              dataURL,
+              ocr,
+              format,
               sizeGb,
               status,
               createdAt,
             };
             const result = onChange(modelFields);
-            value = result?.ownersWallet ?? value;
+            value = result?.walletAddress ?? value;
           }
-          if (errors.ownersWallet?.hasError) {
-            runValidationTasks("ownersWallet", value);
+          if (errors.walletAddress?.hasError) {
+            runValidationTasks("walletAddress", value);
           }
-          setOwnersWallet(value);
+          setWalletAddress(value);
         }}
-        onBlur={() => runValidationTasks("ownersWallet", ownersWallet)}
-        errorMessage={errors.ownersWallet?.errorMessage}
-        hasError={errors.ownersWallet?.hasError}
-        {...getOverrideProps(overrides, "ownersWallet")}
+        onBlur={() => runValidationTasks("walletAddress", walletAddress)}
+        errorMessage={errors.walletAddress?.errorMessage}
+        hasError={errors.walletAddress?.hasError}
+        {...getOverrideProps(overrides, "walletAddress")}
       ></TextField>
       <TextField
-        label="Type"
+        label="Task id"
         isRequired={false}
         isReadOnly={false}
-        value={type}
+        value={taskId}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              ownersWallet,
-              type: value,
-              description,
+              walletAddress,
+              taskId: value,
+              dataURL,
+              ocr,
+              format,
               sizeGb,
               status,
               createdAt,
             };
             const result = onChange(modelFields);
-            value = result?.type ?? value;
+            value = result?.taskId ?? value;
           }
-          if (errors.type?.hasError) {
-            runValidationTasks("type", value);
+          if (errors.taskId?.hasError) {
+            runValidationTasks("taskId", value);
           }
-          setType(value);
+          setTaskId(value);
         }}
-        onBlur={() => runValidationTasks("type", type)}
-        errorMessage={errors.type?.errorMessage}
-        hasError={errors.type?.hasError}
-        {...getOverrideProps(overrides, "type")}
+        onBlur={() => runValidationTasks("taskId", taskId)}
+        errorMessage={errors.taskId?.errorMessage}
+        hasError={errors.taskId?.hasError}
+        {...getOverrideProps(overrides, "taskId")}
       ></TextField>
       <TextField
-        label="Description"
+        label="Data url"
         isRequired={false}
         isReadOnly={false}
-        value={description}
+        value={dataURL}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              ownersWallet,
-              type,
-              description: value,
+              walletAddress,
+              taskId,
+              dataURL: value,
+              ocr,
+              format,
               sizeGb,
               status,
               createdAt,
             };
             const result = onChange(modelFields);
-            value = result?.description ?? value;
+            value = result?.dataURL ?? value;
           }
-          if (errors.description?.hasError) {
-            runValidationTasks("description", value);
+          if (errors.dataURL?.hasError) {
+            runValidationTasks("dataURL", value);
           }
-          setDescription(value);
+          setDataURL(value);
         }}
-        onBlur={() => runValidationTasks("description", description)}
-        errorMessage={errors.description?.errorMessage}
-        hasError={errors.description?.hasError}
-        {...getOverrideProps(overrides, "description")}
+        onBlur={() => runValidationTasks("dataURL", dataURL)}
+        errorMessage={errors.dataURL?.errorMessage}
+        hasError={errors.dataURL?.hasError}
+        {...getOverrideProps(overrides, "dataURL")}
+      ></TextField>
+      <TextField
+        label="Ocr"
+        isRequired={false}
+        isReadOnly={false}
+        value={ocr}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              walletAddress,
+              taskId,
+              dataURL,
+              ocr: value,
+              format,
+              sizeGb,
+              status,
+              createdAt,
+            };
+            const result = onChange(modelFields);
+            value = result?.ocr ?? value;
+          }
+          if (errors.ocr?.hasError) {
+            runValidationTasks("ocr", value);
+          }
+          setOcr(value);
+        }}
+        onBlur={() => runValidationTasks("ocr", ocr)}
+        errorMessage={errors.ocr?.errorMessage}
+        hasError={errors.ocr?.hasError}
+        {...getOverrideProps(overrides, "ocr")}
+      ></TextField>
+      <TextField
+        label="Format"
+        isRequired={false}
+        isReadOnly={false}
+        value={format}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              walletAddress,
+              taskId,
+              dataURL,
+              ocr,
+              format: value,
+              sizeGb,
+              status,
+              createdAt,
+            };
+            const result = onChange(modelFields);
+            value = result?.format ?? value;
+          }
+          if (errors.format?.hasError) {
+            runValidationTasks("format", value);
+          }
+          setFormat(value);
+        }}
+        onBlur={() => runValidationTasks("format", format)}
+        errorMessage={errors.format?.errorMessage}
+        hasError={errors.format?.hasError}
+        {...getOverrideProps(overrides, "format")}
       ></TextField>
       <TextField
         label="Size gb"
@@ -274,9 +350,11 @@ export default function MediaUpdateForm(props) {
             : parseFloat(e.target.value);
           if (onChange) {
             const modelFields = {
-              ownersWallet,
-              type,
-              description,
+              walletAddress,
+              taskId,
+              dataURL,
+              ocr,
+              format,
               sizeGb: value,
               status,
               createdAt,
@@ -303,9 +381,11 @@ export default function MediaUpdateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              ownersWallet,
-              type,
-              description,
+              walletAddress,
+              taskId,
+              dataURL,
+              ocr,
+              format,
               sizeGb,
               status: value,
               createdAt,
@@ -334,9 +414,11 @@ export default function MediaUpdateForm(props) {
             e.target.value === "" ? "" : new Date(e.target.value).toISOString();
           if (onChange) {
             const modelFields = {
-              ownersWallet,
-              type,
-              description,
+              walletAddress,
+              taskId,
+              dataURL,
+              ocr,
+              format,
               sizeGb,
               status,
               createdAt: value,

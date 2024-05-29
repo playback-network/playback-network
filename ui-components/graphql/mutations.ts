@@ -34,6 +34,7 @@ export const createAccount = /* GraphQL */ `
       createdAt
       ens
       id
+      medias
       nftAddresses
       updatedAt
       verified
@@ -68,13 +69,15 @@ export const createMedia = /* GraphQL */ `
   ) {
     createMedia(condition: $condition, input: $input) {
       createdAt
-      description
+      dataURL
+      format
       id
-      ownersWallet
+      ocr
       sizeGb
       status
-      type
+      taskId
       updatedAt
+      walletAddress
       __typename
     }
   }
@@ -129,18 +132,20 @@ export const createTask = /* GraphQL */ `
   ) {
     createTask(condition: $condition, input: $input) {
       aiModelId
-      apps
+      app
+      appImage
       createdAt
       description
       difficulty
       id
       mediaId
+      medias
       name
-      ownersWallet
       priceListed
       published
       status
       updatedAt
+      walletAddress
       __typename
     }
   }
@@ -192,6 +197,7 @@ export const deleteAccount = /* GraphQL */ `
       createdAt
       ens
       id
+      medias
       nftAddresses
       updatedAt
       verified
@@ -226,13 +232,15 @@ export const deleteMedia = /* GraphQL */ `
   ) {
     deleteMedia(condition: $condition, input: $input) {
       createdAt
-      description
+      dataURL
+      format
       id
-      ownersWallet
+      ocr
       sizeGb
       status
-      type
+      taskId
       updatedAt
+      walletAddress
       __typename
     }
   }
@@ -287,18 +295,20 @@ export const deleteTask = /* GraphQL */ `
   ) {
     deleteTask(condition: $condition, input: $input) {
       aiModelId
-      apps
+      app
+      appImage
       createdAt
       description
       difficulty
       id
       mediaId
+      medias
       name
-      ownersWallet
       priceListed
       published
       status
       updatedAt
+      walletAddress
       __typename
     }
   }
@@ -350,6 +360,7 @@ export const updateAccount = /* GraphQL */ `
       createdAt
       ens
       id
+      medias
       nftAddresses
       updatedAt
       verified
@@ -384,13 +395,15 @@ export const updateMedia = /* GraphQL */ `
   ) {
     updateMedia(condition: $condition, input: $input) {
       createdAt
-      description
+      dataURL
+      format
       id
-      ownersWallet
+      ocr
       sizeGb
       status
-      type
+      taskId
       updatedAt
+      walletAddress
       __typename
     }
   }
@@ -445,18 +458,20 @@ export const updateTask = /* GraphQL */ `
   ) {
     updateTask(condition: $condition, input: $input) {
       aiModelId
-      apps
+      app
+      appImage
       createdAt
       description
       difficulty
       id
       mediaId
+      medias
       name
-      ownersWallet
       priceListed
       published
       status
       updatedAt
+      walletAddress
       __typename
     }
   }

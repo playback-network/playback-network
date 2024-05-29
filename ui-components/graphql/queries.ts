@@ -28,6 +28,7 @@ export const getAccount = /* GraphQL */ `
       createdAt
       ens
       id
+      medias
       nftAddresses
       updatedAt
       verified
@@ -56,13 +57,15 @@ export const getMedia = /* GraphQL */ `
   query GetMedia($id: ID!) {
     getMedia(id: $id) {
       createdAt
-      description
+      dataURL
+      format
       id
-      ownersWallet
+      ocr
       sizeGb
       status
-      type
+      taskId
       updatedAt
+      walletAddress
       __typename
     }
   }
@@ -108,18 +111,20 @@ export const getTask = /* GraphQL */ `
   query GetTask($id: ID!) {
     getTask(id: $id) {
       aiModelId
-      apps
+      app
+      appImage
       createdAt
       description
       difficulty
       id
       mediaId
+      medias
       name
-      ownersWallet
       priceListed
       published
       status
       updatedAt
+      walletAddress
       __typename
     }
   }
@@ -175,6 +180,7 @@ export const listAccounts = /* GraphQL */ `
         createdAt
         ens
         id
+        medias
         nftAddresses
         updatedAt
         verified
@@ -219,13 +225,15 @@ export const listMedia = /* GraphQL */ `
     listMedia(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         createdAt
-        description
+        dataURL
+        format
         id
-        ownersWallet
+        ocr
         sizeGb
         status
-        type
+        taskId
         updatedAt
+        walletAddress
         __typename
       }
       nextToken
@@ -295,18 +303,20 @@ export const listTasks = /* GraphQL */ `
     listTasks(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         aiModelId
-        apps
+        app
+        appImage
         createdAt
         description
         difficulty
         id
         mediaId
+        medias
         name
-        ownersWallet
         priceListed
         published
         status
         updatedAt
+        walletAddress
         __typename
       }
       nextToken
