@@ -22,10 +22,6 @@ export default function MediaCreateForm(props) {
     taskId: "",
     dataURL: "",
     ocr: "",
-    format: "",
-    sizeGb: "",
-    status: "",
-    createdAt: "",
   };
   const [walletAddress, setWalletAddress] = React.useState(
     initialValues.walletAddress
@@ -33,20 +29,12 @@ export default function MediaCreateForm(props) {
   const [taskId, setTaskId] = React.useState(initialValues.taskId);
   const [dataURL, setDataURL] = React.useState(initialValues.dataURL);
   const [ocr, setOcr] = React.useState(initialValues.ocr);
-  const [format, setFormat] = React.useState(initialValues.format);
-  const [sizeGb, setSizeGb] = React.useState(initialValues.sizeGb);
-  const [status, setStatus] = React.useState(initialValues.status);
-  const [createdAt, setCreatedAt] = React.useState(initialValues.createdAt);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setWalletAddress(initialValues.walletAddress);
     setTaskId(initialValues.taskId);
     setDataURL(initialValues.dataURL);
     setOcr(initialValues.ocr);
-    setFormat(initialValues.format);
-    setSizeGb(initialValues.sizeGb);
-    setStatus(initialValues.status);
-    setCreatedAt(initialValues.createdAt);
     setErrors({});
   };
   const validations = {
@@ -54,10 +42,6 @@ export default function MediaCreateForm(props) {
     taskId: [],
     dataURL: [],
     ocr: [],
-    format: [],
-    sizeGb: [],
-    status: [],
-    createdAt: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -76,23 +60,6 @@ export default function MediaCreateForm(props) {
     setErrors((errors) => ({ ...errors, [fieldName]: validationResponse }));
     return validationResponse;
   };
-  const convertToLocal = (date) => {
-    const df = new Intl.DateTimeFormat("default", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      calendar: "iso8601",
-      numberingSystem: "latn",
-      hourCycle: "h23",
-    });
-    const parts = df.formatToParts(date).reduce((acc, part) => {
-      acc[part.type] = part.value;
-      return acc;
-    }, {});
-    return `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}`;
-  };
   return (
     <Grid
       as="form"
@@ -106,10 +73,6 @@ export default function MediaCreateForm(props) {
           taskId,
           dataURL,
           ocr,
-          format,
-          sizeGb,
-          status,
-          createdAt,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -176,10 +139,6 @@ export default function MediaCreateForm(props) {
               taskId,
               dataURL,
               ocr,
-              format,
-              sizeGb,
-              status,
-              createdAt,
             };
             const result = onChange(modelFields);
             value = result?.walletAddress ?? value;
@@ -207,10 +166,6 @@ export default function MediaCreateForm(props) {
               taskId: value,
               dataURL,
               ocr,
-              format,
-              sizeGb,
-              status,
-              createdAt,
             };
             const result = onChange(modelFields);
             value = result?.taskId ?? value;
@@ -238,10 +193,6 @@ export default function MediaCreateForm(props) {
               taskId,
               dataURL: value,
               ocr,
-              format,
-              sizeGb,
-              status,
-              createdAt,
             };
             const result = onChange(modelFields);
             value = result?.dataURL ?? value;
@@ -269,10 +220,6 @@ export default function MediaCreateForm(props) {
               taskId,
               dataURL,
               ocr: value,
-              format,
-              sizeGb,
-              status,
-              createdAt,
             };
             const result = onChange(modelFields);
             value = result?.ocr ?? value;
@@ -286,136 +233,6 @@ export default function MediaCreateForm(props) {
         errorMessage={errors.ocr?.errorMessage}
         hasError={errors.ocr?.hasError}
         {...getOverrideProps(overrides, "ocr")}
-      ></TextField>
-      <TextField
-        label="Format"
-        isRequired={false}
-        isReadOnly={false}
-        value={format}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              walletAddress,
-              taskId,
-              dataURL,
-              ocr,
-              format: value,
-              sizeGb,
-              status,
-              createdAt,
-            };
-            const result = onChange(modelFields);
-            value = result?.format ?? value;
-          }
-          if (errors.format?.hasError) {
-            runValidationTasks("format", value);
-          }
-          setFormat(value);
-        }}
-        onBlur={() => runValidationTasks("format", format)}
-        errorMessage={errors.format?.errorMessage}
-        hasError={errors.format?.hasError}
-        {...getOverrideProps(overrides, "format")}
-      ></TextField>
-      <TextField
-        label="Size gb"
-        isRequired={false}
-        isReadOnly={false}
-        type="number"
-        step="any"
-        value={sizeGb}
-        onChange={(e) => {
-          let value = isNaN(parseFloat(e.target.value))
-            ? e.target.value
-            : parseFloat(e.target.value);
-          if (onChange) {
-            const modelFields = {
-              walletAddress,
-              taskId,
-              dataURL,
-              ocr,
-              format,
-              sizeGb: value,
-              status,
-              createdAt,
-            };
-            const result = onChange(modelFields);
-            value = result?.sizeGb ?? value;
-          }
-          if (errors.sizeGb?.hasError) {
-            runValidationTasks("sizeGb", value);
-          }
-          setSizeGb(value);
-        }}
-        onBlur={() => runValidationTasks("sizeGb", sizeGb)}
-        errorMessage={errors.sizeGb?.errorMessage}
-        hasError={errors.sizeGb?.hasError}
-        {...getOverrideProps(overrides, "sizeGb")}
-      ></TextField>
-      <TextField
-        label="Status"
-        isRequired={false}
-        isReadOnly={false}
-        value={status}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              walletAddress,
-              taskId,
-              dataURL,
-              ocr,
-              format,
-              sizeGb,
-              status: value,
-              createdAt,
-            };
-            const result = onChange(modelFields);
-            value = result?.status ?? value;
-          }
-          if (errors.status?.hasError) {
-            runValidationTasks("status", value);
-          }
-          setStatus(value);
-        }}
-        onBlur={() => runValidationTasks("status", status)}
-        errorMessage={errors.status?.errorMessage}
-        hasError={errors.status?.hasError}
-        {...getOverrideProps(overrides, "status")}
-      ></TextField>
-      <TextField
-        label="Created at"
-        isRequired={false}
-        isReadOnly={false}
-        type="datetime-local"
-        value={createdAt && convertToLocal(new Date(createdAt))}
-        onChange={(e) => {
-          let value =
-            e.target.value === "" ? "" : new Date(e.target.value).toISOString();
-          if (onChange) {
-            const modelFields = {
-              walletAddress,
-              taskId,
-              dataURL,
-              ocr,
-              format,
-              sizeGb,
-              status,
-              createdAt: value,
-            };
-            const result = onChange(modelFields);
-            value = result?.createdAt ?? value;
-          }
-          if (errors.createdAt?.hasError) {
-            runValidationTasks("createdAt", value);
-          }
-          setCreatedAt(value);
-        }}
-        onBlur={() => runValidationTasks("createdAt", createdAt)}
-        errorMessage={errors.createdAt?.errorMessage}
-        hasError={errors.createdAt?.hasError}
-        {...getOverrideProps(overrides, "createdAt")}
       ></TextField>
       <Flex
         justifyContent="space-between"

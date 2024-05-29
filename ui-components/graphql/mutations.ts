@@ -69,11 +69,8 @@ export const createMedia = /* GraphQL */ `
     createMedia(condition: $condition, input: $input) {
       createdAt
       dataURL
-      format
       id
       ocr
-      sizeGb
-      status
       taskId
       updatedAt
       walletAddress
@@ -92,7 +89,6 @@ export const createMedias = /* GraphQL */ `
       taskId: $taskId
       walletAddress: $walletAddress
     ) {
-      aiModelId
       app
       appImage
       createdAt
@@ -102,9 +98,6 @@ export const createMedias = /* GraphQL */ `
       mediaId
       medias
       name
-      priceListed
-      published
-      status
       updatedAt
       walletAddress
       __typename
@@ -160,7 +153,6 @@ export const createTask = /* GraphQL */ `
     $input: CreateTaskInput!
   ) {
     createTask(condition: $condition, input: $input) {
-      aiModelId
       app
       appImage
       createdAt
@@ -170,9 +162,6 @@ export const createTask = /* GraphQL */ `
       mediaId
       medias
       name
-      priceListed
-      published
-      status
       updatedAt
       walletAddress
       __typename
@@ -261,11 +250,8 @@ export const deleteMedia = /* GraphQL */ `
     deleteMedia(condition: $condition, input: $input) {
       createdAt
       dataURL
-      format
       id
       ocr
-      sizeGb
-      status
       taskId
       updatedAt
       walletAddress
@@ -322,7 +308,6 @@ export const deleteTask = /* GraphQL */ `
     $input: DeleteTaskInput!
   ) {
     deleteTask(condition: $condition, input: $input) {
-      aiModelId
       app
       appImage
       createdAt
@@ -332,9 +317,6 @@ export const deleteTask = /* GraphQL */ `
       mediaId
       medias
       name
-      priceListed
-      published
-      status
       updatedAt
       walletAddress
       __typename
@@ -423,11 +405,8 @@ export const updateMedia = /* GraphQL */ `
     updateMedia(condition: $condition, input: $input) {
       createdAt
       dataURL
-      format
       id
       ocr
-      sizeGb
-      status
       taskId
       updatedAt
       walletAddress
@@ -484,7 +463,6 @@ export const updateTask = /* GraphQL */ `
     $input: UpdateTaskInput!
   ) {
     updateTask(condition: $condition, input: $input) {
-      aiModelId
       app
       appImage
       createdAt
@@ -494,9 +472,6 @@ export const updateTask = /* GraphQL */ `
       mediaId
       medias
       name
-      priceListed
-      published
-      status
       updatedAt
       walletAddress
       __typename

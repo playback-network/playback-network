@@ -57,11 +57,8 @@ export const getMedia = /* GraphQL */ `
     getMedia(id: $id) {
       createdAt
       dataURL
-      format
       id
       ocr
-      sizeGb
-      status
       taskId
       updatedAt
       walletAddress
@@ -109,7 +106,6 @@ export const getSale = /* GraphQL */ `
 export const getTask = /* GraphQL */ `
   query GetTask($id: ID!) {
     getTask(id: $id) {
-      aiModelId
       app
       appImage
       createdAt
@@ -119,9 +115,6 @@ export const getTask = /* GraphQL */ `
       mediaId
       medias
       name
-      priceListed
-      published
-      status
       updatedAt
       walletAddress
       __typename
@@ -224,11 +217,8 @@ export const listMedia = /* GraphQL */ `
       items {
         createdAt
         dataURL
-        format
         id
         ocr
-        sizeGb
-        status
         taskId
         updatedAt
         walletAddress
@@ -300,7 +290,6 @@ export const listTasks = /* GraphQL */ `
   ) {
     listTasks(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
-        aiModelId
         app
         appImage
         createdAt
@@ -310,9 +299,6 @@ export const listTasks = /* GraphQL */ `
         mediaId
         medias
         name
-        priceListed
-        published
-        status
         updatedAt
         walletAddress
         __typename

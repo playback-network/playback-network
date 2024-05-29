@@ -31,6 +31,22 @@ export const handler: Schema['createMedias']['functionHandler'] = async (
   const start = performance.now();
   const walletAddress = event.arguments?.walletAddress;
   const taskId = event.arguments?.taskId;
+
+  const emptyTask = {
+    id: '0',
+    createdAt: 'error',
+    updatedAt: 'error',
+    mediaId: '',
+    status: '',
+    walletAddress: '',
+    medias: '',
+    name: '',
+    description: '',
+    difficulty: 0,
+    app: '',
+    appImage: '',
+  };
+
   if (taskId && walletAddress) {
     const task = { id: taskId, walletAddress: walletAddress };
     const { data: updatedTask, errors: taskUpdateErrors } =
@@ -48,17 +64,11 @@ export const handler: Schema['createMedias']['functionHandler'] = async (
     }
 
     if (errors) {
-      return {
-        message: `Something went wrong updating the Task ${taskId} with ${walletAddress}`,
-        status: 500,
-      };
+      return emptyTask;
     }
 
     //success response
     return updatedTask;
   }
-  return {
-    message: `Update Task mutation needs parameters ${taskId} and ${walletAddress}`,
-    status: 400,
-  };
+  return emptyTask;
 };

@@ -57,11 +57,8 @@ export const onCreateMedia = /* GraphQL */ `
     onCreateMedia(filter: $filter) {
       createdAt
       dataURL
-      format
       id
       ocr
-      sizeGb
-      status
       taskId
       updatedAt
       walletAddress
@@ -109,7 +106,6 @@ export const onCreateSale = /* GraphQL */ `
 export const onCreateTask = /* GraphQL */ `
   subscription OnCreateTask($filter: ModelSubscriptionTaskFilterInput) {
     onCreateTask(filter: $filter) {
-      aiModelId
       app
       appImage
       createdAt
@@ -119,9 +115,6 @@ export const onCreateTask = /* GraphQL */ `
       mediaId
       medias
       name
-      priceListed
-      published
-      status
       updatedAt
       walletAddress
       __typename
@@ -195,11 +188,8 @@ export const onDeleteMedia = /* GraphQL */ `
     onDeleteMedia(filter: $filter) {
       createdAt
       dataURL
-      format
       id
       ocr
-      sizeGb
-      status
       taskId
       updatedAt
       walletAddress
@@ -247,7 +237,6 @@ export const onDeleteSale = /* GraphQL */ `
 export const onDeleteTask = /* GraphQL */ `
   subscription OnDeleteTask($filter: ModelSubscriptionTaskFilterInput) {
     onDeleteTask(filter: $filter) {
-      aiModelId
       app
       appImage
       createdAt
@@ -257,9 +246,6 @@ export const onDeleteTask = /* GraphQL */ `
       mediaId
       medias
       name
-      priceListed
-      published
-      status
       updatedAt
       walletAddress
       __typename
@@ -333,11 +319,8 @@ export const onUpdateMedia = /* GraphQL */ `
     onUpdateMedia(filter: $filter) {
       createdAt
       dataURL
-      format
       id
       ocr
-      sizeGb
-      status
       taskId
       updatedAt
       walletAddress
@@ -385,7 +368,6 @@ export const onUpdateSale = /* GraphQL */ `
 export const onUpdateTask = /* GraphQL */ `
   subscription OnUpdateTask($filter: ModelSubscriptionTaskFilterInput) {
     onUpdateTask(filter: $filter) {
-      aiModelId
       app
       appImage
       createdAt
@@ -395,9 +377,6 @@ export const onUpdateTask = /* GraphQL */ `
       mediaId
       medias
       name
-      priceListed
-      published
-      status
       updatedAt
       walletAddress
       __typename
