@@ -16,8 +16,7 @@ export declare type ValidationResponse = {
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type AccountCreateFormInputValues = {
-    wallet?: string;
-    ens?: string;
+    walletAddress?: string;
     balance?: number;
     nftAddresses?: string;
     medias?: string;
@@ -25,8 +24,7 @@ export declare type AccountCreateFormInputValues = {
     createdAt?: string;
 };
 export declare type AccountCreateFormValidationValues = {
-    wallet?: ValidationFunction<string>;
-    ens?: ValidationFunction<string>;
+    walletAddress?: ValidationFunction<string>;
     balance?: ValidationFunction<number>;
     nftAddresses?: ValidationFunction<string>;
     medias?: ValidationFunction<string>;
@@ -36,8 +34,7 @@ export declare type AccountCreateFormValidationValues = {
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type AccountCreateFormOverridesProps = {
     AccountCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
-    wallet?: PrimitiveOverrideProps<TextFieldProps>;
-    ens?: PrimitiveOverrideProps<TextFieldProps>;
+    walletAddress?: PrimitiveOverrideProps<TextFieldProps>;
     balance?: PrimitiveOverrideProps<TextFieldProps>;
     nftAddresses?: PrimitiveOverrideProps<TextAreaFieldProps>;
     medias?: PrimitiveOverrideProps<TextAreaFieldProps>;

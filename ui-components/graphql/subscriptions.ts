@@ -26,13 +26,12 @@ export const onCreateAccount = /* GraphQL */ `
     onCreateAccount(filter: $filter) {
       balance
       createdAt
-      ens
       id
       medias
       nftAddresses
       updatedAt
       verified
-      wallet
+      walletAddress
       __typename
     }
   }
@@ -165,13 +164,12 @@ export const onDeleteAccount = /* GraphQL */ `
     onDeleteAccount(filter: $filter) {
       balance
       createdAt
-      ens
       id
       medias
       nftAddresses
       updatedAt
       verified
-      wallet
+      walletAddress
       __typename
     }
   }
@@ -304,13 +302,12 @@ export const onUpdateAccount = /* GraphQL */ `
     onUpdateAccount(filter: $filter) {
       balance
       createdAt
-      ens
       id
       medias
       nftAddresses
       updatedAt
       verified
-      wallet
+      walletAddress
       __typename
     }
   }

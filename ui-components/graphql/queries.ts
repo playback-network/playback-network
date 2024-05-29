@@ -26,13 +26,12 @@ export const getAccount = /* GraphQL */ `
     getAccount(id: $id) {
       balance
       createdAt
-      ens
       id
       medias
       nftAddresses
       updatedAt
       verified
-      wallet
+      walletAddress
       __typename
     }
   }
@@ -178,13 +177,12 @@ export const listAccounts = /* GraphQL */ `
       items {
         balance
         createdAt
-        ens
         id
         medias
         nftAddresses
         updatedAt
         verified
-        wallet
+        walletAddress
         __typename
       }
       nextToken

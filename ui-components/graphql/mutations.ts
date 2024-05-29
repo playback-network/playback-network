@@ -32,13 +32,12 @@ export const createAccount = /* GraphQL */ `
     createAccount(condition: $condition, input: $input) {
       balance
       createdAt
-      ens
       id
       medias
       nftAddresses
       updatedAt
       verified
-      wallet
+      walletAddress
       __typename
     }
   }
@@ -76,6 +75,36 @@ export const createMedia = /* GraphQL */ `
       sizeGb
       status
       taskId
+      updatedAt
+      walletAddress
+      __typename
+    }
+  }
+`;
+export const createMedias = /* GraphQL */ `
+  mutation CreateMedias(
+    $frames: AWSJSON
+    $taskId: String
+    $walletAddress: String
+  ) {
+    createMedias(
+      frames: $frames
+      taskId: $taskId
+      walletAddress: $walletAddress
+    ) {
+      aiModelId
+      app
+      appImage
+      createdAt
+      description
+      difficulty
+      id
+      mediaId
+      medias
+      name
+      priceListed
+      published
+      status
       updatedAt
       walletAddress
       __typename
@@ -195,13 +224,12 @@ export const deleteAccount = /* GraphQL */ `
     deleteAccount(condition: $condition, input: $input) {
       balance
       createdAt
-      ens
       id
       medias
       nftAddresses
       updatedAt
       verified
-      wallet
+      walletAddress
       __typename
     }
   }
@@ -358,13 +386,12 @@ export const updateAccount = /* GraphQL */ `
     updateAccount(condition: $condition, input: $input) {
       balance
       createdAt
-      ens
       id
       medias
       nftAddresses
       updatedAt
       verified
-      wallet
+      walletAddress
       __typename
     }
   }

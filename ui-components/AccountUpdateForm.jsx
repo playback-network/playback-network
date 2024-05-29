@@ -27,16 +27,16 @@ export default function AccountUpdateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    wallet: "",
-    ens: "",
+    walletAddress: "",
     balance: "",
     nftAddresses: "",
     medias: "",
     verified: false,
     createdAt: "",
   };
-  const [wallet, setWallet] = React.useState(initialValues.wallet);
-  const [ens, setEns] = React.useState(initialValues.ens);
+  const [walletAddress, setWalletAddress] = React.useState(
+    initialValues.walletAddress
+  );
   const [balance, setBalance] = React.useState(initialValues.balance);
   const [nftAddresses, setNftAddresses] = React.useState(
     initialValues.nftAddresses
@@ -49,8 +49,7 @@ export default function AccountUpdateForm(props) {
     const cleanValues = accountRecord
       ? { ...initialValues, ...accountRecord }
       : initialValues;
-    setWallet(cleanValues.wallet);
-    setEns(cleanValues.ens);
+    setWalletAddress(cleanValues.walletAddress);
     setBalance(cleanValues.balance);
     setNftAddresses(
       typeof cleanValues.nftAddresses === "string" ||
@@ -84,8 +83,7 @@ export default function AccountUpdateForm(props) {
   }, [idProp, accountModelProp]);
   React.useEffect(resetStateValues, [accountRecord]);
   const validations = {
-    wallet: [],
-    ens: [],
+    walletAddress: [],
     balance: [],
     nftAddresses: [{ type: "JSON" }],
     medias: [{ type: "JSON" }],
@@ -135,8 +133,7 @@ export default function AccountUpdateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          wallet: wallet ?? null,
-          ens: ens ?? null,
+          walletAddress: walletAddress ?? null,
           balance: balance ?? null,
           nftAddresses: nftAddresses ?? null,
           medias: medias ?? null,
@@ -194,16 +191,15 @@ export default function AccountUpdateForm(props) {
       {...rest}
     >
       <TextField
-        label="Wallet"
+        label="Wallet address"
         isRequired={false}
         isReadOnly={false}
-        value={wallet}
+        value={walletAddress}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              wallet: value,
-              ens,
+              walletAddress: value,
               balance,
               nftAddresses,
               medias,
@@ -211,47 +207,17 @@ export default function AccountUpdateForm(props) {
               createdAt,
             };
             const result = onChange(modelFields);
-            value = result?.wallet ?? value;
+            value = result?.walletAddress ?? value;
           }
-          if (errors.wallet?.hasError) {
-            runValidationTasks("wallet", value);
+          if (errors.walletAddress?.hasError) {
+            runValidationTasks("walletAddress", value);
           }
-          setWallet(value);
+          setWalletAddress(value);
         }}
-        onBlur={() => runValidationTasks("wallet", wallet)}
-        errorMessage={errors.wallet?.errorMessage}
-        hasError={errors.wallet?.hasError}
-        {...getOverrideProps(overrides, "wallet")}
-      ></TextField>
-      <TextField
-        label="Ens"
-        isRequired={false}
-        isReadOnly={false}
-        value={ens}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              wallet,
-              ens: value,
-              balance,
-              nftAddresses,
-              medias,
-              verified,
-              createdAt,
-            };
-            const result = onChange(modelFields);
-            value = result?.ens ?? value;
-          }
-          if (errors.ens?.hasError) {
-            runValidationTasks("ens", value);
-          }
-          setEns(value);
-        }}
-        onBlur={() => runValidationTasks("ens", ens)}
-        errorMessage={errors.ens?.errorMessage}
-        hasError={errors.ens?.hasError}
-        {...getOverrideProps(overrides, "ens")}
+        onBlur={() => runValidationTasks("walletAddress", walletAddress)}
+        errorMessage={errors.walletAddress?.errorMessage}
+        hasError={errors.walletAddress?.hasError}
+        {...getOverrideProps(overrides, "walletAddress")}
       ></TextField>
       <TextField
         label="Balance"
@@ -266,8 +232,7 @@ export default function AccountUpdateForm(props) {
             : parseFloat(e.target.value);
           if (onChange) {
             const modelFields = {
-              wallet,
-              ens,
+              walletAddress,
               balance: value,
               nftAddresses,
               medias,
@@ -296,8 +261,7 @@ export default function AccountUpdateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              wallet,
-              ens,
+              walletAddress,
               balance,
               nftAddresses: value,
               medias,
@@ -326,8 +290,7 @@ export default function AccountUpdateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              wallet,
-              ens,
+              walletAddress,
               balance,
               nftAddresses,
               medias: value,
@@ -356,8 +319,7 @@ export default function AccountUpdateForm(props) {
           let value = e.target.checked;
           if (onChange) {
             const modelFields = {
-              wallet,
-              ens,
+              walletAddress,
               balance,
               nftAddresses,
               medias,
@@ -388,8 +350,7 @@ export default function AccountUpdateForm(props) {
             e.target.value === "" ? "" : new Date(e.target.value).toISOString();
           if (onChange) {
             const modelFields = {
-              wallet,
-              ens,
+              walletAddress,
               balance,
               nftAddresses,
               medias,
