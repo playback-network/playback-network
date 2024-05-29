@@ -55,14 +55,7 @@ export const handler: Schema['createMedias']['functionHandler'] = async (
     }
 
     //success response
-    const executionDuration = performance.now() - start;
-    return {
-      content: updatedTask,
-      message: `Task assigned to walletAddress: ${updatedTask?.walletAddress}`,
-      id: event.arguments?.taskId,
-      updatedAt: new Date().toISOString(),
-      executionDuration: executionDuration.toString(),
-    };
+    return updatedTask;
   }
   return {
     message: `Update Task mutation needs parameters ${taskId} and ${walletAddress}`,
