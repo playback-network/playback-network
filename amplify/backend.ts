@@ -7,6 +7,8 @@ import {
   RestApi,
 } from 'aws-cdk-lib/aws-apigateway';
 import { myApiFunction } from './functions/api-function/resource';
+import { galadrielFunction } from './functions/galadriel-function/resource';
+import { payloadmanagerFunction } from './functions/payloadmanager-function/resource';
 import { auth } from './auth/resource';
 import { data } from './data/resource';
 import { storage } from './storage/resource';
@@ -15,6 +17,8 @@ const backend = defineBackend({
   auth,
   data,
   myApiFunction,
+  galadrielFunction,
+  payloadmanagerFunction,
   storage,
 });
 
@@ -32,7 +36,8 @@ const myRestApi = new RestApi(apiStack, 'RestApi', {
   },
 });
 
-// create a new Lambda integration
+// FOR myApiFunction:
+// create a new Lambda integration for myApiFunction
 const lambdaIntegration = new LambdaIntegration(
   backend.myApiFunction.resources.lambda
 );
