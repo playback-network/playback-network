@@ -17,17 +17,21 @@ export declare type ValidationResponse = {
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type MediaUpdateFormInputValues = {
-    ownersWallet?: string;
-    type?: string;
-    description?: string;
+    walletAddress?: string;
+    taskId?: string;
+    dataURL?: string;
+    ocr?: string;
+    format?: string;
     sizeGb?: number;
     status?: string;
     createdAt?: string;
 };
 export declare type MediaUpdateFormValidationValues = {
-    ownersWallet?: ValidationFunction<string>;
-    type?: ValidationFunction<string>;
-    description?: ValidationFunction<string>;
+    walletAddress?: ValidationFunction<string>;
+    taskId?: ValidationFunction<string>;
+    dataURL?: ValidationFunction<string>;
+    ocr?: ValidationFunction<string>;
+    format?: ValidationFunction<string>;
     sizeGb?: ValidationFunction<number>;
     status?: ValidationFunction<string>;
     createdAt?: ValidationFunction<string>;
@@ -35,9 +39,11 @@ export declare type MediaUpdateFormValidationValues = {
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type MediaUpdateFormOverridesProps = {
     MediaUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
-    ownersWallet?: PrimitiveOverrideProps<TextFieldProps>;
-    type?: PrimitiveOverrideProps<TextFieldProps>;
-    description?: PrimitiveOverrideProps<TextFieldProps>;
+    walletAddress?: PrimitiveOverrideProps<TextFieldProps>;
+    taskId?: PrimitiveOverrideProps<TextFieldProps>;
+    dataURL?: PrimitiveOverrideProps<TextFieldProps>;
+    ocr?: PrimitiveOverrideProps<TextFieldProps>;
+    format?: PrimitiveOverrideProps<TextFieldProps>;
     sizeGb?: PrimitiveOverrideProps<TextFieldProps>;
     status?: PrimitiveOverrideProps<TextFieldProps>;
     createdAt?: PrimitiveOverrideProps<TextFieldProps>;

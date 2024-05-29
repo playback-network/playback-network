@@ -31,6 +31,7 @@ export default function AccountUpdateForm(props) {
     ens: "",
     balance: "",
     nftAddresses: "",
+    medias: "",
     verified: false,
     createdAt: "",
   };
@@ -40,6 +41,7 @@ export default function AccountUpdateForm(props) {
   const [nftAddresses, setNftAddresses] = React.useState(
     initialValues.nftAddresses
   );
+  const [medias, setMedias] = React.useState(initialValues.medias);
   const [verified, setVerified] = React.useState(initialValues.verified);
   const [createdAt, setCreatedAt] = React.useState(initialValues.createdAt);
   const [errors, setErrors] = React.useState({});
@@ -55,6 +57,11 @@ export default function AccountUpdateForm(props) {
         cleanValues.nftAddresses === null
         ? cleanValues.nftAddresses
         : JSON.stringify(cleanValues.nftAddresses)
+    );
+    setMedias(
+      typeof cleanValues.medias === "string" || cleanValues.medias === null
+        ? cleanValues.medias
+        : JSON.stringify(cleanValues.medias)
     );
     setVerified(cleanValues.verified);
     setCreatedAt(cleanValues.createdAt);
@@ -81,6 +88,7 @@ export default function AccountUpdateForm(props) {
     ens: [],
     balance: [],
     nftAddresses: [{ type: "JSON" }],
+    medias: [{ type: "JSON" }],
     verified: [],
     createdAt: [],
   };
@@ -131,6 +139,7 @@ export default function AccountUpdateForm(props) {
           ens: ens ?? null,
           balance: balance ?? null,
           nftAddresses: nftAddresses ?? null,
+          medias: medias ?? null,
           verified: verified ?? null,
           createdAt: createdAt ?? null,
         };
@@ -197,6 +206,7 @@ export default function AccountUpdateForm(props) {
               ens,
               balance,
               nftAddresses,
+              medias,
               verified,
               createdAt,
             };
@@ -226,6 +236,7 @@ export default function AccountUpdateForm(props) {
               ens: value,
               balance,
               nftAddresses,
+              medias,
               verified,
               createdAt,
             };
@@ -259,6 +270,7 @@ export default function AccountUpdateForm(props) {
               ens,
               balance: value,
               nftAddresses,
+              medias,
               verified,
               createdAt,
             };
@@ -288,6 +300,7 @@ export default function AccountUpdateForm(props) {
               ens,
               balance,
               nftAddresses: value,
+              medias,
               verified,
               createdAt,
             };
@@ -304,6 +317,36 @@ export default function AccountUpdateForm(props) {
         hasError={errors.nftAddresses?.hasError}
         {...getOverrideProps(overrides, "nftAddresses")}
       ></TextAreaField>
+      <TextAreaField
+        label="Medias"
+        isRequired={false}
+        isReadOnly={false}
+        value={medias}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              wallet,
+              ens,
+              balance,
+              nftAddresses,
+              medias: value,
+              verified,
+              createdAt,
+            };
+            const result = onChange(modelFields);
+            value = result?.medias ?? value;
+          }
+          if (errors.medias?.hasError) {
+            runValidationTasks("medias", value);
+          }
+          setMedias(value);
+        }}
+        onBlur={() => runValidationTasks("medias", medias)}
+        errorMessage={errors.medias?.errorMessage}
+        hasError={errors.medias?.hasError}
+        {...getOverrideProps(overrides, "medias")}
+      ></TextAreaField>
       <SwitchField
         label="Verified"
         defaultChecked={false}
@@ -317,6 +360,7 @@ export default function AccountUpdateForm(props) {
               ens,
               balance,
               nftAddresses,
+              medias,
               verified: value,
               createdAt,
             };
@@ -348,6 +392,7 @@ export default function AccountUpdateForm(props) {
               ens,
               balance,
               nftAddresses,
+              medias,
               verified,
               createdAt: value,
             };

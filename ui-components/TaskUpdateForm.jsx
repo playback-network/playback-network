@@ -29,31 +29,35 @@ export default function TaskUpdateForm(props) {
   const initialValues = {
     mediaId: "",
     aiModelId: "",
-    ownersWallet: "",
+    walletAddress: "",
+    medias: "",
     name: "",
     description: "",
     difficulty: "",
+    app: "",
+    appImage: "",
     priceListed: "",
     status: "",
-    apps: "",
     published: false,
     createdAt: "",
   };
   const [mediaId, setMediaId] = React.useState(initialValues.mediaId);
   const [aiModelId, setAiModelId] = React.useState(initialValues.aiModelId);
-  const [ownersWallet, setOwnersWallet] = React.useState(
-    initialValues.ownersWallet
+  const [walletAddress, setWalletAddress] = React.useState(
+    initialValues.walletAddress
   );
+  const [medias, setMedias] = React.useState(initialValues.medias);
   const [name, setName] = React.useState(initialValues.name);
   const [description, setDescription] = React.useState(
     initialValues.description
   );
   const [difficulty, setDifficulty] = React.useState(initialValues.difficulty);
+  const [app, setApp] = React.useState(initialValues.app);
+  const [appImage, setAppImage] = React.useState(initialValues.appImage);
   const [priceListed, setPriceListed] = React.useState(
     initialValues.priceListed
   );
   const [status, setStatus] = React.useState(initialValues.status);
-  const [apps, setApps] = React.useState(initialValues.apps);
   const [published, setPublished] = React.useState(initialValues.published);
   const [createdAt, setCreatedAt] = React.useState(initialValues.createdAt);
   const [errors, setErrors] = React.useState({});
@@ -63,17 +67,19 @@ export default function TaskUpdateForm(props) {
       : initialValues;
     setMediaId(cleanValues.mediaId);
     setAiModelId(cleanValues.aiModelId);
-    setOwnersWallet(cleanValues.ownersWallet);
+    setWalletAddress(cleanValues.walletAddress);
+    setMedias(
+      typeof cleanValues.medias === "string" || cleanValues.medias === null
+        ? cleanValues.medias
+        : JSON.stringify(cleanValues.medias)
+    );
     setName(cleanValues.name);
     setDescription(cleanValues.description);
     setDifficulty(cleanValues.difficulty);
+    setApp(cleanValues.app);
+    setAppImage(cleanValues.appImage);
     setPriceListed(cleanValues.priceListed);
     setStatus(cleanValues.status);
-    setApps(
-      typeof cleanValues.apps === "string" || cleanValues.apps === null
-        ? cleanValues.apps
-        : JSON.stringify(cleanValues.apps)
-    );
     setPublished(cleanValues.published);
     setCreatedAt(cleanValues.createdAt);
     setErrors({});
@@ -97,13 +103,15 @@ export default function TaskUpdateForm(props) {
   const validations = {
     mediaId: [],
     aiModelId: [],
-    ownersWallet: [],
+    walletAddress: [],
+    medias: [{ type: "JSON" }],
     name: [],
     description: [],
     difficulty: [],
+    app: [],
+    appImage: [],
     priceListed: [],
     status: [],
-    apps: [{ type: "JSON" }],
     published: [],
     createdAt: [],
   };
@@ -152,13 +160,15 @@ export default function TaskUpdateForm(props) {
         let modelFields = {
           mediaId: mediaId ?? null,
           aiModelId: aiModelId ?? null,
-          ownersWallet: ownersWallet ?? null,
+          walletAddress: walletAddress ?? null,
+          medias: medias ?? null,
           name: name ?? null,
           description: description ?? null,
           difficulty: difficulty ?? null,
+          app: app ?? null,
+          appImage: appImage ?? null,
           priceListed: priceListed ?? null,
           status: status ?? null,
-          apps: apps ?? null,
           published: published ?? null,
           createdAt: createdAt ?? null,
         };
@@ -223,13 +233,15 @@ export default function TaskUpdateForm(props) {
             const modelFields = {
               mediaId: value,
               aiModelId,
-              ownersWallet,
+              walletAddress,
+              medias,
               name,
               description,
               difficulty,
+              app,
+              appImage,
               priceListed,
               status,
-              apps,
               published,
               createdAt,
             };
@@ -257,13 +269,15 @@ export default function TaskUpdateForm(props) {
             const modelFields = {
               mediaId,
               aiModelId: value,
-              ownersWallet,
+              walletAddress,
+              medias,
               name,
               description,
               difficulty,
+              app,
+              appImage,
               priceListed,
               status,
-              apps,
               published,
               createdAt,
             };
@@ -281,39 +295,77 @@ export default function TaskUpdateForm(props) {
         {...getOverrideProps(overrides, "aiModelId")}
       ></TextField>
       <TextField
-        label="Owners wallet"
+        label="Wallet address"
         isRequired={false}
         isReadOnly={false}
-        value={ownersWallet}
+        value={walletAddress}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
               mediaId,
               aiModelId,
-              ownersWallet: value,
+              walletAddress: value,
+              medias,
               name,
               description,
               difficulty,
+              app,
+              appImage,
               priceListed,
               status,
-              apps,
               published,
               createdAt,
             };
             const result = onChange(modelFields);
-            value = result?.ownersWallet ?? value;
+            value = result?.walletAddress ?? value;
           }
-          if (errors.ownersWallet?.hasError) {
-            runValidationTasks("ownersWallet", value);
+          if (errors.walletAddress?.hasError) {
+            runValidationTasks("walletAddress", value);
           }
-          setOwnersWallet(value);
+          setWalletAddress(value);
         }}
-        onBlur={() => runValidationTasks("ownersWallet", ownersWallet)}
-        errorMessage={errors.ownersWallet?.errorMessage}
-        hasError={errors.ownersWallet?.hasError}
-        {...getOverrideProps(overrides, "ownersWallet")}
+        onBlur={() => runValidationTasks("walletAddress", walletAddress)}
+        errorMessage={errors.walletAddress?.errorMessage}
+        hasError={errors.walletAddress?.hasError}
+        {...getOverrideProps(overrides, "walletAddress")}
       ></TextField>
+      <TextAreaField
+        label="Medias"
+        isRequired={false}
+        isReadOnly={false}
+        value={medias}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              mediaId,
+              aiModelId,
+              walletAddress,
+              medias: value,
+              name,
+              description,
+              difficulty,
+              app,
+              appImage,
+              priceListed,
+              status,
+              published,
+              createdAt,
+            };
+            const result = onChange(modelFields);
+            value = result?.medias ?? value;
+          }
+          if (errors.medias?.hasError) {
+            runValidationTasks("medias", value);
+          }
+          setMedias(value);
+        }}
+        onBlur={() => runValidationTasks("medias", medias)}
+        errorMessage={errors.medias?.errorMessage}
+        hasError={errors.medias?.hasError}
+        {...getOverrideProps(overrides, "medias")}
+      ></TextAreaField>
       <TextField
         label="Name"
         isRequired={false}
@@ -325,13 +377,15 @@ export default function TaskUpdateForm(props) {
             const modelFields = {
               mediaId,
               aiModelId,
-              ownersWallet,
+              walletAddress,
+              medias,
               name: value,
               description,
               difficulty,
+              app,
+              appImage,
               priceListed,
               status,
-              apps,
               published,
               createdAt,
             };
@@ -359,13 +413,15 @@ export default function TaskUpdateForm(props) {
             const modelFields = {
               mediaId,
               aiModelId,
-              ownersWallet,
+              walletAddress,
+              medias,
               name,
               description: value,
               difficulty,
+              app,
+              appImage,
               priceListed,
               status,
-              apps,
               published,
               createdAt,
             };
@@ -397,13 +453,15 @@ export default function TaskUpdateForm(props) {
             const modelFields = {
               mediaId,
               aiModelId,
-              ownersWallet,
+              walletAddress,
+              medias,
               name,
               description,
               difficulty: value,
+              app,
+              appImage,
               priceListed,
               status,
-              apps,
               published,
               createdAt,
             };
@@ -421,6 +479,78 @@ export default function TaskUpdateForm(props) {
         {...getOverrideProps(overrides, "difficulty")}
       ></TextField>
       <TextField
+        label="App"
+        isRequired={false}
+        isReadOnly={false}
+        value={app}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              mediaId,
+              aiModelId,
+              walletAddress,
+              medias,
+              name,
+              description,
+              difficulty,
+              app: value,
+              appImage,
+              priceListed,
+              status,
+              published,
+              createdAt,
+            };
+            const result = onChange(modelFields);
+            value = result?.app ?? value;
+          }
+          if (errors.app?.hasError) {
+            runValidationTasks("app", value);
+          }
+          setApp(value);
+        }}
+        onBlur={() => runValidationTasks("app", app)}
+        errorMessage={errors.app?.errorMessage}
+        hasError={errors.app?.hasError}
+        {...getOverrideProps(overrides, "app")}
+      ></TextField>
+      <TextField
+        label="App image"
+        isRequired={false}
+        isReadOnly={false}
+        value={appImage}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              mediaId,
+              aiModelId,
+              walletAddress,
+              medias,
+              name,
+              description,
+              difficulty,
+              app,
+              appImage: value,
+              priceListed,
+              status,
+              published,
+              createdAt,
+            };
+            const result = onChange(modelFields);
+            value = result?.appImage ?? value;
+          }
+          if (errors.appImage?.hasError) {
+            runValidationTasks("appImage", value);
+          }
+          setAppImage(value);
+        }}
+        onBlur={() => runValidationTasks("appImage", appImage)}
+        errorMessage={errors.appImage?.errorMessage}
+        hasError={errors.appImage?.hasError}
+        {...getOverrideProps(overrides, "appImage")}
+      ></TextField>
+      <TextField
         label="Price listed"
         isRequired={false}
         isReadOnly={false}
@@ -435,13 +565,15 @@ export default function TaskUpdateForm(props) {
             const modelFields = {
               mediaId,
               aiModelId,
-              ownersWallet,
+              walletAddress,
+              medias,
               name,
               description,
               difficulty,
+              app,
+              appImage,
               priceListed: value,
               status,
-              apps,
               published,
               createdAt,
             };
@@ -469,13 +601,15 @@ export default function TaskUpdateForm(props) {
             const modelFields = {
               mediaId,
               aiModelId,
-              ownersWallet,
+              walletAddress,
+              medias,
               name,
               description,
               difficulty,
+              app,
+              appImage,
               priceListed,
               status: value,
-              apps,
               published,
               createdAt,
             };
@@ -492,40 +626,6 @@ export default function TaskUpdateForm(props) {
         hasError={errors.status?.hasError}
         {...getOverrideProps(overrides, "status")}
       ></TextField>
-      <TextAreaField
-        label="Apps"
-        isRequired={false}
-        isReadOnly={false}
-        value={apps}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              mediaId,
-              aiModelId,
-              ownersWallet,
-              name,
-              description,
-              difficulty,
-              priceListed,
-              status,
-              apps: value,
-              published,
-              createdAt,
-            };
-            const result = onChange(modelFields);
-            value = result?.apps ?? value;
-          }
-          if (errors.apps?.hasError) {
-            runValidationTasks("apps", value);
-          }
-          setApps(value);
-        }}
-        onBlur={() => runValidationTasks("apps", apps)}
-        errorMessage={errors.apps?.errorMessage}
-        hasError={errors.apps?.hasError}
-        {...getOverrideProps(overrides, "apps")}
-      ></TextAreaField>
       <SwitchField
         label="Published"
         defaultChecked={false}
@@ -537,13 +637,15 @@ export default function TaskUpdateForm(props) {
             const modelFields = {
               mediaId,
               aiModelId,
-              ownersWallet,
+              walletAddress,
+              medias,
               name,
               description,
               difficulty,
+              app,
+              appImage,
               priceListed,
               status,
-              apps,
               published: value,
               createdAt,
             };
@@ -573,13 +675,15 @@ export default function TaskUpdateForm(props) {
             const modelFields = {
               mediaId,
               aiModelId,
-              ownersWallet,
+              walletAddress,
+              medias,
               name,
               description,
               difficulty,
+              app,
+              appImage,
               priceListed,
               status,
-              apps,
               published,
               createdAt: value,
             };
