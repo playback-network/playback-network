@@ -67,7 +67,7 @@ const schema = a.schema({
       // format: a.string(),
       // sizeGb: a.float(),
       // status: a.string(),
-      // createdAt: a.datetime(),
+      createdAt: a.datetime(),
     })
     .authorization((allow) => [allow.publicApiKey()]),
   Task: a
@@ -84,7 +84,7 @@ const schema = a.schema({
       // priceListed: a.float(),
       // status: a.string(),
       // published: a.boolean(),
-      // createdAt: a.datetime(),
+      createdAt: a.datetime(),
     })
     .authorization((allow) => [allow.publicApiKey()]),
   Sale: a
