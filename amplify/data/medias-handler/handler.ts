@@ -15,7 +15,6 @@ const client = generateClient<Schema>();
 
 export const handler: Handler = async (event, context) => {
   try {
-    const start = performance.now();
     const { walletAddress, taskId, frames } = JSON.parse(event.body);
 
     if (!frames || frames.length === 0) {
@@ -47,17 +46,7 @@ export const handler: Handler = async (event, context) => {
         };
       }
 
-      const executionDuration = performance.now() - start;
-      return {
-        statusCode: 200,
-        body: JSON.stringify({
-          content: updatedTask,
-          message: `Task assigned to walletAddress: ${updatedTask?.walletAddress}`,
-          id: taskId,
-          updatedAt: new Date().toISOString(),
-          executionDuration: executionDuration.toString(),
-        }),
-      };
+      return updatedTask;
     } else {
       return {
         statusCode: 400,
