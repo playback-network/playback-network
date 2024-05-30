@@ -2,35 +2,14 @@ import { Amplify } from 'aws-amplify';
 import { Schema } from '../resource';
 import { generateClient } from 'aws-amplify/data';
 import type { Handler } from 'aws-lambda';
-import { env } from '$amplify/env/medias-handler';
 
-Amplify.configure(
-  {
-    API: {
-      GraphQL: {
-        endpoint: env.data.GRAPHQL_ENDPOINT, // replace with your defineData name
-        region: env.AWS_REGION,
-        defaultAuthMode: 'identityPool',
-      },
-    },
-  },
-  {
-    Auth: {
-      credentialsProvider: {
-        getCredentialsAndIdentityId: async () => ({
-          credentials: {
-            accessKeyId: env.AWS_ACCESS_KEY_ID,
-            secretAccessKey: env.AWS_SECRET_ACCESS_KEY,
-            sessionToken: env.AWS_SESSION_TOKEN,
-          },
-        }),
-        clearCredentialsAndIdentityId: () => {
-          /* noop */
-        },
-      },
-    },
-  }
-);
+const env = {
+  AWS_REGION: process.env.AWS_REGION,
+  AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
+  AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
+  AWS_SESSION_TOKEN: process.env.AWS_SESSION_TOKEN,
+  GRAPHQL_ENDPOINT: process.env.GRAPHQL_ENDPOINT,
+};
 
 const client = generateClient<Schema>();
 
