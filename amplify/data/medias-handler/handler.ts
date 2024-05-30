@@ -48,21 +48,10 @@ export const handler: Handler = async (event, context) => {
 
       return updatedTask;
     } else {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({
-          message: `Update Task mutation needs parameters ${taskId} and ${walletAddress}`,
-        }),
-      };
+      throw new Error('Internal Server Error');
     }
   } catch (error: any) {
     console.error('Error:', error);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({
-        message: 'Internal Server Error',
-        error: error.message,
-      }),
-    };
+    throw new Error('Internal Server Error');
   }
 };
