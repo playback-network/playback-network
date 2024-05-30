@@ -100,6 +100,7 @@ export const createMedias = /* GraphQL */ `
       name
       updatedAt
       walletAddress
+      createdAt
       __typename
     }
   }

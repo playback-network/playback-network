@@ -37,13 +37,7 @@ export const handler: Handler = async (event, context) => {
       }
 
       if (taskUpdateErrors || errors.length > 0) {
-        return {
-          statusCode: 500,
-          body: JSON.stringify({
-            message: `Something went wrong updating the Task ${taskId} with ${walletAddress}`,
-            errors: [taskUpdateErrors, ...errors].filter(Boolean),
-          }),
-        };
+        return new Error('Internal Server Error');
       }
 
       return updatedTask;
