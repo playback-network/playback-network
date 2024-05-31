@@ -21,18 +21,17 @@ const schema = a.schema({
     .model({
       walletAddress: a.string(),
       taskId: a.string(),
-      dataURL: a.string(),
       s3address: a.string(),
-      price: a.float(),
+      fileName: a.string(),
+      sizeMb: a.float(),
     })
     .authorization((allow) => [allow.publicApiKey()]),
   Task: a
     .model({
       mediaId: a.string(),
       walletAddress: a.string(),
-      medias: a.json(),
       name: a.string(),
-      description: a.string(),
+      description: a.json(),
       difficulty: a.float(),
       app: a.string(),
       appImage: a.string(),
