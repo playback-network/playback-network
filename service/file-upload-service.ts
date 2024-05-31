@@ -2,14 +2,16 @@ import { uploadData } from 'aws-amplify/storage';
 
 const uploadFileToS3Bucket = async ({
   file,
-  identityId,
+  taskId,
+  walletAddress,
 }: {
   file: File;
-  identityId: string;
+  taskId: string;
+  walletAddress: string;
 }): Promise<boolean> => {
   try {
     const result = await uploadData({
-      path: `public/${identityId}/${file.name}`, // Modified path value
+      path: `public/${walletAddress}/${taskId}/raw-images/${file.name}`,
       data: file,
       options: {
         onProgress: ({ transferredBytes, totalBytes }) => {

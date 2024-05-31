@@ -1,11 +1,3 @@
-export { default as TodoCreateForm } from "./TodoCreateForm";
-export { default as TodoUpdateForm } from "./TodoUpdateForm";
-export { default as AccountCreateForm } from "./AccountCreateForm";
-export { default as AccountUpdateForm } from "./AccountUpdateForm";
-export { default as NFTCreateForm } from "./NFTCreateForm";
-export { default as NFTUpdateForm } from "./NFTUpdateForm";
-export { default as AIModelCreateForm } from "./AIModelCreateForm";
-export { default as AIModelUpdateForm } from "./AIModelUpdateForm";
 export { default as MediaCreateForm } from "./MediaCreateForm";
 export { default as MediaUpdateForm } from "./MediaUpdateForm";
 export { default as TaskCreateForm } from "./TaskCreateForm";

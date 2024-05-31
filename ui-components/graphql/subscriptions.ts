@@ -2,40 +2,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateAIModel = /* GraphQL */ `
-  subscription OnCreateAIModel($filter: ModelSubscriptionAIModelFilterInput) {
-    onCreateAIModel(filter: $filter) {
-      accuracy
-      app
-      createdAt
-      description
-      id
-      name
-      ownersWallet
-      price
-      published
-      serialisedConfig
-      status
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const onCreateAccount = /* GraphQL */ `
-  subscription OnCreateAccount($filter: ModelSubscriptionAccountFilterInput) {
-    onCreateAccount(filter: $filter) {
-      balance
-      createdAt
-      id
-      medias
-      nftAddresses
-      updatedAt
-      verified
-      walletAddress
-      __typename
-    }
-  }
-`;
 export const onCreateApp = /* GraphQL */ `
   subscription OnCreateApp($filter: ModelSubscriptionAppFilterInput) {
     onCreateApp(filter: $filter) {
@@ -63,22 +29,6 @@ export const onCreateMedia = /* GraphQL */ `
       taskId
       updatedAt
       walletAddress
-      __typename
-    }
-  }
-`;
-export const onCreateNFT = /* GraphQL */ `
-  subscription OnCreateNFT($filter: ModelSubscriptionNFTFilterInput) {
-    onCreateNFT(filter: $filter) {
-      blockAddress
-      cid
-      createdAt
-      id
-      metadata
-      ownersWallet
-      price
-      sizeGb
-      updatedAt
       __typename
     }
   }
@@ -122,52 +72,6 @@ export const onCreateTask = /* GraphQL */ `
     }
   }
 `;
-export const onCreateTodo = /* GraphQL */ `
-  subscription OnCreateTodo($filter: ModelSubscriptionTodoFilterInput) {
-    onCreateTodo(filter: $filter) {
-      content
-      createdAt
-      id
-      isDone
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const onDeleteAIModel = /* GraphQL */ `
-  subscription OnDeleteAIModel($filter: ModelSubscriptionAIModelFilterInput) {
-    onDeleteAIModel(filter: $filter) {
-      accuracy
-      app
-      createdAt
-      description
-      id
-      name
-      ownersWallet
-      price
-      published
-      serialisedConfig
-      status
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const onDeleteAccount = /* GraphQL */ `
-  subscription OnDeleteAccount($filter: ModelSubscriptionAccountFilterInput) {
-    onDeleteAccount(filter: $filter) {
-      balance
-      createdAt
-      id
-      medias
-      nftAddresses
-      updatedAt
-      verified
-      walletAddress
-      __typename
-    }
-  }
-`;
 export const onDeleteApp = /* GraphQL */ `
   subscription OnDeleteApp($filter: ModelSubscriptionAppFilterInput) {
     onDeleteApp(filter: $filter) {
@@ -195,22 +99,6 @@ export const onDeleteMedia = /* GraphQL */ `
       taskId
       updatedAt
       walletAddress
-      __typename
-    }
-  }
-`;
-export const onDeleteNFT = /* GraphQL */ `
-  subscription OnDeleteNFT($filter: ModelSubscriptionNFTFilterInput) {
-    onDeleteNFT(filter: $filter) {
-      blockAddress
-      cid
-      createdAt
-      id
-      metadata
-      ownersWallet
-      price
-      sizeGb
-      updatedAt
       __typename
     }
   }
@@ -254,52 +142,6 @@ export const onDeleteTask = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteTodo = /* GraphQL */ `
-  subscription OnDeleteTodo($filter: ModelSubscriptionTodoFilterInput) {
-    onDeleteTodo(filter: $filter) {
-      content
-      createdAt
-      id
-      isDone
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const onUpdateAIModel = /* GraphQL */ `
-  subscription OnUpdateAIModel($filter: ModelSubscriptionAIModelFilterInput) {
-    onUpdateAIModel(filter: $filter) {
-      accuracy
-      app
-      createdAt
-      description
-      id
-      name
-      ownersWallet
-      price
-      published
-      serialisedConfig
-      status
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const onUpdateAccount = /* GraphQL */ `
-  subscription OnUpdateAccount($filter: ModelSubscriptionAccountFilterInput) {
-    onUpdateAccount(filter: $filter) {
-      balance
-      createdAt
-      id
-      medias
-      nftAddresses
-      updatedAt
-      verified
-      walletAddress
-      __typename
-    }
-  }
-`;
 export const onUpdateApp = /* GraphQL */ `
   subscription OnUpdateApp($filter: ModelSubscriptionAppFilterInput) {
     onUpdateApp(filter: $filter) {
@@ -327,22 +169,6 @@ export const onUpdateMedia = /* GraphQL */ `
       taskId
       updatedAt
       walletAddress
-      __typename
-    }
-  }
-`;
-export const onUpdateNFT = /* GraphQL */ `
-  subscription OnUpdateNFT($filter: ModelSubscriptionNFTFilterInput) {
-    onUpdateNFT(filter: $filter) {
-      blockAddress
-      cid
-      createdAt
-      id
-      metadata
-      ownersWallet
-      price
-      sizeGb
-      updatedAt
       __typename
     }
   }
@@ -382,18 +208,6 @@ export const onUpdateTask = /* GraphQL */ `
       name
       updatedAt
       walletAddress
-      __typename
-    }
-  }
-`;
-export const onUpdateTodo = /* GraphQL */ `
-  subscription OnUpdateTodo($filter: ModelSubscriptionTodoFilterInput) {
-    onUpdateTodo(filter: $filter) {
-      content
-      createdAt
-      id
-      isDone
-      updatedAt
       __typename
     }
   }
