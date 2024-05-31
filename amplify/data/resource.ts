@@ -1,4 +1,13 @@
-import { type ClientSchema, a, defineData } from '@aws-amplify/backend';
+import {
+  type ClientSchema,
+  a,
+  defineData,
+  defineFunction,
+} from '@aws-amplify/backend';
+
+const mediasHandler = defineFunction({
+  entry: './medias-handler/handler.ts',
+});
 
 /*== STEP 1 ===============================================================
 The section below creates a Todo database table with a "content" field. Try
@@ -16,8 +25,7 @@ const schema = a.schema({
     .authorization((allow) => [allow.publicApiKey()]),
   Account: a
     .model({
-      wallet: a.string(),
-      ens: a.string(),
+      walletAddress: a.string(),
       balance: a.float(),
       nftAddresses: a.json(),
       medias: a.json(),
@@ -56,16 +64,17 @@ const schema = a.schema({
       taskId: a.string(),
       dataURL: a.string(),
       ocr: a.string(),
-      format: a.string(),
-      sizeGb: a.float(),
-      status: a.string(),
+      price: a.float(),
+      // format: a.string(),
+      // sizeGb: a.float(),
+      // status: a.string(),
       createdAt: a.datetime(),
     })
     .authorization((allow) => [allow.publicApiKey()]),
   Task: a
     .model({
       mediaId: a.string(),
-      aiModelId: a.string(),
+      // aiModelId: a.string(),
       walletAddress: a.string(),
       medias: a.json(),
       name: a.string(),
@@ -73,9 +82,9 @@ const schema = a.schema({
       difficulty: a.float(),
       app: a.string(),
       appImage: a.string(),
-      priceListed: a.float(),
-      status: a.string(),
-      published: a.boolean(),
+      // priceListed: a.float(),
+      // status: a.string(),
+      // published: a.boolean(),
       createdAt: a.datetime(),
     })
     .authorization((allow) => [allow.publicApiKey()]),
@@ -106,6 +115,18 @@ const schema = a.schema({
       createdAt: a.datetime(),
     })
     .authorization((allow) => [allow.publicApiKey()]),
+
+  // Custom mutation to create multiple medias at once (received as 'frames')
+  createMedias: a
+    .mutation()
+    .arguments({
+      walletAddress: a.string(),
+      taskId: a.string(),
+      frames: a.json(), // medias
+    })
+    .returns(a.ref('Task'))
+    .authorization((allow) => [allow.publicApiKey()])
+    .handler(a.handler.function(mediasHandler)),
 });
 
 export type Schema = ClientSchema<typeof schema>;
@@ -116,7 +137,7 @@ export const data = defineData({
     defaultAuthorizationMode: 'apiKey',
     // API Key is used for a.allow.public() rules
     apiKeyAuthorizationMode: {
-      expiresInDays: 30,
+      expiresInDays: 300,
     },
   },
 });

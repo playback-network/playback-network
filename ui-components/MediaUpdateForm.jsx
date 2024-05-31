@@ -24,9 +24,7 @@ export default function MediaUpdateForm(props) {
     taskId: "",
     dataURL: "",
     ocr: "",
-    format: "",
-    sizeGb: "",
-    status: "",
+    price: "",
     createdAt: "",
   };
   const [walletAddress, setWalletAddress] = React.useState(
@@ -35,9 +33,7 @@ export default function MediaUpdateForm(props) {
   const [taskId, setTaskId] = React.useState(initialValues.taskId);
   const [dataURL, setDataURL] = React.useState(initialValues.dataURL);
   const [ocr, setOcr] = React.useState(initialValues.ocr);
-  const [format, setFormat] = React.useState(initialValues.format);
-  const [sizeGb, setSizeGb] = React.useState(initialValues.sizeGb);
-  const [status, setStatus] = React.useState(initialValues.status);
+  const [price, setPrice] = React.useState(initialValues.price);
   const [createdAt, setCreatedAt] = React.useState(initialValues.createdAt);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
@@ -48,9 +44,7 @@ export default function MediaUpdateForm(props) {
     setTaskId(cleanValues.taskId);
     setDataURL(cleanValues.dataURL);
     setOcr(cleanValues.ocr);
-    setFormat(cleanValues.format);
-    setSizeGb(cleanValues.sizeGb);
-    setStatus(cleanValues.status);
+    setPrice(cleanValues.price);
     setCreatedAt(cleanValues.createdAt);
     setErrors({});
   };
@@ -75,9 +69,7 @@ export default function MediaUpdateForm(props) {
     taskId: [],
     dataURL: [],
     ocr: [],
-    format: [],
-    sizeGb: [],
-    status: [],
+    price: [],
     createdAt: [],
   };
   const runValidationTasks = async (
@@ -127,9 +119,7 @@ export default function MediaUpdateForm(props) {
           taskId: taskId ?? null,
           dataURL: dataURL ?? null,
           ocr: ocr ?? null,
-          format: format ?? null,
-          sizeGb: sizeGb ?? null,
-          status: status ?? null,
+          price: price ?? null,
           createdAt: createdAt ?? null,
         };
         const validationResponses = await Promise.all(
@@ -195,9 +185,7 @@ export default function MediaUpdateForm(props) {
               taskId,
               dataURL,
               ocr,
-              format,
-              sizeGb,
-              status,
+              price,
               createdAt,
             };
             const result = onChange(modelFields);
@@ -226,9 +214,7 @@ export default function MediaUpdateForm(props) {
               taskId: value,
               dataURL,
               ocr,
-              format,
-              sizeGb,
-              status,
+              price,
               createdAt,
             };
             const result = onChange(modelFields);
@@ -257,9 +243,7 @@ export default function MediaUpdateForm(props) {
               taskId,
               dataURL: value,
               ocr,
-              format,
-              sizeGb,
-              status,
+              price,
               createdAt,
             };
             const result = onChange(modelFields);
@@ -288,9 +272,7 @@ export default function MediaUpdateForm(props) {
               taskId,
               dataURL,
               ocr: value,
-              format,
-              sizeGb,
-              status,
+              price,
               createdAt,
             };
             const result = onChange(modelFields);
@@ -307,43 +289,12 @@ export default function MediaUpdateForm(props) {
         {...getOverrideProps(overrides, "ocr")}
       ></TextField>
       <TextField
-        label="Format"
-        isRequired={false}
-        isReadOnly={false}
-        value={format}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              walletAddress,
-              taskId,
-              dataURL,
-              ocr,
-              format: value,
-              sizeGb,
-              status,
-              createdAt,
-            };
-            const result = onChange(modelFields);
-            value = result?.format ?? value;
-          }
-          if (errors.format?.hasError) {
-            runValidationTasks("format", value);
-          }
-          setFormat(value);
-        }}
-        onBlur={() => runValidationTasks("format", format)}
-        errorMessage={errors.format?.errorMessage}
-        hasError={errors.format?.hasError}
-        {...getOverrideProps(overrides, "format")}
-      ></TextField>
-      <TextField
-        label="Size gb"
+        label="Price"
         isRequired={false}
         isReadOnly={false}
         type="number"
         step="any"
-        value={sizeGb}
+        value={price}
         onChange={(e) => {
           let value = isNaN(parseFloat(e.target.value))
             ? e.target.value
@@ -354,54 +305,21 @@ export default function MediaUpdateForm(props) {
               taskId,
               dataURL,
               ocr,
-              format,
-              sizeGb: value,
-              status,
+              price: value,
               createdAt,
             };
             const result = onChange(modelFields);
-            value = result?.sizeGb ?? value;
+            value = result?.price ?? value;
           }
-          if (errors.sizeGb?.hasError) {
-            runValidationTasks("sizeGb", value);
+          if (errors.price?.hasError) {
+            runValidationTasks("price", value);
           }
-          setSizeGb(value);
+          setPrice(value);
         }}
-        onBlur={() => runValidationTasks("sizeGb", sizeGb)}
-        errorMessage={errors.sizeGb?.errorMessage}
-        hasError={errors.sizeGb?.hasError}
-        {...getOverrideProps(overrides, "sizeGb")}
-      ></TextField>
-      <TextField
-        label="Status"
-        isRequired={false}
-        isReadOnly={false}
-        value={status}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              walletAddress,
-              taskId,
-              dataURL,
-              ocr,
-              format,
-              sizeGb,
-              status: value,
-              createdAt,
-            };
-            const result = onChange(modelFields);
-            value = result?.status ?? value;
-          }
-          if (errors.status?.hasError) {
-            runValidationTasks("status", value);
-          }
-          setStatus(value);
-        }}
-        onBlur={() => runValidationTasks("status", status)}
-        errorMessage={errors.status?.errorMessage}
-        hasError={errors.status?.hasError}
-        {...getOverrideProps(overrides, "status")}
+        onBlur={() => runValidationTasks("price", price)}
+        errorMessage={errors.price?.errorMessage}
+        hasError={errors.price?.hasError}
+        {...getOverrideProps(overrides, "price")}
       ></TextField>
       <TextField
         label="Created at"
@@ -418,9 +336,7 @@ export default function MediaUpdateForm(props) {
               taskId,
               dataURL,
               ocr,
-              format,
-              sizeGb,
-              status,
+              price,
               createdAt: value,
             };
             const result = onChange(modelFields);

@@ -32,13 +32,12 @@ export const createAccount = /* GraphQL */ `
     createAccount(condition: $condition, input: $input) {
       balance
       createdAt
-      ens
       id
       medias
       nftAddresses
       updatedAt
       verified
-      wallet
+      walletAddress
       __typename
     }
   }
@@ -70,12 +69,36 @@ export const createMedia = /* GraphQL */ `
     createMedia(condition: $condition, input: $input) {
       createdAt
       dataURL
-      format
       id
       ocr
-      sizeGb
-      status
+      price
       taskId
+      updatedAt
+      walletAddress
+      __typename
+    }
+  }
+`;
+export const createMedias = /* GraphQL */ `
+  mutation CreateMedias(
+    $frames: AWSJSON
+    $taskId: String
+    $walletAddress: String
+  ) {
+    createMedias(
+      frames: $frames
+      taskId: $taskId
+      walletAddress: $walletAddress
+    ) {
+      app
+      appImage
+      createdAt
+      description
+      difficulty
+      id
+      mediaId
+      medias
+      name
       updatedAt
       walletAddress
       __typename
@@ -131,7 +154,6 @@ export const createTask = /* GraphQL */ `
     $input: CreateTaskInput!
   ) {
     createTask(condition: $condition, input: $input) {
-      aiModelId
       app
       appImage
       createdAt
@@ -141,9 +163,6 @@ export const createTask = /* GraphQL */ `
       mediaId
       medias
       name
-      priceListed
-      published
-      status
       updatedAt
       walletAddress
       __typename
@@ -195,13 +214,12 @@ export const deleteAccount = /* GraphQL */ `
     deleteAccount(condition: $condition, input: $input) {
       balance
       createdAt
-      ens
       id
       medias
       nftAddresses
       updatedAt
       verified
-      wallet
+      walletAddress
       __typename
     }
   }
@@ -233,11 +251,9 @@ export const deleteMedia = /* GraphQL */ `
     deleteMedia(condition: $condition, input: $input) {
       createdAt
       dataURL
-      format
       id
       ocr
-      sizeGb
-      status
+      price
       taskId
       updatedAt
       walletAddress
@@ -294,7 +310,6 @@ export const deleteTask = /* GraphQL */ `
     $input: DeleteTaskInput!
   ) {
     deleteTask(condition: $condition, input: $input) {
-      aiModelId
       app
       appImage
       createdAt
@@ -304,9 +319,6 @@ export const deleteTask = /* GraphQL */ `
       mediaId
       medias
       name
-      priceListed
-      published
-      status
       updatedAt
       walletAddress
       __typename
@@ -358,13 +370,12 @@ export const updateAccount = /* GraphQL */ `
     updateAccount(condition: $condition, input: $input) {
       balance
       createdAt
-      ens
       id
       medias
       nftAddresses
       updatedAt
       verified
-      wallet
+      walletAddress
       __typename
     }
   }
@@ -396,11 +407,9 @@ export const updateMedia = /* GraphQL */ `
     updateMedia(condition: $condition, input: $input) {
       createdAt
       dataURL
-      format
       id
       ocr
-      sizeGb
-      status
+      price
       taskId
       updatedAt
       walletAddress
@@ -457,7 +466,6 @@ export const updateTask = /* GraphQL */ `
     $input: UpdateTaskInput!
   ) {
     updateTask(condition: $condition, input: $input) {
-      aiModelId
       app
       appImage
       createdAt
@@ -467,9 +475,6 @@ export const updateTask = /* GraphQL */ `
       mediaId
       medias
       name
-      priceListed
-      published
-      status
       updatedAt
       walletAddress
       __typename

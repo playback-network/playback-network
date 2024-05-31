@@ -20,9 +20,7 @@ export declare type MediaCreateFormInputValues = {
     taskId?: string;
     dataURL?: string;
     ocr?: string;
-    format?: string;
-    sizeGb?: number;
-    status?: string;
+    price?: number;
     createdAt?: string;
 };
 export declare type MediaCreateFormValidationValues = {
@@ -30,9 +28,7 @@ export declare type MediaCreateFormValidationValues = {
     taskId?: ValidationFunction<string>;
     dataURL?: ValidationFunction<string>;
     ocr?: ValidationFunction<string>;
-    format?: ValidationFunction<string>;
-    sizeGb?: ValidationFunction<number>;
-    status?: ValidationFunction<string>;
+    price?: ValidationFunction<number>;
     createdAt?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
@@ -42,9 +38,7 @@ export declare type MediaCreateFormOverridesProps = {
     taskId?: PrimitiveOverrideProps<TextFieldProps>;
     dataURL?: PrimitiveOverrideProps<TextFieldProps>;
     ocr?: PrimitiveOverrideProps<TextFieldProps>;
-    format?: PrimitiveOverrideProps<TextFieldProps>;
-    sizeGb?: PrimitiveOverrideProps<TextFieldProps>;
-    status?: PrimitiveOverrideProps<TextFieldProps>;
+    price?: PrimitiveOverrideProps<TextFieldProps>;
     createdAt?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type MediaCreateFormProps = React.PropsWithChildren<{
