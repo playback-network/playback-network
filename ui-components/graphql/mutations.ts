@@ -71,6 +71,7 @@ export const createMedia = /* GraphQL */ `
       dataURL
       id
       ocr
+      price
       taskId
       updatedAt
       walletAddress
@@ -100,7 +101,6 @@ export const createMedias = /* GraphQL */ `
       name
       updatedAt
       walletAddress
-      createdAt
       __typename
     }
   }
@@ -253,6 +253,7 @@ export const deleteMedia = /* GraphQL */ `
       dataURL
       id
       ocr
+      price
       taskId
       updatedAt
       walletAddress
@@ -408,6 +409,7 @@ export const updateMedia = /* GraphQL */ `
       dataURL
       id
       ocr
+      price
       taskId
       updatedAt
       walletAddress

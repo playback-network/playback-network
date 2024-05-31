@@ -67,6 +67,7 @@ export const getMedia = /* GraphQL */ `query GetMedia($id: ID!) {
     dataURL
     id
     ocr
+    price
     taskId
     updatedAt
     walletAddress
@@ -221,6 +222,7 @@ export const listMedia = /* GraphQL */ `query ListMedia(
       dataURL
       id
       ocr
+      price
       taskId
       updatedAt
       walletAddress

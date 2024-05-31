@@ -70,6 +70,7 @@ export const onCreateMedia = /* GraphQL */ `subscription OnCreateMedia($filter: 
     dataURL
     id
     ocr
+    price
     taskId
     updatedAt
     walletAddress
@@ -217,6 +218,7 @@ export const onDeleteMedia = /* GraphQL */ `subscription OnDeleteMedia($filter: 
     dataURL
     id
     ocr
+    price
     taskId
     updatedAt
     walletAddress
@@ -364,6 +366,7 @@ export const onUpdateMedia = /* GraphQL */ `subscription OnUpdateMedia($filter: 
     dataURL
     id
     ocr
+    price
     taskId
     updatedAt
     walletAddress

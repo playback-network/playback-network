@@ -82,6 +82,7 @@ export const createMedia = /* GraphQL */ `mutation CreateMedia(
     dataURL
     id
     ocr
+    price
     taskId
     updatedAt
     walletAddress
@@ -281,6 +282,7 @@ export const deleteMedia = /* GraphQL */ `mutation DeleteMedia(
     dataURL
     id
     ocr
+    price
     taskId
     updatedAt
     walletAddress
@@ -452,6 +454,7 @@ export const updateMedia = /* GraphQL */ `mutation UpdateMedia(
     dataURL
     id
     ocr
+    price
     taskId
     updatedAt
     walletAddress

@@ -59,6 +59,7 @@ export const onCreateMedia = /* GraphQL */ `
       dataURL
       id
       ocr
+      price
       taskId
       updatedAt
       walletAddress
@@ -190,6 +191,7 @@ export const onDeleteMedia = /* GraphQL */ `
       dataURL
       id
       ocr
+      price
       taskId
       updatedAt
       walletAddress
@@ -321,6 +323,7 @@ export const onUpdateMedia = /* GraphQL */ `
       dataURL
       id
       ocr
+      price
       taskId
       updatedAt
       walletAddress

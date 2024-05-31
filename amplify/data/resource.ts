@@ -64,6 +64,7 @@ const schema = a.schema({
       taskId: a.string(),
       dataURL: a.string(),
       ocr: a.string(),
+      price: a.float(),
       // format: a.string(),
       // sizeGb: a.float(),
       // status: a.string(),

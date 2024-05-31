@@ -32,6 +32,7 @@ export default function TaskCreateForm(props) {
     difficulty: "",
     app: "",
     appImage: "",
+    createdAt: "",
   };
   const [mediaId, setMediaId] = React.useState(initialValues.mediaId);
   const [walletAddress, setWalletAddress] = React.useState(
@@ -45,6 +46,7 @@ export default function TaskCreateForm(props) {
   const [difficulty, setDifficulty] = React.useState(initialValues.difficulty);
   const [app, setApp] = React.useState(initialValues.app);
   const [appImage, setAppImage] = React.useState(initialValues.appImage);
+  const [createdAt, setCreatedAt] = React.useState(initialValues.createdAt);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setMediaId(initialValues.mediaId);
@@ -55,6 +57,7 @@ export default function TaskCreateForm(props) {
     setDifficulty(initialValues.difficulty);
     setApp(initialValues.app);
     setAppImage(initialValues.appImage);
+    setCreatedAt(initialValues.createdAt);
     setErrors({});
   };
   const validations = {
@@ -66,6 +69,7 @@ export default function TaskCreateForm(props) {
     difficulty: [],
     app: [],
     appImage: [],
+    createdAt: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -84,6 +88,23 @@ export default function TaskCreateForm(props) {
     setErrors((errors) => ({ ...errors, [fieldName]: validationResponse }));
     return validationResponse;
   };
+  const convertToLocal = (date) => {
+    const df = new Intl.DateTimeFormat("default", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      calendar: "iso8601",
+      numberingSystem: "latn",
+      hourCycle: "h23",
+    });
+    const parts = df.formatToParts(date).reduce((acc, part) => {
+      acc[part.type] = part.value;
+      return acc;
+    }, {});
+    return `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}`;
+  };
   return (
     <Grid
       as="form"
@@ -101,6 +122,7 @@ export default function TaskCreateForm(props) {
           difficulty,
           app,
           appImage,
+          createdAt,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -171,6 +193,7 @@ export default function TaskCreateForm(props) {
               difficulty,
               app,
               appImage,
+              createdAt,
             };
             const result = onChange(modelFields);
             value = result?.mediaId ?? value;
@@ -202,6 +225,7 @@ export default function TaskCreateForm(props) {
               difficulty,
               app,
               appImage,
+              createdAt,
             };
             const result = onChange(modelFields);
             value = result?.walletAddress ?? value;
@@ -232,6 +256,7 @@ export default function TaskCreateForm(props) {
               difficulty,
               app,
               appImage,
+              createdAt,
             };
             const result = onChange(modelFields);
             value = result?.medias ?? value;
@@ -263,6 +288,7 @@ export default function TaskCreateForm(props) {
               difficulty,
               app,
               appImage,
+              createdAt,
             };
             const result = onChange(modelFields);
             value = result?.name ?? value;
@@ -294,6 +320,7 @@ export default function TaskCreateForm(props) {
               difficulty,
               app,
               appImage,
+              createdAt,
             };
             const result = onChange(modelFields);
             value = result?.description ?? value;
@@ -329,6 +356,7 @@ export default function TaskCreateForm(props) {
               difficulty: value,
               app,
               appImage,
+              createdAt,
             };
             const result = onChange(modelFields);
             value = result?.difficulty ?? value;
@@ -360,6 +388,7 @@ export default function TaskCreateForm(props) {
               difficulty,
               app: value,
               appImage,
+              createdAt,
             };
             const result = onChange(modelFields);
             value = result?.app ?? value;
@@ -391,6 +420,7 @@ export default function TaskCreateForm(props) {
               difficulty,
               app,
               appImage: value,
+              createdAt,
             };
             const result = onChange(modelFields);
             value = result?.appImage ?? value;
@@ -404,6 +434,40 @@ export default function TaskCreateForm(props) {
         errorMessage={errors.appImage?.errorMessage}
         hasError={errors.appImage?.hasError}
         {...getOverrideProps(overrides, "appImage")}
+      ></TextField>
+      <TextField
+        label="Created at"
+        isRequired={false}
+        isReadOnly={false}
+        type="datetime-local"
+        value={createdAt && convertToLocal(new Date(createdAt))}
+        onChange={(e) => {
+          let value =
+            e.target.value === "" ? "" : new Date(e.target.value).toISOString();
+          if (onChange) {
+            const modelFields = {
+              mediaId,
+              walletAddress,
+              medias,
+              name,
+              description,
+              difficulty,
+              app,
+              appImage,
+              createdAt: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.createdAt ?? value;
+          }
+          if (errors.createdAt?.hasError) {
+            runValidationTasks("createdAt", value);
+          }
+          setCreatedAt(value);
+        }}
+        onBlur={() => runValidationTasks("createdAt", createdAt)}
+        errorMessage={errors.createdAt?.errorMessage}
+        hasError={errors.createdAt?.hasError}
+        {...getOverrideProps(overrides, "createdAt")}
       ></TextField>
       <Flex
         justifyContent="space-between"
