@@ -28,7 +28,6 @@ export default function TaskUpdateForm(props) {
   const initialValues = {
     mediaId: "",
     walletAddress: "",
-    medias: "",
     name: "",
     description: "",
     difficulty: "",
@@ -39,7 +38,6 @@ export default function TaskUpdateForm(props) {
   const [walletAddress, setWalletAddress] = React.useState(
     initialValues.walletAddress
   );
-  const [medias, setMedias] = React.useState(initialValues.medias);
   const [name, setName] = React.useState(initialValues.name);
   const [description, setDescription] = React.useState(
     initialValues.description
@@ -54,13 +52,13 @@ export default function TaskUpdateForm(props) {
       : initialValues;
     setMediaId(cleanValues.mediaId);
     setWalletAddress(cleanValues.walletAddress);
-    setMedias(
-      typeof cleanValues.medias === "string" || cleanValues.medias === null
-        ? cleanValues.medias
-        : JSON.stringify(cleanValues.medias)
-    );
     setName(cleanValues.name);
-    setDescription(cleanValues.description);
+    setDescription(
+      typeof cleanValues.description === "string" ||
+        cleanValues.description === null
+        ? cleanValues.description
+        : JSON.stringify(cleanValues.description)
+    );
     setDifficulty(cleanValues.difficulty);
     setApp(cleanValues.app);
     setAppImage(cleanValues.appImage);
@@ -85,9 +83,8 @@ export default function TaskUpdateForm(props) {
   const validations = {
     mediaId: [],
     walletAddress: [],
-    medias: [{ type: "JSON" }],
     name: [],
-    description: [],
+    description: [{ type: "JSON" }],
     difficulty: [],
     app: [],
     appImage: [],
@@ -120,7 +117,6 @@ export default function TaskUpdateForm(props) {
         let modelFields = {
           mediaId: mediaId ?? null,
           walletAddress: walletAddress ?? null,
-          medias: medias ?? null,
           name: name ?? null,
           description: description ?? null,
           difficulty: difficulty ?? null,
@@ -188,7 +184,6 @@ export default function TaskUpdateForm(props) {
             const modelFields = {
               mediaId: value,
               walletAddress,
-              medias,
               name,
               description,
               difficulty,
@@ -219,7 +214,6 @@ export default function TaskUpdateForm(props) {
             const modelFields = {
               mediaId,
               walletAddress: value,
-              medias,
               name,
               description,
               difficulty,
@@ -239,37 +233,6 @@ export default function TaskUpdateForm(props) {
         hasError={errors.walletAddress?.hasError}
         {...getOverrideProps(overrides, "walletAddress")}
       ></TextField>
-      <TextAreaField
-        label="Medias"
-        isRequired={false}
-        isReadOnly={false}
-        value={medias}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              mediaId,
-              walletAddress,
-              medias: value,
-              name,
-              description,
-              difficulty,
-              app,
-              appImage,
-            };
-            const result = onChange(modelFields);
-            value = result?.medias ?? value;
-          }
-          if (errors.medias?.hasError) {
-            runValidationTasks("medias", value);
-          }
-          setMedias(value);
-        }}
-        onBlur={() => runValidationTasks("medias", medias)}
-        errorMessage={errors.medias?.errorMessage}
-        hasError={errors.medias?.hasError}
-        {...getOverrideProps(overrides, "medias")}
-      ></TextAreaField>
       <TextField
         label="Name"
         isRequired={false}
@@ -281,7 +244,6 @@ export default function TaskUpdateForm(props) {
             const modelFields = {
               mediaId,
               walletAddress,
-              medias,
               name: value,
               description,
               difficulty,
@@ -301,7 +263,7 @@ export default function TaskUpdateForm(props) {
         hasError={errors.name?.hasError}
         {...getOverrideProps(overrides, "name")}
       ></TextField>
-      <TextField
+      <TextAreaField
         label="Description"
         isRequired={false}
         isReadOnly={false}
@@ -312,7 +274,6 @@ export default function TaskUpdateForm(props) {
             const modelFields = {
               mediaId,
               walletAddress,
-              medias,
               name,
               description: value,
               difficulty,
@@ -331,7 +292,7 @@ export default function TaskUpdateForm(props) {
         errorMessage={errors.description?.errorMessage}
         hasError={errors.description?.hasError}
         {...getOverrideProps(overrides, "description")}
-      ></TextField>
+      ></TextAreaField>
       <TextField
         label="Difficulty"
         isRequired={false}
@@ -347,7 +308,6 @@ export default function TaskUpdateForm(props) {
             const modelFields = {
               mediaId,
               walletAddress,
-              medias,
               name,
               description,
               difficulty: value,
@@ -378,7 +338,6 @@ export default function TaskUpdateForm(props) {
             const modelFields = {
               mediaId,
               walletAddress,
-              medias,
               name,
               description,
               difficulty,
@@ -409,7 +368,6 @@ export default function TaskUpdateForm(props) {
             const modelFields = {
               mediaId,
               walletAddress,
-              medias,
               name,
               description,
               difficulty,

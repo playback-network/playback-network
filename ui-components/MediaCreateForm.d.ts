@@ -18,25 +18,25 @@ export declare type ValidationFunction<T> = (value: T, validationResponse: Valid
 export declare type MediaCreateFormInputValues = {
     walletAddress?: string;
     taskId?: string;
-    dataURL?: string;
     s3address?: string;
-    price?: number;
+    fileName?: string;
+    sizeMb?: number;
 };
 export declare type MediaCreateFormValidationValues = {
     walletAddress?: ValidationFunction<string>;
     taskId?: ValidationFunction<string>;
-    dataURL?: ValidationFunction<string>;
     s3address?: ValidationFunction<string>;
-    price?: ValidationFunction<number>;
+    fileName?: ValidationFunction<string>;
+    sizeMb?: ValidationFunction<number>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type MediaCreateFormOverridesProps = {
     MediaCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
     walletAddress?: PrimitiveOverrideProps<TextFieldProps>;
     taskId?: PrimitiveOverrideProps<TextFieldProps>;
-    dataURL?: PrimitiveOverrideProps<TextFieldProps>;
     s3address?: PrimitiveOverrideProps<TextFieldProps>;
-    price?: PrimitiveOverrideProps<TextFieldProps>;
+    fileName?: PrimitiveOverrideProps<TextFieldProps>;
+    sizeMb?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type MediaCreateFormProps = React.PropsWithChildren<{
     overrides?: MediaCreateFormOverridesProps | undefined | null;

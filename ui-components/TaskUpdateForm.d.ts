@@ -19,7 +19,6 @@ export declare type ValidationFunction<T> = (value: T, validationResponse: Valid
 export declare type TaskUpdateFormInputValues = {
     mediaId?: string;
     walletAddress?: string;
-    medias?: string;
     name?: string;
     description?: string;
     difficulty?: number;
@@ -29,7 +28,6 @@ export declare type TaskUpdateFormInputValues = {
 export declare type TaskUpdateFormValidationValues = {
     mediaId?: ValidationFunction<string>;
     walletAddress?: ValidationFunction<string>;
-    medias?: ValidationFunction<string>;
     name?: ValidationFunction<string>;
     description?: ValidationFunction<string>;
     difficulty?: ValidationFunction<number>;
@@ -41,9 +39,8 @@ export declare type TaskUpdateFormOverridesProps = {
     TaskUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
     mediaId?: PrimitiveOverrideProps<TextFieldProps>;
     walletAddress?: PrimitiveOverrideProps<TextFieldProps>;
-    medias?: PrimitiveOverrideProps<TextAreaFieldProps>;
     name?: PrimitiveOverrideProps<TextFieldProps>;
-    description?: PrimitiveOverrideProps<TextFieldProps>;
+    description?: PrimitiveOverrideProps<TextAreaFieldProps>;
     difficulty?: PrimitiveOverrideProps<TextFieldProps>;
     app?: PrimitiveOverrideProps<TextFieldProps>;
     appImage?: PrimitiveOverrideProps<TextFieldProps>;

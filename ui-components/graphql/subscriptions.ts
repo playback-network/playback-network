@@ -22,10 +22,10 @@ export const onCreateMedia = /* GraphQL */ `
   subscription OnCreateMedia($filter: ModelSubscriptionMediaFilterInput) {
     onCreateMedia(filter: $filter) {
       createdAt
-      dataURL
+      fileName
       id
-      price
       s3address
+      sizeMb
       taskId
       updatedAt
       walletAddress
@@ -43,7 +43,6 @@ export const onCreateTask = /* GraphQL */ `
       difficulty
       id
       mediaId
-      medias
       name
       updatedAt
       walletAddress
@@ -83,10 +82,10 @@ export const onDeleteMedia = /* GraphQL */ `
   subscription OnDeleteMedia($filter: ModelSubscriptionMediaFilterInput) {
     onDeleteMedia(filter: $filter) {
       createdAt
-      dataURL
+      fileName
       id
-      price
       s3address
+      sizeMb
       taskId
       updatedAt
       walletAddress
@@ -104,7 +103,6 @@ export const onDeleteTask = /* GraphQL */ `
       difficulty
       id
       mediaId
-      medias
       name
       updatedAt
       walletAddress
@@ -144,10 +142,10 @@ export const onUpdateMedia = /* GraphQL */ `
   subscription OnUpdateMedia($filter: ModelSubscriptionMediaFilterInput) {
     onUpdateMedia(filter: $filter) {
       createdAt
-      dataURL
+      fileName
       id
-      price
       s3address
+      sizeMb
       taskId
       updatedAt
       walletAddress
@@ -165,7 +163,6 @@ export const onUpdateTask = /* GraphQL */ `
       difficulty
       id
       mediaId
-      medias
       name
       updatedAt
       walletAddress

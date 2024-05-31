@@ -26,10 +26,10 @@ export const getApp = /* GraphQL */ `query GetApp($id: ID!) {
 export const getMedia = /* GraphQL */ `query GetMedia($id: ID!) {
   getMedia(id: $id) {
     createdAt
-    dataURL
+    fileName
     id
-    price
     s3address
+    sizeMb
     taskId
     updatedAt
     walletAddress
@@ -46,7 +46,6 @@ export const getTask = /* GraphQL */ `query GetTask($id: ID!) {
     difficulty
     id
     mediaId
-    medias
     name
     updatedAt
     walletAddress
@@ -92,10 +91,10 @@ export const listMedia = /* GraphQL */ `query ListMedia(
   listMedia(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       createdAt
-      dataURL
+      fileName
       id
-      price
       s3address
+      sizeMb
       taskId
       updatedAt
       walletAddress
@@ -120,7 +119,6 @@ export const listTasks = /* GraphQL */ `query ListTasks(
       difficulty
       id
       mediaId
-      medias
       name
       updatedAt
       walletAddress

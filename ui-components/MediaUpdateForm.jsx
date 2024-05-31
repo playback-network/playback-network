@@ -22,17 +22,17 @@ export default function MediaUpdateForm(props) {
   const initialValues = {
     walletAddress: "",
     taskId: "",
-    dataURL: "",
     s3address: "",
-    price: "",
+    fileName: "",
+    sizeMb: "",
   };
   const [walletAddress, setWalletAddress] = React.useState(
     initialValues.walletAddress
   );
   const [taskId, setTaskId] = React.useState(initialValues.taskId);
-  const [dataURL, setDataURL] = React.useState(initialValues.dataURL);
   const [s3address, setS3address] = React.useState(initialValues.s3address);
-  const [price, setPrice] = React.useState(initialValues.price);
+  const [fileName, setFileName] = React.useState(initialValues.fileName);
+  const [sizeMb, setSizeMb] = React.useState(initialValues.sizeMb);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = mediaRecord
@@ -40,9 +40,9 @@ export default function MediaUpdateForm(props) {
       : initialValues;
     setWalletAddress(cleanValues.walletAddress);
     setTaskId(cleanValues.taskId);
-    setDataURL(cleanValues.dataURL);
     setS3address(cleanValues.s3address);
-    setPrice(cleanValues.price);
+    setFileName(cleanValues.fileName);
+    setSizeMb(cleanValues.sizeMb);
     setErrors({});
   };
   const [mediaRecord, setMediaRecord] = React.useState(mediaModelProp);
@@ -64,9 +64,9 @@ export default function MediaUpdateForm(props) {
   const validations = {
     walletAddress: [],
     taskId: [],
-    dataURL: [],
     s3address: [],
-    price: [],
+    fileName: [],
+    sizeMb: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -96,9 +96,9 @@ export default function MediaUpdateForm(props) {
         let modelFields = {
           walletAddress: walletAddress ?? null,
           taskId: taskId ?? null,
-          dataURL: dataURL ?? null,
           s3address: s3address ?? null,
-          price: price ?? null,
+          fileName: fileName ?? null,
+          sizeMb: sizeMb ?? null,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -161,9 +161,9 @@ export default function MediaUpdateForm(props) {
             const modelFields = {
               walletAddress: value,
               taskId,
-              dataURL,
               s3address,
-              price,
+              fileName,
+              sizeMb,
             };
             const result = onChange(modelFields);
             value = result?.walletAddress ?? value;
@@ -189,9 +189,9 @@ export default function MediaUpdateForm(props) {
             const modelFields = {
               walletAddress,
               taskId: value,
-              dataURL,
               s3address,
-              price,
+              fileName,
+              sizeMb,
             };
             const result = onChange(modelFields);
             value = result?.taskId ?? value;
@@ -207,34 +207,6 @@ export default function MediaUpdateForm(props) {
         {...getOverrideProps(overrides, "taskId")}
       ></TextField>
       <TextField
-        label="Data url"
-        isRequired={false}
-        isReadOnly={false}
-        value={dataURL}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              walletAddress,
-              taskId,
-              dataURL: value,
-              s3address,
-              price,
-            };
-            const result = onChange(modelFields);
-            value = result?.dataURL ?? value;
-          }
-          if (errors.dataURL?.hasError) {
-            runValidationTasks("dataURL", value);
-          }
-          setDataURL(value);
-        }}
-        onBlur={() => runValidationTasks("dataURL", dataURL)}
-        errorMessage={errors.dataURL?.errorMessage}
-        hasError={errors.dataURL?.hasError}
-        {...getOverrideProps(overrides, "dataURL")}
-      ></TextField>
-      <TextField
         label="S3address"
         isRequired={false}
         isReadOnly={false}
@@ -245,9 +217,9 @@ export default function MediaUpdateForm(props) {
             const modelFields = {
               walletAddress,
               taskId,
-              dataURL,
               s3address: value,
-              price,
+              fileName,
+              sizeMb,
             };
             const result = onChange(modelFields);
             value = result?.s3address ?? value;
@@ -263,12 +235,40 @@ export default function MediaUpdateForm(props) {
         {...getOverrideProps(overrides, "s3address")}
       ></TextField>
       <TextField
-        label="Price"
+        label="File name"
+        isRequired={false}
+        isReadOnly={false}
+        value={fileName}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              walletAddress,
+              taskId,
+              s3address,
+              fileName: value,
+              sizeMb,
+            };
+            const result = onChange(modelFields);
+            value = result?.fileName ?? value;
+          }
+          if (errors.fileName?.hasError) {
+            runValidationTasks("fileName", value);
+          }
+          setFileName(value);
+        }}
+        onBlur={() => runValidationTasks("fileName", fileName)}
+        errorMessage={errors.fileName?.errorMessage}
+        hasError={errors.fileName?.hasError}
+        {...getOverrideProps(overrides, "fileName")}
+      ></TextField>
+      <TextField
+        label="Size mb"
         isRequired={false}
         isReadOnly={false}
         type="number"
         step="any"
-        value={price}
+        value={sizeMb}
         onChange={(e) => {
           let value = isNaN(parseFloat(e.target.value))
             ? e.target.value
@@ -277,22 +277,22 @@ export default function MediaUpdateForm(props) {
             const modelFields = {
               walletAddress,
               taskId,
-              dataURL,
               s3address,
-              price: value,
+              fileName,
+              sizeMb: value,
             };
             const result = onChange(modelFields);
-            value = result?.price ?? value;
+            value = result?.sizeMb ?? value;
           }
-          if (errors.price?.hasError) {
-            runValidationTasks("price", value);
+          if (errors.sizeMb?.hasError) {
+            runValidationTasks("sizeMb", value);
           }
-          setPrice(value);
+          setSizeMb(value);
         }}
-        onBlur={() => runValidationTasks("price", price)}
-        errorMessage={errors.price?.errorMessage}
-        hasError={errors.price?.hasError}
-        {...getOverrideProps(overrides, "price")}
+        onBlur={() => runValidationTasks("sizeMb", sizeMb)}
+        errorMessage={errors.sizeMb?.errorMessage}
+        hasError={errors.sizeMb?.hasError}
+        {...getOverrideProps(overrides, "sizeMb")}
       ></TextField>
       <Flex
         justifyContent="space-between"

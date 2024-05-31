@@ -35,10 +35,10 @@ export const createMedia = /* GraphQL */ `mutation CreateMedia(
 ) {
   createMedia(condition: $condition, input: $input) {
     createdAt
-    dataURL
+    fileName
     id
-    price
     s3address
+    sizeMb
     taskId
     updatedAt
     walletAddress
@@ -66,7 +66,6 @@ export const createMedias = /* GraphQL */ `mutation CreateMedias(
     difficulty
     id
     mediaId
-    medias
     name
     updatedAt
     walletAddress
@@ -89,7 +88,6 @@ export const createTask = /* GraphQL */ `mutation CreateTask(
     difficulty
     id
     mediaId
-    medias
     name
     updatedAt
     walletAddress
@@ -144,10 +142,10 @@ export const deleteMedia = /* GraphQL */ `mutation DeleteMedia(
 ) {
   deleteMedia(condition: $condition, input: $input) {
     createdAt
-    dataURL
+    fileName
     id
-    price
     s3address
+    sizeMb
     taskId
     updatedAt
     walletAddress
@@ -170,7 +168,6 @@ export const deleteTask = /* GraphQL */ `mutation DeleteTask(
     difficulty
     id
     mediaId
-    medias
     name
     updatedAt
     walletAddress
@@ -225,10 +222,10 @@ export const updateMedia = /* GraphQL */ `mutation UpdateMedia(
 ) {
   updateMedia(condition: $condition, input: $input) {
     createdAt
-    dataURL
+    fileName
     id
-    price
     s3address
+    sizeMb
     taskId
     updatedAt
     walletAddress
@@ -251,7 +248,6 @@ export const updateTask = /* GraphQL */ `mutation UpdateTask(
     difficulty
     id
     mediaId
-    medias
     name
     updatedAt
     walletAddress
