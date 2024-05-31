@@ -10,6 +10,13 @@ const mediasHandler = defineFunction({
 });
 
 const schema = a.schema({
+  Todo: a
+    .model({
+      content: a.string(),
+      isDone: a.boolean(),
+      createdAt: a.datetime(),
+    })
+    .authorization((allow) => [allow.publicApiKey()]),
   Media: a
     .model({
       walletAddress: a.string(),

@@ -30,8 +30,8 @@ export const createMedia = /* GraphQL */ `
       createdAt
       dataURL
       id
-      ocr
       price
+      s3address
       taskId
       updatedAt
       walletAddress
@@ -65,30 +65,6 @@ export const createMedias = /* GraphQL */ `
     }
   }
 `;
-export const createSale = /* GraphQL */ `
-  mutation CreateSale(
-    $condition: ModelSaleConditionInput
-    $input: CreateSaleInput!
-  ) {
-    createSale(condition: $condition, input: $input) {
-      aiModelId
-      app
-      buyersWallet
-      createdAt
-      id
-      isAuction
-      priceListed
-      pricePaid
-      published
-      sellerssWallet
-      status
-      taskId
-      transactionLedgerId
-      updatedAt
-      __typename
-    }
-  }
-`;
 export const createTask = /* GraphQL */ `
   mutation CreateTask(
     $condition: ModelTaskConditionInput
@@ -106,6 +82,21 @@ export const createTask = /* GraphQL */ `
       name
       updatedAt
       walletAddress
+      __typename
+    }
+  }
+`;
+export const createTodo = /* GraphQL */ `
+  mutation CreateTodo(
+    $condition: ModelTodoConditionInput
+    $input: CreateTodoInput!
+  ) {
+    createTodo(condition: $condition, input: $input) {
+      content
+      createdAt
+      id
+      isDone
+      updatedAt
       __typename
     }
   }
@@ -138,35 +129,11 @@ export const deleteMedia = /* GraphQL */ `
       createdAt
       dataURL
       id
-      ocr
       price
+      s3address
       taskId
       updatedAt
       walletAddress
-      __typename
-    }
-  }
-`;
-export const deleteSale = /* GraphQL */ `
-  mutation DeleteSale(
-    $condition: ModelSaleConditionInput
-    $input: DeleteSaleInput!
-  ) {
-    deleteSale(condition: $condition, input: $input) {
-      aiModelId
-      app
-      buyersWallet
-      createdAt
-      id
-      isAuction
-      priceListed
-      pricePaid
-      published
-      sellerssWallet
-      status
-      taskId
-      transactionLedgerId
-      updatedAt
       __typename
     }
   }
@@ -188,6 +155,21 @@ export const deleteTask = /* GraphQL */ `
       name
       updatedAt
       walletAddress
+      __typename
+    }
+  }
+`;
+export const deleteTodo = /* GraphQL */ `
+  mutation DeleteTodo(
+    $condition: ModelTodoConditionInput
+    $input: DeleteTodoInput!
+  ) {
+    deleteTodo(condition: $condition, input: $input) {
+      content
+      createdAt
+      id
+      isDone
+      updatedAt
       __typename
     }
   }
@@ -220,35 +202,11 @@ export const updateMedia = /* GraphQL */ `
       createdAt
       dataURL
       id
-      ocr
       price
+      s3address
       taskId
       updatedAt
       walletAddress
-      __typename
-    }
-  }
-`;
-export const updateSale = /* GraphQL */ `
-  mutation UpdateSale(
-    $condition: ModelSaleConditionInput
-    $input: UpdateSaleInput!
-  ) {
-    updateSale(condition: $condition, input: $input) {
-      aiModelId
-      app
-      buyersWallet
-      createdAt
-      id
-      isAuction
-      priceListed
-      pricePaid
-      published
-      sellerssWallet
-      status
-      taskId
-      transactionLedgerId
-      updatedAt
       __typename
     }
   }
@@ -270,6 +228,21 @@ export const updateTask = /* GraphQL */ `
       name
       updatedAt
       walletAddress
+      __typename
+    }
+  }
+`;
+export const updateTodo = /* GraphQL */ `
+  mutation UpdateTodo(
+    $condition: ModelTodoConditionInput
+    $input: UpdateTodoInput!
+  ) {
+    updateTodo(condition: $condition, input: $input) {
+      content
+      createdAt
+      id
+      isDone
+      updatedAt
       __typename
     }
   }

@@ -20,17 +20,15 @@ export declare type MediaUpdateFormInputValues = {
     walletAddress?: string;
     taskId?: string;
     dataURL?: string;
-    ocr?: string;
+    s3address?: string;
     price?: number;
-    createdAt?: string;
 };
 export declare type MediaUpdateFormValidationValues = {
     walletAddress?: ValidationFunction<string>;
     taskId?: ValidationFunction<string>;
     dataURL?: ValidationFunction<string>;
-    ocr?: ValidationFunction<string>;
+    s3address?: ValidationFunction<string>;
     price?: ValidationFunction<number>;
-    createdAt?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type MediaUpdateFormOverridesProps = {
@@ -38,9 +36,8 @@ export declare type MediaUpdateFormOverridesProps = {
     walletAddress?: PrimitiveOverrideProps<TextFieldProps>;
     taskId?: PrimitiveOverrideProps<TextFieldProps>;
     dataURL?: PrimitiveOverrideProps<TextFieldProps>;
-    ocr?: PrimitiveOverrideProps<TextFieldProps>;
+    s3address?: PrimitiveOverrideProps<TextFieldProps>;
     price?: PrimitiveOverrideProps<TextFieldProps>;
-    createdAt?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type MediaUpdateFormProps = React.PropsWithChildren<{
     overrides?: MediaUpdateFormOverridesProps | undefined | null;

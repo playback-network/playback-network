@@ -31,8 +31,8 @@ export const onCreateMedia = /* GraphQL */ `subscription OnCreateMedia($filter: 
     createdAt
     dataURL
     id
-    ocr
     price
+    s3address
     taskId
     updatedAt
     walletAddress
@@ -42,29 +42,6 @@ export const onCreateMedia = /* GraphQL */ `subscription OnCreateMedia($filter: 
 ` as GeneratedSubscription<
   APITypes.OnCreateMediaSubscriptionVariables,
   APITypes.OnCreateMediaSubscription
->;
-export const onCreateSale = /* GraphQL */ `subscription OnCreateSale($filter: ModelSubscriptionSaleFilterInput) {
-  onCreateSale(filter: $filter) {
-    aiModelId
-    app
-    buyersWallet
-    createdAt
-    id
-    isAuction
-    priceListed
-    pricePaid
-    published
-    sellerssWallet
-    status
-    taskId
-    transactionLedgerId
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnCreateSaleSubscriptionVariables,
-  APITypes.OnCreateSaleSubscription
 >;
 export const onCreateTask = /* GraphQL */ `subscription OnCreateTask($filter: ModelSubscriptionTaskFilterInput) {
   onCreateTask(filter: $filter) {
@@ -85,6 +62,20 @@ export const onCreateTask = /* GraphQL */ `subscription OnCreateTask($filter: Mo
 ` as GeneratedSubscription<
   APITypes.OnCreateTaskSubscriptionVariables,
   APITypes.OnCreateTaskSubscription
+>;
+export const onCreateTodo = /* GraphQL */ `subscription OnCreateTodo($filter: ModelSubscriptionTodoFilterInput) {
+  onCreateTodo(filter: $filter) {
+    content
+    createdAt
+    id
+    isDone
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateTodoSubscriptionVariables,
+  APITypes.OnCreateTodoSubscription
 >;
 export const onDeleteApp = /* GraphQL */ `subscription OnDeleteApp($filter: ModelSubscriptionAppFilterInput) {
   onDeleteApp(filter: $filter) {
@@ -109,8 +100,8 @@ export const onDeleteMedia = /* GraphQL */ `subscription OnDeleteMedia($filter: 
     createdAt
     dataURL
     id
-    ocr
     price
+    s3address
     taskId
     updatedAt
     walletAddress
@@ -120,29 +111,6 @@ export const onDeleteMedia = /* GraphQL */ `subscription OnDeleteMedia($filter: 
 ` as GeneratedSubscription<
   APITypes.OnDeleteMediaSubscriptionVariables,
   APITypes.OnDeleteMediaSubscription
->;
-export const onDeleteSale = /* GraphQL */ `subscription OnDeleteSale($filter: ModelSubscriptionSaleFilterInput) {
-  onDeleteSale(filter: $filter) {
-    aiModelId
-    app
-    buyersWallet
-    createdAt
-    id
-    isAuction
-    priceListed
-    pricePaid
-    published
-    sellerssWallet
-    status
-    taskId
-    transactionLedgerId
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnDeleteSaleSubscriptionVariables,
-  APITypes.OnDeleteSaleSubscription
 >;
 export const onDeleteTask = /* GraphQL */ `subscription OnDeleteTask($filter: ModelSubscriptionTaskFilterInput) {
   onDeleteTask(filter: $filter) {
@@ -163,6 +131,20 @@ export const onDeleteTask = /* GraphQL */ `subscription OnDeleteTask($filter: Mo
 ` as GeneratedSubscription<
   APITypes.OnDeleteTaskSubscriptionVariables,
   APITypes.OnDeleteTaskSubscription
+>;
+export const onDeleteTodo = /* GraphQL */ `subscription OnDeleteTodo($filter: ModelSubscriptionTodoFilterInput) {
+  onDeleteTodo(filter: $filter) {
+    content
+    createdAt
+    id
+    isDone
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteTodoSubscriptionVariables,
+  APITypes.OnDeleteTodoSubscription
 >;
 export const onUpdateApp = /* GraphQL */ `subscription OnUpdateApp($filter: ModelSubscriptionAppFilterInput) {
   onUpdateApp(filter: $filter) {
@@ -187,8 +169,8 @@ export const onUpdateMedia = /* GraphQL */ `subscription OnUpdateMedia($filter: 
     createdAt
     dataURL
     id
-    ocr
     price
+    s3address
     taskId
     updatedAt
     walletAddress
@@ -198,29 +180,6 @@ export const onUpdateMedia = /* GraphQL */ `subscription OnUpdateMedia($filter: 
 ` as GeneratedSubscription<
   APITypes.OnUpdateMediaSubscriptionVariables,
   APITypes.OnUpdateMediaSubscription
->;
-export const onUpdateSale = /* GraphQL */ `subscription OnUpdateSale($filter: ModelSubscriptionSaleFilterInput) {
-  onUpdateSale(filter: $filter) {
-    aiModelId
-    app
-    buyersWallet
-    createdAt
-    id
-    isAuction
-    priceListed
-    pricePaid
-    published
-    sellerssWallet
-    status
-    taskId
-    transactionLedgerId
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnUpdateSaleSubscriptionVariables,
-  APITypes.OnUpdateSaleSubscription
 >;
 export const onUpdateTask = /* GraphQL */ `subscription OnUpdateTask($filter: ModelSubscriptionTaskFilterInput) {
   onUpdateTask(filter: $filter) {
@@ -241,4 +200,18 @@ export const onUpdateTask = /* GraphQL */ `subscription OnUpdateTask($filter: Mo
 ` as GeneratedSubscription<
   APITypes.OnUpdateTaskSubscriptionVariables,
   APITypes.OnUpdateTaskSubscription
+>;
+export const onUpdateTodo = /* GraphQL */ `subscription OnUpdateTodo($filter: ModelSubscriptionTodoFilterInput) {
+  onUpdateTodo(filter: $filter) {
+    content
+    createdAt
+    id
+    isDone
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateTodoSubscriptionVariables,
+  APITypes.OnUpdateTodoSubscription
 >;

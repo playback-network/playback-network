@@ -21,35 +21,31 @@ export default function MediaCreateForm(props) {
     walletAddress: "",
     taskId: "",
     dataURL: "",
-    ocr: "",
+    s3address: "",
     price: "",
-    createdAt: "",
   };
   const [walletAddress, setWalletAddress] = React.useState(
     initialValues.walletAddress
   );
   const [taskId, setTaskId] = React.useState(initialValues.taskId);
   const [dataURL, setDataURL] = React.useState(initialValues.dataURL);
-  const [ocr, setOcr] = React.useState(initialValues.ocr);
+  const [s3address, setS3address] = React.useState(initialValues.s3address);
   const [price, setPrice] = React.useState(initialValues.price);
-  const [createdAt, setCreatedAt] = React.useState(initialValues.createdAt);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setWalletAddress(initialValues.walletAddress);
     setTaskId(initialValues.taskId);
     setDataURL(initialValues.dataURL);
-    setOcr(initialValues.ocr);
+    setS3address(initialValues.s3address);
     setPrice(initialValues.price);
-    setCreatedAt(initialValues.createdAt);
     setErrors({});
   };
   const validations = {
     walletAddress: [],
     taskId: [],
     dataURL: [],
-    ocr: [],
+    s3address: [],
     price: [],
-    createdAt: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -68,23 +64,6 @@ export default function MediaCreateForm(props) {
     setErrors((errors) => ({ ...errors, [fieldName]: validationResponse }));
     return validationResponse;
   };
-  const convertToLocal = (date) => {
-    const df = new Intl.DateTimeFormat("default", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      calendar: "iso8601",
-      numberingSystem: "latn",
-      hourCycle: "h23",
-    });
-    const parts = df.formatToParts(date).reduce((acc, part) => {
-      acc[part.type] = part.value;
-      return acc;
-    }, {});
-    return `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}`;
-  };
   return (
     <Grid
       as="form"
@@ -97,9 +76,8 @@ export default function MediaCreateForm(props) {
           walletAddress,
           taskId,
           dataURL,
-          ocr,
+          s3address,
           price,
-          createdAt,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -165,9 +143,8 @@ export default function MediaCreateForm(props) {
               walletAddress: value,
               taskId,
               dataURL,
-              ocr,
+              s3address,
               price,
-              createdAt,
             };
             const result = onChange(modelFields);
             value = result?.walletAddress ?? value;
@@ -194,9 +171,8 @@ export default function MediaCreateForm(props) {
               walletAddress,
               taskId: value,
               dataURL,
-              ocr,
+              s3address,
               price,
-              createdAt,
             };
             const result = onChange(modelFields);
             value = result?.taskId ?? value;
@@ -223,9 +199,8 @@ export default function MediaCreateForm(props) {
               walletAddress,
               taskId,
               dataURL: value,
-              ocr,
+              s3address,
               price,
-              createdAt,
             };
             const result = onChange(modelFields);
             value = result?.dataURL ?? value;
@@ -241,10 +216,10 @@ export default function MediaCreateForm(props) {
         {...getOverrideProps(overrides, "dataURL")}
       ></TextField>
       <TextField
-        label="Ocr"
+        label="S3address"
         isRequired={false}
         isReadOnly={false}
-        value={ocr}
+        value={s3address}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
@@ -252,22 +227,21 @@ export default function MediaCreateForm(props) {
               walletAddress,
               taskId,
               dataURL,
-              ocr: value,
+              s3address: value,
               price,
-              createdAt,
             };
             const result = onChange(modelFields);
-            value = result?.ocr ?? value;
+            value = result?.s3address ?? value;
           }
-          if (errors.ocr?.hasError) {
-            runValidationTasks("ocr", value);
+          if (errors.s3address?.hasError) {
+            runValidationTasks("s3address", value);
           }
-          setOcr(value);
+          setS3address(value);
         }}
-        onBlur={() => runValidationTasks("ocr", ocr)}
-        errorMessage={errors.ocr?.errorMessage}
-        hasError={errors.ocr?.hasError}
-        {...getOverrideProps(overrides, "ocr")}
+        onBlur={() => runValidationTasks("s3address", s3address)}
+        errorMessage={errors.s3address?.errorMessage}
+        hasError={errors.s3address?.hasError}
+        {...getOverrideProps(overrides, "s3address")}
       ></TextField>
       <TextField
         label="Price"
@@ -285,9 +259,8 @@ export default function MediaCreateForm(props) {
               walletAddress,
               taskId,
               dataURL,
-              ocr,
+              s3address,
               price: value,
-              createdAt,
             };
             const result = onChange(modelFields);
             value = result?.price ?? value;
@@ -301,37 +274,6 @@ export default function MediaCreateForm(props) {
         errorMessage={errors.price?.errorMessage}
         hasError={errors.price?.hasError}
         {...getOverrideProps(overrides, "price")}
-      ></TextField>
-      <TextField
-        label="Created at"
-        isRequired={false}
-        isReadOnly={false}
-        type="datetime-local"
-        value={createdAt && convertToLocal(new Date(createdAt))}
-        onChange={(e) => {
-          let value =
-            e.target.value === "" ? "" : new Date(e.target.value).toISOString();
-          if (onChange) {
-            const modelFields = {
-              walletAddress,
-              taskId,
-              dataURL,
-              ocr,
-              price,
-              createdAt: value,
-            };
-            const result = onChange(modelFields);
-            value = result?.createdAt ?? value;
-          }
-          if (errors.createdAt?.hasError) {
-            runValidationTasks("createdAt", value);
-          }
-          setCreatedAt(value);
-        }}
-        onBlur={() => runValidationTasks("createdAt", createdAt)}
-        errorMessage={errors.createdAt?.errorMessage}
-        hasError={errors.createdAt?.hasError}
-        {...getOverrideProps(overrides, "createdAt")}
       ></TextField>
       <Flex
         justifyContent="space-between"

@@ -24,7 +24,6 @@ export declare type TaskCreateFormInputValues = {
     difficulty?: number;
     app?: string;
     appImage?: string;
-    createdAt?: string;
 };
 export declare type TaskCreateFormValidationValues = {
     mediaId?: ValidationFunction<string>;
@@ -35,7 +34,6 @@ export declare type TaskCreateFormValidationValues = {
     difficulty?: ValidationFunction<number>;
     app?: ValidationFunction<string>;
     appImage?: ValidationFunction<string>;
-    createdAt?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type TaskCreateFormOverridesProps = {
@@ -48,7 +46,6 @@ export declare type TaskCreateFormOverridesProps = {
     difficulty?: PrimitiveOverrideProps<TextFieldProps>;
     app?: PrimitiveOverrideProps<TextFieldProps>;
     appImage?: PrimitiveOverrideProps<TextFieldProps>;
-    createdAt?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type TaskCreateFormProps = React.PropsWithChildren<{
     overrides?: TaskCreateFormOverridesProps | undefined | null;

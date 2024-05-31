@@ -28,8 +28,8 @@ export const getMedia = /* GraphQL */ `query GetMedia($id: ID!) {
     createdAt
     dataURL
     id
-    ocr
     price
+    s3address
     taskId
     updatedAt
     walletAddress
@@ -37,26 +37,6 @@ export const getMedia = /* GraphQL */ `query GetMedia($id: ID!) {
   }
 }
 ` as GeneratedQuery<APITypes.GetMediaQueryVariables, APITypes.GetMediaQuery>;
-export const getSale = /* GraphQL */ `query GetSale($id: ID!) {
-  getSale(id: $id) {
-    aiModelId
-    app
-    buyersWallet
-    createdAt
-    id
-    isAuction
-    priceListed
-    pricePaid
-    published
-    sellerssWallet
-    status
-    taskId
-    transactionLedgerId
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedQuery<APITypes.GetSaleQueryVariables, APITypes.GetSaleQuery>;
 export const getTask = /* GraphQL */ `query GetTask($id: ID!) {
   getTask(id: $id) {
     app
@@ -74,6 +54,17 @@ export const getTask = /* GraphQL */ `query GetTask($id: ID!) {
   }
 }
 ` as GeneratedQuery<APITypes.GetTaskQueryVariables, APITypes.GetTaskQuery>;
+export const getTodo = /* GraphQL */ `query GetTodo($id: ID!) {
+  getTodo(id: $id) {
+    content
+    createdAt
+    id
+    isDone
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<APITypes.GetTodoQueryVariables, APITypes.GetTodoQuery>;
 export const listApps = /* GraphQL */ `query ListApps($filter: ModelAppFilterInput, $limit: Int, $nextToken: String) {
   listApps(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
@@ -103,8 +94,8 @@ export const listMedia = /* GraphQL */ `query ListMedia(
       createdAt
       dataURL
       id
-      ocr
       price
+      s3address
       taskId
       updatedAt
       walletAddress
@@ -115,34 +106,6 @@ export const listMedia = /* GraphQL */ `query ListMedia(
   }
 }
 ` as GeneratedQuery<APITypes.ListMediaQueryVariables, APITypes.ListMediaQuery>;
-export const listSales = /* GraphQL */ `query ListSales(
-  $filter: ModelSaleFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listSales(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      aiModelId
-      app
-      buyersWallet
-      createdAt
-      id
-      isAuction
-      priceListed
-      pricePaid
-      published
-      sellerssWallet
-      status
-      taskId
-      transactionLedgerId
-      updatedAt
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<APITypes.ListSalesQueryVariables, APITypes.ListSalesQuery>;
 export const listTasks = /* GraphQL */ `query ListTasks(
   $filter: ModelTaskFilterInput
   $limit: Int
@@ -168,3 +131,22 @@ export const listTasks = /* GraphQL */ `query ListTasks(
   }
 }
 ` as GeneratedQuery<APITypes.ListTasksQueryVariables, APITypes.ListTasksQuery>;
+export const listTodos = /* GraphQL */ `query ListTodos(
+  $filter: ModelTodoFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listTodos(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      content
+      createdAt
+      id
+      isDone
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<APITypes.ListTodosQueryVariables, APITypes.ListTodosQuery>;

@@ -17,39 +17,21 @@ export type App = {
 
 export type Media = {
   __typename: "Media",
-  createdAt?: string | null,
+  createdAt: string,
   dataURL?: string | null,
   id: string,
-  ocr?: string | null,
   price?: number | null,
+  s3address?: string | null,
   taskId?: string | null,
   updatedAt: string,
   walletAddress?: string | null,
-};
-
-export type Sale = {
-  __typename: "Sale",
-  aiModelId?: string | null,
-  app?: string | null,
-  buyersWallet?: string | null,
-  createdAt?: string | null,
-  id: string,
-  isAuction?: boolean | null,
-  priceListed?: number | null,
-  pricePaid?: number | null,
-  published?: boolean | null,
-  sellerssWallet?: string | null,
-  status?: string | null,
-  taskId?: string | null,
-  transactionLedgerId?: string | null,
-  updatedAt: string,
 };
 
 export type Task = {
   __typename: "Task",
   app?: string | null,
   appImage?: string | null,
-  createdAt?: string | null,
+  createdAt: string,
   description?: string | null,
   difficulty?: number | null,
   id: string,
@@ -58,6 +40,15 @@ export type Task = {
   name?: string | null,
   updatedAt: string,
   walletAddress?: string | null,
+};
+
+export type Todo = {
+  __typename: "Todo",
+  content?: string | null,
+  createdAt?: string | null,
+  id: string,
+  isDone?: boolean | null,
+  updatedAt: string,
 };
 
 export type ModelAppFilterInput = {
@@ -162,9 +153,9 @@ export type ModelMediaFilterInput = {
   dataURL?: ModelStringInput | null,
   id?: ModelIDInput | null,
   not?: ModelMediaFilterInput | null,
-  ocr?: ModelStringInput | null,
   or?: Array< ModelMediaFilterInput | null > | null,
   price?: ModelFloatInput | null,
+  s3address?: ModelStringInput | null,
   taskId?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
   walletAddress?: ModelStringInput | null,
@@ -173,32 +164,6 @@ export type ModelMediaFilterInput = {
 export type ModelMediaConnection = {
   __typename: "ModelMediaConnection",
   items:  Array<Media | null >,
-  nextToken?: string | null,
-};
-
-export type ModelSaleFilterInput = {
-  aiModelId?: ModelStringInput | null,
-  and?: Array< ModelSaleFilterInput | null > | null,
-  app?: ModelStringInput | null,
-  buyersWallet?: ModelStringInput | null,
-  createdAt?: ModelStringInput | null,
-  id?: ModelIDInput | null,
-  isAuction?: ModelBooleanInput | null,
-  not?: ModelSaleFilterInput | null,
-  or?: Array< ModelSaleFilterInput | null > | null,
-  priceListed?: ModelFloatInput | null,
-  pricePaid?: ModelFloatInput | null,
-  published?: ModelBooleanInput | null,
-  sellerssWallet?: ModelStringInput | null,
-  status?: ModelStringInput | null,
-  taskId?: ModelStringInput | null,
-  transactionLedgerId?: ModelStringInput | null,
-  updatedAt?: ModelStringInput | null,
-};
-
-export type ModelSaleConnection = {
-  __typename: "ModelSaleConnection",
-  items:  Array<Sale | null >,
   nextToken?: string | null,
 };
 
@@ -222,6 +187,23 @@ export type ModelTaskFilterInput = {
 export type ModelTaskConnection = {
   __typename: "ModelTaskConnection",
   items:  Array<Task | null >,
+  nextToken?: string | null,
+};
+
+export type ModelTodoFilterInput = {
+  and?: Array< ModelTodoFilterInput | null > | null,
+  content?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  id?: ModelIDInput | null,
+  isDone?: ModelBooleanInput | null,
+  not?: ModelTodoFilterInput | null,
+  or?: Array< ModelTodoFilterInput | null > | null,
+  updatedAt?: ModelStringInput | null,
+};
+
+export type ModelTodoConnection = {
+  __typename: "ModelTodoConnection",
+  items:  Array<Todo | null >,
   nextToken?: string | null,
 };
 
@@ -255,57 +237,21 @@ export type ModelMediaConditionInput = {
   createdAt?: ModelStringInput | null,
   dataURL?: ModelStringInput | null,
   not?: ModelMediaConditionInput | null,
-  ocr?: ModelStringInput | null,
   or?: Array< ModelMediaConditionInput | null > | null,
   price?: ModelFloatInput | null,
+  s3address?: ModelStringInput | null,
   taskId?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
   walletAddress?: ModelStringInput | null,
 };
 
 export type CreateMediaInput = {
-  createdAt?: string | null,
   dataURL?: string | null,
   id?: string | null,
-  ocr?: string | null,
   price?: number | null,
+  s3address?: string | null,
   taskId?: string | null,
   walletAddress?: string | null,
-};
-
-export type ModelSaleConditionInput = {
-  aiModelId?: ModelStringInput | null,
-  and?: Array< ModelSaleConditionInput | null > | null,
-  app?: ModelStringInput | null,
-  buyersWallet?: ModelStringInput | null,
-  createdAt?: ModelStringInput | null,
-  isAuction?: ModelBooleanInput | null,
-  not?: ModelSaleConditionInput | null,
-  or?: Array< ModelSaleConditionInput | null > | null,
-  priceListed?: ModelFloatInput | null,
-  pricePaid?: ModelFloatInput | null,
-  published?: ModelBooleanInput | null,
-  sellerssWallet?: ModelStringInput | null,
-  status?: ModelStringInput | null,
-  taskId?: ModelStringInput | null,
-  transactionLedgerId?: ModelStringInput | null,
-  updatedAt?: ModelStringInput | null,
-};
-
-export type CreateSaleInput = {
-  aiModelId?: string | null,
-  app?: string | null,
-  buyersWallet?: string | null,
-  createdAt?: string | null,
-  id?: string | null,
-  isAuction?: boolean | null,
-  priceListed?: number | null,
-  pricePaid?: number | null,
-  published?: boolean | null,
-  sellerssWallet?: string | null,
-  status?: string | null,
-  taskId?: string | null,
-  transactionLedgerId?: string | null,
 };
 
 export type ModelTaskConditionInput = {
@@ -327,7 +273,6 @@ export type ModelTaskConditionInput = {
 export type CreateTaskInput = {
   app?: string | null,
   appImage?: string | null,
-  createdAt?: string | null,
   description?: string | null,
   difficulty?: number | null,
   id?: string | null,
@@ -335,6 +280,23 @@ export type CreateTaskInput = {
   medias?: string | null,
   name?: string | null,
   walletAddress?: string | null,
+};
+
+export type ModelTodoConditionInput = {
+  and?: Array< ModelTodoConditionInput | null > | null,
+  content?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  isDone?: ModelBooleanInput | null,
+  not?: ModelTodoConditionInput | null,
+  or?: Array< ModelTodoConditionInput | null > | null,
+  updatedAt?: ModelStringInput | null,
+};
+
+export type CreateTodoInput = {
+  content?: string | null,
+  createdAt?: string | null,
+  id?: string | null,
+  isDone?: boolean | null,
 };
 
 export type DeleteAppInput = {
@@ -345,11 +307,11 @@ export type DeleteMediaInput = {
   id: string,
 };
 
-export type DeleteSaleInput = {
+export type DeleteTaskInput = {
   id: string,
 };
 
-export type DeleteTaskInput = {
+export type DeleteTodoInput = {
   id: string,
 };
 
@@ -365,35 +327,17 @@ export type UpdateAppInput = {
 };
 
 export type UpdateMediaInput = {
-  createdAt?: string | null,
   dataURL?: string | null,
   id: string,
-  ocr?: string | null,
   price?: number | null,
+  s3address?: string | null,
   taskId?: string | null,
   walletAddress?: string | null,
-};
-
-export type UpdateSaleInput = {
-  aiModelId?: string | null,
-  app?: string | null,
-  buyersWallet?: string | null,
-  createdAt?: string | null,
-  id: string,
-  isAuction?: boolean | null,
-  priceListed?: number | null,
-  pricePaid?: number | null,
-  published?: boolean | null,
-  sellerssWallet?: string | null,
-  status?: string | null,
-  taskId?: string | null,
-  transactionLedgerId?: string | null,
 };
 
 export type UpdateTaskInput = {
   app?: string | null,
   appImage?: string | null,
-  createdAt?: string | null,
   description?: string | null,
   difficulty?: number | null,
   id: string,
@@ -401,6 +345,13 @@ export type UpdateTaskInput = {
   medias?: string | null,
   name?: string | null,
   walletAddress?: string | null,
+};
+
+export type UpdateTodoInput = {
+  content?: string | null,
+  createdAt?: string | null,
+  id: string,
+  isDone?: boolean | null,
 };
 
 export type ModelSubscriptionAppFilterInput = {
@@ -469,31 +420,12 @@ export type ModelSubscriptionMediaFilterInput = {
   createdAt?: ModelSubscriptionStringInput | null,
   dataURL?: ModelSubscriptionStringInput | null,
   id?: ModelSubscriptionIDInput | null,
-  ocr?: ModelSubscriptionStringInput | null,
   or?: Array< ModelSubscriptionMediaFilterInput | null > | null,
   price?: ModelSubscriptionFloatInput | null,
+  s3address?: ModelSubscriptionStringInput | null,
   taskId?: ModelSubscriptionStringInput | null,
   updatedAt?: ModelSubscriptionStringInput | null,
   walletAddress?: ModelSubscriptionStringInput | null,
-};
-
-export type ModelSubscriptionSaleFilterInput = {
-  aiModelId?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionSaleFilterInput | null > | null,
-  app?: ModelSubscriptionStringInput | null,
-  buyersWallet?: ModelSubscriptionStringInput | null,
-  createdAt?: ModelSubscriptionStringInput | null,
-  id?: ModelSubscriptionIDInput | null,
-  isAuction?: ModelSubscriptionBooleanInput | null,
-  or?: Array< ModelSubscriptionSaleFilterInput | null > | null,
-  priceListed?: ModelSubscriptionFloatInput | null,
-  pricePaid?: ModelSubscriptionFloatInput | null,
-  published?: ModelSubscriptionBooleanInput | null,
-  sellerssWallet?: ModelSubscriptionStringInput | null,
-  status?: ModelSubscriptionStringInput | null,
-  taskId?: ModelSubscriptionStringInput | null,
-  transactionLedgerId?: ModelSubscriptionStringInput | null,
-  updatedAt?: ModelSubscriptionStringInput | null,
 };
 
 export type ModelSubscriptionTaskFilterInput = {
@@ -510,6 +442,16 @@ export type ModelSubscriptionTaskFilterInput = {
   or?: Array< ModelSubscriptionTaskFilterInput | null > | null,
   updatedAt?: ModelSubscriptionStringInput | null,
   walletAddress?: ModelSubscriptionStringInput | null,
+};
+
+export type ModelSubscriptionTodoFilterInput = {
+  and?: Array< ModelSubscriptionTodoFilterInput | null > | null,
+  content?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  id?: ModelSubscriptionIDInput | null,
+  isDone?: ModelSubscriptionBooleanInput | null,
+  or?: Array< ModelSubscriptionTodoFilterInput | null > | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
 };
 
 export type GetAppQueryVariables = {
@@ -538,38 +480,14 @@ export type GetMediaQueryVariables = {
 export type GetMediaQuery = {
   getMedia?:  {
     __typename: "Media",
-    createdAt?: string | null,
+    createdAt: string,
     dataURL?: string | null,
     id: string,
-    ocr?: string | null,
     price?: number | null,
+    s3address?: string | null,
     taskId?: string | null,
     updatedAt: string,
     walletAddress?: string | null,
-  } | null,
-};
-
-export type GetSaleQueryVariables = {
-  id: string,
-};
-
-export type GetSaleQuery = {
-  getSale?:  {
-    __typename: "Sale",
-    aiModelId?: string | null,
-    app?: string | null,
-    buyersWallet?: string | null,
-    createdAt?: string | null,
-    id: string,
-    isAuction?: boolean | null,
-    priceListed?: number | null,
-    pricePaid?: number | null,
-    published?: boolean | null,
-    sellerssWallet?: string | null,
-    status?: string | null,
-    taskId?: string | null,
-    transactionLedgerId?: string | null,
-    updatedAt: string,
   } | null,
 };
 
@@ -582,7 +500,7 @@ export type GetTaskQuery = {
     __typename: "Task",
     app?: string | null,
     appImage?: string | null,
-    createdAt?: string | null,
+    createdAt: string,
     description?: string | null,
     difficulty?: number | null,
     id: string,
@@ -591,6 +509,21 @@ export type GetTaskQuery = {
     name?: string | null,
     updatedAt: string,
     walletAddress?: string | null,
+  } | null,
+};
+
+export type GetTodoQueryVariables = {
+  id: string,
+};
+
+export type GetTodoQuery = {
+  getTodo?:  {
+    __typename: "Todo",
+    content?: string | null,
+    createdAt?: string | null,
+    id: string,
+    isDone?: boolean | null,
+    updatedAt: string,
   } | null,
 };
 
@@ -630,44 +563,14 @@ export type ListMediaQuery = {
     __typename: "ModelMediaConnection",
     items:  Array< {
       __typename: "Media",
-      createdAt?: string | null,
+      createdAt: string,
       dataURL?: string | null,
       id: string,
-      ocr?: string | null,
       price?: number | null,
+      s3address?: string | null,
       taskId?: string | null,
       updatedAt: string,
       walletAddress?: string | null,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type ListSalesQueryVariables = {
-  filter?: ModelSaleFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListSalesQuery = {
-  listSales?:  {
-    __typename: "ModelSaleConnection",
-    items:  Array< {
-      __typename: "Sale",
-      aiModelId?: string | null,
-      app?: string | null,
-      buyersWallet?: string | null,
-      createdAt?: string | null,
-      id: string,
-      isAuction?: boolean | null,
-      priceListed?: number | null,
-      pricePaid?: number | null,
-      published?: boolean | null,
-      sellerssWallet?: string | null,
-      status?: string | null,
-      taskId?: string | null,
-      transactionLedgerId?: string | null,
-      updatedAt: string,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -686,7 +589,7 @@ export type ListTasksQuery = {
       __typename: "Task",
       app?: string | null,
       appImage?: string | null,
-      createdAt?: string | null,
+      createdAt: string,
       description?: string | null,
       difficulty?: number | null,
       id: string,
@@ -695,6 +598,27 @@ export type ListTasksQuery = {
       name?: string | null,
       updatedAt: string,
       walletAddress?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ListTodosQueryVariables = {
+  filter?: ModelTodoFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListTodosQuery = {
+  listTodos?:  {
+    __typename: "ModelTodoConnection",
+    items:  Array< {
+      __typename: "Todo",
+      content?: string | null,
+      createdAt?: string | null,
+      id: string,
+      isDone?: boolean | null,
+      updatedAt: string,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -728,11 +652,11 @@ export type CreateMediaMutationVariables = {
 export type CreateMediaMutation = {
   createMedia?:  {
     __typename: "Media",
-    createdAt?: string | null,
+    createdAt: string,
     dataURL?: string | null,
     id: string,
-    ocr?: string | null,
     price?: number | null,
+    s3address?: string | null,
     taskId?: string | null,
     updatedAt: string,
     walletAddress?: string | null,
@@ -750,7 +674,7 @@ export type CreateMediasMutation = {
     __typename: "Task",
     app?: string | null,
     appImage?: string | null,
-    createdAt?: string | null,
+    createdAt: string,
     description?: string | null,
     difficulty?: number | null,
     id: string,
@@ -759,31 +683,6 @@ export type CreateMediasMutation = {
     name?: string | null,
     updatedAt: string,
     walletAddress?: string | null,
-  } | null,
-};
-
-export type CreateSaleMutationVariables = {
-  condition?: ModelSaleConditionInput | null,
-  input: CreateSaleInput,
-};
-
-export type CreateSaleMutation = {
-  createSale?:  {
-    __typename: "Sale",
-    aiModelId?: string | null,
-    app?: string | null,
-    buyersWallet?: string | null,
-    createdAt?: string | null,
-    id: string,
-    isAuction?: boolean | null,
-    priceListed?: number | null,
-    pricePaid?: number | null,
-    published?: boolean | null,
-    sellerssWallet?: string | null,
-    status?: string | null,
-    taskId?: string | null,
-    transactionLedgerId?: string | null,
-    updatedAt: string,
   } | null,
 };
 
@@ -797,7 +696,7 @@ export type CreateTaskMutation = {
     __typename: "Task",
     app?: string | null,
     appImage?: string | null,
-    createdAt?: string | null,
+    createdAt: string,
     description?: string | null,
     difficulty?: number | null,
     id: string,
@@ -806,6 +705,22 @@ export type CreateTaskMutation = {
     name?: string | null,
     updatedAt: string,
     walletAddress?: string | null,
+  } | null,
+};
+
+export type CreateTodoMutationVariables = {
+  condition?: ModelTodoConditionInput | null,
+  input: CreateTodoInput,
+};
+
+export type CreateTodoMutation = {
+  createTodo?:  {
+    __typename: "Todo",
+    content?: string | null,
+    createdAt?: string | null,
+    id: string,
+    isDone?: boolean | null,
+    updatedAt: string,
   } | null,
 };
 
@@ -837,39 +752,14 @@ export type DeleteMediaMutationVariables = {
 export type DeleteMediaMutation = {
   deleteMedia?:  {
     __typename: "Media",
-    createdAt?: string | null,
+    createdAt: string,
     dataURL?: string | null,
     id: string,
-    ocr?: string | null,
     price?: number | null,
+    s3address?: string | null,
     taskId?: string | null,
     updatedAt: string,
     walletAddress?: string | null,
-  } | null,
-};
-
-export type DeleteSaleMutationVariables = {
-  condition?: ModelSaleConditionInput | null,
-  input: DeleteSaleInput,
-};
-
-export type DeleteSaleMutation = {
-  deleteSale?:  {
-    __typename: "Sale",
-    aiModelId?: string | null,
-    app?: string | null,
-    buyersWallet?: string | null,
-    createdAt?: string | null,
-    id: string,
-    isAuction?: boolean | null,
-    priceListed?: number | null,
-    pricePaid?: number | null,
-    published?: boolean | null,
-    sellerssWallet?: string | null,
-    status?: string | null,
-    taskId?: string | null,
-    transactionLedgerId?: string | null,
-    updatedAt: string,
   } | null,
 };
 
@@ -883,7 +773,7 @@ export type DeleteTaskMutation = {
     __typename: "Task",
     app?: string | null,
     appImage?: string | null,
-    createdAt?: string | null,
+    createdAt: string,
     description?: string | null,
     difficulty?: number | null,
     id: string,
@@ -892,6 +782,22 @@ export type DeleteTaskMutation = {
     name?: string | null,
     updatedAt: string,
     walletAddress?: string | null,
+  } | null,
+};
+
+export type DeleteTodoMutationVariables = {
+  condition?: ModelTodoConditionInput | null,
+  input: DeleteTodoInput,
+};
+
+export type DeleteTodoMutation = {
+  deleteTodo?:  {
+    __typename: "Todo",
+    content?: string | null,
+    createdAt?: string | null,
+    id: string,
+    isDone?: boolean | null,
+    updatedAt: string,
   } | null,
 };
 
@@ -923,39 +829,14 @@ export type UpdateMediaMutationVariables = {
 export type UpdateMediaMutation = {
   updateMedia?:  {
     __typename: "Media",
-    createdAt?: string | null,
+    createdAt: string,
     dataURL?: string | null,
     id: string,
-    ocr?: string | null,
     price?: number | null,
+    s3address?: string | null,
     taskId?: string | null,
     updatedAt: string,
     walletAddress?: string | null,
-  } | null,
-};
-
-export type UpdateSaleMutationVariables = {
-  condition?: ModelSaleConditionInput | null,
-  input: UpdateSaleInput,
-};
-
-export type UpdateSaleMutation = {
-  updateSale?:  {
-    __typename: "Sale",
-    aiModelId?: string | null,
-    app?: string | null,
-    buyersWallet?: string | null,
-    createdAt?: string | null,
-    id: string,
-    isAuction?: boolean | null,
-    priceListed?: number | null,
-    pricePaid?: number | null,
-    published?: boolean | null,
-    sellerssWallet?: string | null,
-    status?: string | null,
-    taskId?: string | null,
-    transactionLedgerId?: string | null,
-    updatedAt: string,
   } | null,
 };
 
@@ -969,7 +850,7 @@ export type UpdateTaskMutation = {
     __typename: "Task",
     app?: string | null,
     appImage?: string | null,
-    createdAt?: string | null,
+    createdAt: string,
     description?: string | null,
     difficulty?: number | null,
     id: string,
@@ -978,6 +859,22 @@ export type UpdateTaskMutation = {
     name?: string | null,
     updatedAt: string,
     walletAddress?: string | null,
+  } | null,
+};
+
+export type UpdateTodoMutationVariables = {
+  condition?: ModelTodoConditionInput | null,
+  input: UpdateTodoInput,
+};
+
+export type UpdateTodoMutation = {
+  updateTodo?:  {
+    __typename: "Todo",
+    content?: string | null,
+    createdAt?: string | null,
+    id: string,
+    isDone?: boolean | null,
+    updatedAt: string,
   } | null,
 };
 
@@ -1007,38 +904,14 @@ export type OnCreateMediaSubscriptionVariables = {
 export type OnCreateMediaSubscription = {
   onCreateMedia?:  {
     __typename: "Media",
-    createdAt?: string | null,
+    createdAt: string,
     dataURL?: string | null,
     id: string,
-    ocr?: string | null,
     price?: number | null,
+    s3address?: string | null,
     taskId?: string | null,
     updatedAt: string,
     walletAddress?: string | null,
-  } | null,
-};
-
-export type OnCreateSaleSubscriptionVariables = {
-  filter?: ModelSubscriptionSaleFilterInput | null,
-};
-
-export type OnCreateSaleSubscription = {
-  onCreateSale?:  {
-    __typename: "Sale",
-    aiModelId?: string | null,
-    app?: string | null,
-    buyersWallet?: string | null,
-    createdAt?: string | null,
-    id: string,
-    isAuction?: boolean | null,
-    priceListed?: number | null,
-    pricePaid?: number | null,
-    published?: boolean | null,
-    sellerssWallet?: string | null,
-    status?: string | null,
-    taskId?: string | null,
-    transactionLedgerId?: string | null,
-    updatedAt: string,
   } | null,
 };
 
@@ -1051,7 +924,7 @@ export type OnCreateTaskSubscription = {
     __typename: "Task",
     app?: string | null,
     appImage?: string | null,
-    createdAt?: string | null,
+    createdAt: string,
     description?: string | null,
     difficulty?: number | null,
     id: string,
@@ -1060,6 +933,21 @@ export type OnCreateTaskSubscription = {
     name?: string | null,
     updatedAt: string,
     walletAddress?: string | null,
+  } | null,
+};
+
+export type OnCreateTodoSubscriptionVariables = {
+  filter?: ModelSubscriptionTodoFilterInput | null,
+};
+
+export type OnCreateTodoSubscription = {
+  onCreateTodo?:  {
+    __typename: "Todo",
+    content?: string | null,
+    createdAt?: string | null,
+    id: string,
+    isDone?: boolean | null,
+    updatedAt: string,
   } | null,
 };
 
@@ -1089,38 +977,14 @@ export type OnDeleteMediaSubscriptionVariables = {
 export type OnDeleteMediaSubscription = {
   onDeleteMedia?:  {
     __typename: "Media",
-    createdAt?: string | null,
+    createdAt: string,
     dataURL?: string | null,
     id: string,
-    ocr?: string | null,
     price?: number | null,
+    s3address?: string | null,
     taskId?: string | null,
     updatedAt: string,
     walletAddress?: string | null,
-  } | null,
-};
-
-export type OnDeleteSaleSubscriptionVariables = {
-  filter?: ModelSubscriptionSaleFilterInput | null,
-};
-
-export type OnDeleteSaleSubscription = {
-  onDeleteSale?:  {
-    __typename: "Sale",
-    aiModelId?: string | null,
-    app?: string | null,
-    buyersWallet?: string | null,
-    createdAt?: string | null,
-    id: string,
-    isAuction?: boolean | null,
-    priceListed?: number | null,
-    pricePaid?: number | null,
-    published?: boolean | null,
-    sellerssWallet?: string | null,
-    status?: string | null,
-    taskId?: string | null,
-    transactionLedgerId?: string | null,
-    updatedAt: string,
   } | null,
 };
 
@@ -1133,7 +997,7 @@ export type OnDeleteTaskSubscription = {
     __typename: "Task",
     app?: string | null,
     appImage?: string | null,
-    createdAt?: string | null,
+    createdAt: string,
     description?: string | null,
     difficulty?: number | null,
     id: string,
@@ -1142,6 +1006,21 @@ export type OnDeleteTaskSubscription = {
     name?: string | null,
     updatedAt: string,
     walletAddress?: string | null,
+  } | null,
+};
+
+export type OnDeleteTodoSubscriptionVariables = {
+  filter?: ModelSubscriptionTodoFilterInput | null,
+};
+
+export type OnDeleteTodoSubscription = {
+  onDeleteTodo?:  {
+    __typename: "Todo",
+    content?: string | null,
+    createdAt?: string | null,
+    id: string,
+    isDone?: boolean | null,
+    updatedAt: string,
   } | null,
 };
 
@@ -1171,38 +1050,14 @@ export type OnUpdateMediaSubscriptionVariables = {
 export type OnUpdateMediaSubscription = {
   onUpdateMedia?:  {
     __typename: "Media",
-    createdAt?: string | null,
+    createdAt: string,
     dataURL?: string | null,
     id: string,
-    ocr?: string | null,
     price?: number | null,
+    s3address?: string | null,
     taskId?: string | null,
     updatedAt: string,
     walletAddress?: string | null,
-  } | null,
-};
-
-export type OnUpdateSaleSubscriptionVariables = {
-  filter?: ModelSubscriptionSaleFilterInput | null,
-};
-
-export type OnUpdateSaleSubscription = {
-  onUpdateSale?:  {
-    __typename: "Sale",
-    aiModelId?: string | null,
-    app?: string | null,
-    buyersWallet?: string | null,
-    createdAt?: string | null,
-    id: string,
-    isAuction?: boolean | null,
-    priceListed?: number | null,
-    pricePaid?: number | null,
-    published?: boolean | null,
-    sellerssWallet?: string | null,
-    status?: string | null,
-    taskId?: string | null,
-    transactionLedgerId?: string | null,
-    updatedAt: string,
   } | null,
 };
 
@@ -1215,7 +1070,7 @@ export type OnUpdateTaskSubscription = {
     __typename: "Task",
     app?: string | null,
     appImage?: string | null,
-    createdAt?: string | null,
+    createdAt: string,
     description?: string | null,
     difficulty?: number | null,
     id: string,
@@ -1224,5 +1079,20 @@ export type OnUpdateTaskSubscription = {
     name?: string | null,
     updatedAt: string,
     walletAddress?: string | null,
+  } | null,
+};
+
+export type OnUpdateTodoSubscriptionVariables = {
+  filter?: ModelSubscriptionTodoFilterInput | null,
+};
+
+export type OnUpdateTodoSubscription = {
+  onUpdateTodo?:  {
+    __typename: "Todo",
+    content?: string | null,
+    createdAt?: string | null,
+    id: string,
+    isDone?: boolean | null,
+    updatedAt: string,
   } | null,
 };

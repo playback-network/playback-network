@@ -37,8 +37,8 @@ export const createMedia = /* GraphQL */ `mutation CreateMedia(
     createdAt
     dataURL
     id
-    ocr
     price
+    s3address
     taskId
     updatedAt
     walletAddress
@@ -77,32 +77,6 @@ export const createMedias = /* GraphQL */ `mutation CreateMedias(
   APITypes.CreateMediasMutationVariables,
   APITypes.CreateMediasMutation
 >;
-export const createSale = /* GraphQL */ `mutation CreateSale(
-  $condition: ModelSaleConditionInput
-  $input: CreateSaleInput!
-) {
-  createSale(condition: $condition, input: $input) {
-    aiModelId
-    app
-    buyersWallet
-    createdAt
-    id
-    isAuction
-    priceListed
-    pricePaid
-    published
-    sellerssWallet
-    status
-    taskId
-    transactionLedgerId
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.CreateSaleMutationVariables,
-  APITypes.CreateSaleMutation
->;
 export const createTask = /* GraphQL */ `mutation CreateTask(
   $condition: ModelTaskConditionInput
   $input: CreateTaskInput!
@@ -125,6 +99,23 @@ export const createTask = /* GraphQL */ `mutation CreateTask(
 ` as GeneratedMutation<
   APITypes.CreateTaskMutationVariables,
   APITypes.CreateTaskMutation
+>;
+export const createTodo = /* GraphQL */ `mutation CreateTodo(
+  $condition: ModelTodoConditionInput
+  $input: CreateTodoInput!
+) {
+  createTodo(condition: $condition, input: $input) {
+    content
+    createdAt
+    id
+    isDone
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateTodoMutationVariables,
+  APITypes.CreateTodoMutation
 >;
 export const deleteApp = /* GraphQL */ `mutation DeleteApp(
   $condition: ModelAppConditionInput
@@ -155,8 +146,8 @@ export const deleteMedia = /* GraphQL */ `mutation DeleteMedia(
     createdAt
     dataURL
     id
-    ocr
     price
+    s3address
     taskId
     updatedAt
     walletAddress
@@ -166,32 +157,6 @@ export const deleteMedia = /* GraphQL */ `mutation DeleteMedia(
 ` as GeneratedMutation<
   APITypes.DeleteMediaMutationVariables,
   APITypes.DeleteMediaMutation
->;
-export const deleteSale = /* GraphQL */ `mutation DeleteSale(
-  $condition: ModelSaleConditionInput
-  $input: DeleteSaleInput!
-) {
-  deleteSale(condition: $condition, input: $input) {
-    aiModelId
-    app
-    buyersWallet
-    createdAt
-    id
-    isAuction
-    priceListed
-    pricePaid
-    published
-    sellerssWallet
-    status
-    taskId
-    transactionLedgerId
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.DeleteSaleMutationVariables,
-  APITypes.DeleteSaleMutation
 >;
 export const deleteTask = /* GraphQL */ `mutation DeleteTask(
   $condition: ModelTaskConditionInput
@@ -215,6 +180,23 @@ export const deleteTask = /* GraphQL */ `mutation DeleteTask(
 ` as GeneratedMutation<
   APITypes.DeleteTaskMutationVariables,
   APITypes.DeleteTaskMutation
+>;
+export const deleteTodo = /* GraphQL */ `mutation DeleteTodo(
+  $condition: ModelTodoConditionInput
+  $input: DeleteTodoInput!
+) {
+  deleteTodo(condition: $condition, input: $input) {
+    content
+    createdAt
+    id
+    isDone
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteTodoMutationVariables,
+  APITypes.DeleteTodoMutation
 >;
 export const updateApp = /* GraphQL */ `mutation UpdateApp(
   $condition: ModelAppConditionInput
@@ -245,8 +227,8 @@ export const updateMedia = /* GraphQL */ `mutation UpdateMedia(
     createdAt
     dataURL
     id
-    ocr
     price
+    s3address
     taskId
     updatedAt
     walletAddress
@@ -256,32 +238,6 @@ export const updateMedia = /* GraphQL */ `mutation UpdateMedia(
 ` as GeneratedMutation<
   APITypes.UpdateMediaMutationVariables,
   APITypes.UpdateMediaMutation
->;
-export const updateSale = /* GraphQL */ `mutation UpdateSale(
-  $condition: ModelSaleConditionInput
-  $input: UpdateSaleInput!
-) {
-  updateSale(condition: $condition, input: $input) {
-    aiModelId
-    app
-    buyersWallet
-    createdAt
-    id
-    isAuction
-    priceListed
-    pricePaid
-    published
-    sellerssWallet
-    status
-    taskId
-    transactionLedgerId
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.UpdateSaleMutationVariables,
-  APITypes.UpdateSaleMutation
 >;
 export const updateTask = /* GraphQL */ `mutation UpdateTask(
   $condition: ModelTaskConditionInput
@@ -305,4 +261,21 @@ export const updateTask = /* GraphQL */ `mutation UpdateTask(
 ` as GeneratedMutation<
   APITypes.UpdateTaskMutationVariables,
   APITypes.UpdateTaskMutation
+>;
+export const updateTodo = /* GraphQL */ `mutation UpdateTodo(
+  $condition: ModelTodoConditionInput
+  $input: UpdateTodoInput!
+) {
+  updateTodo(condition: $condition, input: $input) {
+    content
+    createdAt
+    id
+    isDone
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateTodoMutationVariables,
+  APITypes.UpdateTodoMutation
 >;

@@ -24,32 +24,11 @@ export const onCreateMedia = /* GraphQL */ `
       createdAt
       dataURL
       id
-      ocr
       price
+      s3address
       taskId
       updatedAt
       walletAddress
-      __typename
-    }
-  }
-`;
-export const onCreateSale = /* GraphQL */ `
-  subscription OnCreateSale($filter: ModelSubscriptionSaleFilterInput) {
-    onCreateSale(filter: $filter) {
-      aiModelId
-      app
-      buyersWallet
-      createdAt
-      id
-      isAuction
-      priceListed
-      pricePaid
-      published
-      sellerssWallet
-      status
-      taskId
-      transactionLedgerId
-      updatedAt
       __typename
     }
   }
@@ -68,6 +47,18 @@ export const onCreateTask = /* GraphQL */ `
       name
       updatedAt
       walletAddress
+      __typename
+    }
+  }
+`;
+export const onCreateTodo = /* GraphQL */ `
+  subscription OnCreateTodo($filter: ModelSubscriptionTodoFilterInput) {
+    onCreateTodo(filter: $filter) {
+      content
+      createdAt
+      id
+      isDone
+      updatedAt
       __typename
     }
   }
@@ -94,32 +85,11 @@ export const onDeleteMedia = /* GraphQL */ `
       createdAt
       dataURL
       id
-      ocr
       price
+      s3address
       taskId
       updatedAt
       walletAddress
-      __typename
-    }
-  }
-`;
-export const onDeleteSale = /* GraphQL */ `
-  subscription OnDeleteSale($filter: ModelSubscriptionSaleFilterInput) {
-    onDeleteSale(filter: $filter) {
-      aiModelId
-      app
-      buyersWallet
-      createdAt
-      id
-      isAuction
-      priceListed
-      pricePaid
-      published
-      sellerssWallet
-      status
-      taskId
-      transactionLedgerId
-      updatedAt
       __typename
     }
   }
@@ -138,6 +108,18 @@ export const onDeleteTask = /* GraphQL */ `
       name
       updatedAt
       walletAddress
+      __typename
+    }
+  }
+`;
+export const onDeleteTodo = /* GraphQL */ `
+  subscription OnDeleteTodo($filter: ModelSubscriptionTodoFilterInput) {
+    onDeleteTodo(filter: $filter) {
+      content
+      createdAt
+      id
+      isDone
+      updatedAt
       __typename
     }
   }
@@ -164,32 +146,11 @@ export const onUpdateMedia = /* GraphQL */ `
       createdAt
       dataURL
       id
-      ocr
       price
+      s3address
       taskId
       updatedAt
       walletAddress
-      __typename
-    }
-  }
-`;
-export const onUpdateSale = /* GraphQL */ `
-  subscription OnUpdateSale($filter: ModelSubscriptionSaleFilterInput) {
-    onUpdateSale(filter: $filter) {
-      aiModelId
-      app
-      buyersWallet
-      createdAt
-      id
-      isAuction
-      priceListed
-      pricePaid
-      published
-      sellerssWallet
-      status
-      taskId
-      transactionLedgerId
-      updatedAt
       __typename
     }
   }
@@ -208,6 +169,18 @@ export const onUpdateTask = /* GraphQL */ `
       name
       updatedAt
       walletAddress
+      __typename
+    }
+  }
+`;
+export const onUpdateTodo = /* GraphQL */ `
+  subscription OnUpdateTodo($filter: ModelSubscriptionTodoFilterInput) {
+    onUpdateTodo(filter: $filter) {
+      content
+      createdAt
+      id
+      isDone
+      updatedAt
       __typename
     }
   }

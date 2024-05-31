@@ -24,32 +24,11 @@ export const getMedia = /* GraphQL */ `
       createdAt
       dataURL
       id
-      ocr
       price
+      s3address
       taskId
       updatedAt
       walletAddress
-      __typename
-    }
-  }
-`;
-export const getSale = /* GraphQL */ `
-  query GetSale($id: ID!) {
-    getSale(id: $id) {
-      aiModelId
-      app
-      buyersWallet
-      createdAt
-      id
-      isAuction
-      priceListed
-      pricePaid
-      published
-      sellerssWallet
-      status
-      taskId
-      transactionLedgerId
-      updatedAt
       __typename
     }
   }
@@ -68,6 +47,18 @@ export const getTask = /* GraphQL */ `
       name
       updatedAt
       walletAddress
+      __typename
+    }
+  }
+`;
+export const getTodo = /* GraphQL */ `
+  query GetTodo($id: ID!) {
+    getTodo(id: $id) {
+      content
+      createdAt
+      id
+      isDone
+      updatedAt
       __typename
     }
   }
@@ -107,40 +98,11 @@ export const listMedia = /* GraphQL */ `
         createdAt
         dataURL
         id
-        ocr
         price
+        s3address
         taskId
         updatedAt
         walletAddress
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const listSales = /* GraphQL */ `
-  query ListSales(
-    $filter: ModelSaleFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listSales(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        aiModelId
-        app
-        buyersWallet
-        createdAt
-        id
-        isAuction
-        priceListed
-        pricePaid
-        published
-        sellerssWallet
-        status
-        taskId
-        transactionLedgerId
-        updatedAt
         __typename
       }
       nextToken
@@ -167,6 +129,26 @@ export const listTasks = /* GraphQL */ `
         name
         updatedAt
         walletAddress
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const listTodos = /* GraphQL */ `
+  query ListTodos(
+    $filter: ModelTodoFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listTodos(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        content
+        createdAt
+        id
+        isDone
+        updatedAt
         __typename
       }
       nextToken
