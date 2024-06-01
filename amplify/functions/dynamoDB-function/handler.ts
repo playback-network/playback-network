@@ -1,13 +1,13 @@
 import type { DynamoDBStreamHandler } from 'aws-lambda';
 import { Logger } from '@aws-lambda-powertools/logger';
 
-const env = {
-  AWS_REGION: process.env.AWS_REGION,
-  AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
-  AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
-  AWS_SESSION_TOKEN: process.env.AWS_SESSION_TOKEN,
-  GRAPHQL_ENDPOINT: process.env.GRAPHQL_ENDPOINT,
-};
+// const env = {
+//   AWS_REGION: process.env.AWS_REGION,
+//   AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
+//   AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
+//   AWS_SESSION_TOKEN: process.env.AWS_SESSION_TOKEN,
+//   GRAPHQL_ENDPOINT: process.env.GRAPHQL_ENDPOINT,
+// };
 
 const logger = new Logger({
   logLevel: 'INFO',
@@ -15,26 +15,14 @@ const logger = new Logger({
 });
 
 /**
- * Galadriel Lambda is implemented as a the DynamoDB Stream. 
- * It runs on updates on the Task table, 
+ * Galadriel Lambda is implemented as a the DynamoDB Stream.
+ * It runs on updates on the Task table,
  * to collect and prepares data in a Tx to send to Galadriel network
  * @param event
  * @returns
  */
 export const handler: DynamoDBStreamHandler = async (event) => {
   console.log('event', event);
-
-  const requestBody = JSON.parse(event.toString()) || null;
-
-  if (requestBody) {
-    const params = {
-      Bucket: 'amplify-db6s1roouv0tm-dev-bra-mediasbucket5fdfde77-bktlwbdhkr1y', // replace with your bucket name
-      Key: 'public/', // replace with your desired object key
-      Body: requestBody,
-      ContentType: 'image/jpeg', // Set the appropriate content type
-      ACL: 'public-read', // Optional: make the file publicly readable
-    };
-  }
 
   for (const record of event.Records) {
     logger.info(`Processing record: ${record.eventID}`);
