@@ -32,7 +32,9 @@ const schema = a.schema({
       walletAddress: a.string(),
       name: a.string(),
       description: a.json(),
+      price: a.float(),
       difficulty: a.float(),
+      dataPayload: a.float(),
       app: a.string(),
       appImage: a.string(),
     })

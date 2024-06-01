@@ -42,11 +42,13 @@ export const getTask = /* GraphQL */ `query GetTask($id: ID!) {
     app
     appImage
     createdAt
+    dataPayload
     description
     difficulty
     id
     mediaId
     name
+    price
     updatedAt
     walletAddress
     __typename
@@ -115,11 +117,13 @@ export const listTasks = /* GraphQL */ `query ListTasks(
       app
       appImage
       createdAt
+      dataPayload
       description
       difficulty
       id
       mediaId
       name
+      price
       updatedAt
       walletAddress
       __typename

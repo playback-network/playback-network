@@ -39,11 +39,13 @@ export const onCreateTask = /* GraphQL */ `
       app
       appImage
       createdAt
+      dataPayload
       description
       difficulty
       id
       mediaId
       name
+      price
       updatedAt
       walletAddress
       __typename
@@ -99,11 +101,13 @@ export const onDeleteTask = /* GraphQL */ `
       app
       appImage
       createdAt
+      dataPayload
       description
       difficulty
       id
       mediaId
       name
+      price
       updatedAt
       walletAddress
       __typename
@@ -159,11 +163,13 @@ export const onUpdateTask = /* GraphQL */ `
       app
       appImage
       createdAt
+      dataPayload
       description
       difficulty
       id
       mediaId
       name
+      price
       updatedAt
       walletAddress
       __typename

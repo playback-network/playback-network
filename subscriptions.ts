@@ -48,11 +48,13 @@ export const onCreateTask = /* GraphQL */ `subscription OnCreateTask($filter: Mo
     app
     appImage
     createdAt
+    dataPayload
     description
     difficulty
     id
     mediaId
     name
+    price
     updatedAt
     walletAddress
     __typename
@@ -116,11 +118,13 @@ export const onDeleteTask = /* GraphQL */ `subscription OnDeleteTask($filter: Mo
     app
     appImage
     createdAt
+    dataPayload
     description
     difficulty
     id
     mediaId
     name
+    price
     updatedAt
     walletAddress
     __typename
@@ -184,11 +188,13 @@ export const onUpdateTask = /* GraphQL */ `subscription OnUpdateTask($filter: Mo
     app
     appImage
     createdAt
+    dataPayload
     description
     difficulty
     id
     mediaId
     name
+    price
     updatedAt
     walletAddress
     __typename

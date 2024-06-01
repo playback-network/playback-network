@@ -20,7 +20,9 @@ export declare type TaskCreateFormInputValues = {
     walletAddress?: string;
     name?: string;
     description?: string;
+    price?: number;
     difficulty?: number;
+    dataPayload?: number;
     app?: string;
     appImage?: string;
 };
@@ -29,7 +31,9 @@ export declare type TaskCreateFormValidationValues = {
     walletAddress?: ValidationFunction<string>;
     name?: ValidationFunction<string>;
     description?: ValidationFunction<string>;
+    price?: ValidationFunction<number>;
     difficulty?: ValidationFunction<number>;
+    dataPayload?: ValidationFunction<number>;
     app?: ValidationFunction<string>;
     appImage?: ValidationFunction<string>;
 };
@@ -40,7 +44,9 @@ export declare type TaskCreateFormOverridesProps = {
     walletAddress?: PrimitiveOverrideProps<TextFieldProps>;
     name?: PrimitiveOverrideProps<TextFieldProps>;
     description?: PrimitiveOverrideProps<TextAreaFieldProps>;
+    price?: PrimitiveOverrideProps<TextFieldProps>;
     difficulty?: PrimitiveOverrideProps<TextFieldProps>;
+    dataPayload?: PrimitiveOverrideProps<TextFieldProps>;
     app?: PrimitiveOverrideProps<TextFieldProps>;
     appImage?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;

@@ -30,7 +30,9 @@ export default function TaskUpdateForm(props) {
     walletAddress: "",
     name: "",
     description: "",
+    price: "",
     difficulty: "",
+    dataPayload: "",
     app: "",
     appImage: "",
   };
@@ -42,7 +44,11 @@ export default function TaskUpdateForm(props) {
   const [description, setDescription] = React.useState(
     initialValues.description
   );
+  const [price, setPrice] = React.useState(initialValues.price);
   const [difficulty, setDifficulty] = React.useState(initialValues.difficulty);
+  const [dataPayload, setDataPayload] = React.useState(
+    initialValues.dataPayload
+  );
   const [app, setApp] = React.useState(initialValues.app);
   const [appImage, setAppImage] = React.useState(initialValues.appImage);
   const [errors, setErrors] = React.useState({});
@@ -59,7 +65,9 @@ export default function TaskUpdateForm(props) {
         ? cleanValues.description
         : JSON.stringify(cleanValues.description)
     );
+    setPrice(cleanValues.price);
     setDifficulty(cleanValues.difficulty);
+    setDataPayload(cleanValues.dataPayload);
     setApp(cleanValues.app);
     setAppImage(cleanValues.appImage);
     setErrors({});
@@ -85,7 +93,9 @@ export default function TaskUpdateForm(props) {
     walletAddress: [],
     name: [],
     description: [{ type: "JSON" }],
+    price: [],
     difficulty: [],
+    dataPayload: [],
     app: [],
     appImage: [],
   };
@@ -119,7 +129,9 @@ export default function TaskUpdateForm(props) {
           walletAddress: walletAddress ?? null,
           name: name ?? null,
           description: description ?? null,
+          price: price ?? null,
           difficulty: difficulty ?? null,
+          dataPayload: dataPayload ?? null,
           app: app ?? null,
           appImage: appImage ?? null,
         };
@@ -186,7 +198,9 @@ export default function TaskUpdateForm(props) {
               walletAddress,
               name,
               description,
+              price,
               difficulty,
+              dataPayload,
               app,
               appImage,
             };
@@ -216,7 +230,9 @@ export default function TaskUpdateForm(props) {
               walletAddress: value,
               name,
               description,
+              price,
               difficulty,
+              dataPayload,
               app,
               appImage,
             };
@@ -246,7 +262,9 @@ export default function TaskUpdateForm(props) {
               walletAddress,
               name: value,
               description,
+              price,
               difficulty,
+              dataPayload,
               app,
               appImage,
             };
@@ -276,7 +294,9 @@ export default function TaskUpdateForm(props) {
               walletAddress,
               name,
               description: value,
+              price,
               difficulty,
+              dataPayload,
               app,
               appImage,
             };
@@ -294,6 +314,42 @@ export default function TaskUpdateForm(props) {
         {...getOverrideProps(overrides, "description")}
       ></TextAreaField>
       <TextField
+        label="Price"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={price}
+        onChange={(e) => {
+          let value = isNaN(parseFloat(e.target.value))
+            ? e.target.value
+            : parseFloat(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              mediaId,
+              walletAddress,
+              name,
+              description,
+              price: value,
+              difficulty,
+              dataPayload,
+              app,
+              appImage,
+            };
+            const result = onChange(modelFields);
+            value = result?.price ?? value;
+          }
+          if (errors.price?.hasError) {
+            runValidationTasks("price", value);
+          }
+          setPrice(value);
+        }}
+        onBlur={() => runValidationTasks("price", price)}
+        errorMessage={errors.price?.errorMessage}
+        hasError={errors.price?.hasError}
+        {...getOverrideProps(overrides, "price")}
+      ></TextField>
+      <TextField
         label="Difficulty"
         isRequired={false}
         isReadOnly={false}
@@ -310,7 +366,9 @@ export default function TaskUpdateForm(props) {
               walletAddress,
               name,
               description,
+              price,
               difficulty: value,
+              dataPayload,
               app,
               appImage,
             };
@@ -328,6 +386,42 @@ export default function TaskUpdateForm(props) {
         {...getOverrideProps(overrides, "difficulty")}
       ></TextField>
       <TextField
+        label="Data payload"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={dataPayload}
+        onChange={(e) => {
+          let value = isNaN(parseFloat(e.target.value))
+            ? e.target.value
+            : parseFloat(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              mediaId,
+              walletAddress,
+              name,
+              description,
+              price,
+              difficulty,
+              dataPayload: value,
+              app,
+              appImage,
+            };
+            const result = onChange(modelFields);
+            value = result?.dataPayload ?? value;
+          }
+          if (errors.dataPayload?.hasError) {
+            runValidationTasks("dataPayload", value);
+          }
+          setDataPayload(value);
+        }}
+        onBlur={() => runValidationTasks("dataPayload", dataPayload)}
+        errorMessage={errors.dataPayload?.errorMessage}
+        hasError={errors.dataPayload?.hasError}
+        {...getOverrideProps(overrides, "dataPayload")}
+      ></TextField>
+      <TextField
         label="App"
         isRequired={false}
         isReadOnly={false}
@@ -340,7 +434,9 @@ export default function TaskUpdateForm(props) {
               walletAddress,
               name,
               description,
+              price,
               difficulty,
+              dataPayload,
               app: value,
               appImage,
             };
@@ -370,7 +466,9 @@ export default function TaskUpdateForm(props) {
               walletAddress,
               name,
               description,
+              price,
               difficulty,
+              dataPayload,
               app,
               appImage: value,
             };
