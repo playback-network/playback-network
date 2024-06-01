@@ -10,10 +10,10 @@ import { Stack } from 'aws-cdk-lib';
 import { Policy, PolicyStatement, Effect } from 'aws-cdk-lib/aws-iam';
 
 const backend = defineBackend({
-  auth,
   storage,
   payloadmanagerFunction,
   myDynamoDBFunction,
+  auth,
   data,
 });
 
@@ -27,6 +27,7 @@ const backend = defineBackend({
 //     startingPosition: StartingPosition.LATEST,
 //   }
 // );
+// backend.myDynamoDBFunction.resources.lambda.addEventSource(eventSource);
 
 // Temp workaround:
 // https://github.com/aws-amplify/amplify-category-api/issues/2554#issuecomment-2140732707
@@ -50,8 +51,18 @@ backend.myDynamoDBFunction.resources.lambda.role?.attachInlinePolicy(
           'dynamodb:GetShardIterator',
           'dynamodb:ListStreams',
         ],
-        resources: [backend.data.resources.tables["Task"].tableArn],
+        resources: [backend.data.resources.tables['Task'].tableArn],
       }),
     ],
   })
+);
+
+new EventSourceMapping(
+  Stack.of(taskTable),
+  "dynamoDB-function",
+  {
+      target: backend.myDynamoDBFunction.resources.lambda,
+      eventSourceArn: taskTable.tableStreamArn,
+      startingPosition: StartingPosition.LATEST,
+  }
 );
