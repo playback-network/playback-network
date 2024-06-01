@@ -23,7 +23,7 @@ export declare type TaskUpdateFormInputValues = {
     description?: string;
     price?: number;
     difficulty?: number;
-    dataPayload?: number;
+    dataPayload?: string;
     app?: string;
     appImage?: string;
 };
@@ -34,7 +34,7 @@ export declare type TaskUpdateFormValidationValues = {
     description?: ValidationFunction<string>;
     price?: ValidationFunction<number>;
     difficulty?: ValidationFunction<number>;
-    dataPayload?: ValidationFunction<number>;
+    dataPayload?: ValidationFunction<string>;
     app?: ValidationFunction<string>;
     appImage?: ValidationFunction<string>;
 };

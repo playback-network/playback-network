@@ -364,13 +364,9 @@ export default function TaskCreateForm(props) {
         label="Data payload"
         isRequired={false}
         isReadOnly={false}
-        type="number"
-        step="any"
         value={dataPayload}
         onChange={(e) => {
-          let value = isNaN(parseFloat(e.target.value))
-            ? e.target.value
-            : parseFloat(e.target.value);
+          let { value } = e.target;
           if (onChange) {
             const modelFields = {
               mediaId,

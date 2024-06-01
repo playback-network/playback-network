@@ -34,7 +34,7 @@ const schema = a.schema({
       description: a.json(),
       price: a.float(),
       difficulty: a.float(),
-      dataPayload: a.float(),
+      dataPayload: a.string(),
       app: a.string(),
       appImage: a.string(),
     })
