@@ -17,28 +17,7 @@ const backend = defineBackend({
   data,
 });
 
-// DynamoDB Streams docs has an issue
-// https://docs.amplify.aws/react/build-a-backend/functions/examples/dynamo-db-stream/
-// Known issue: Fix when the issue has been solved.
-// https://github.com/aws-amplify/amplify-category-api/issues/2554#issue-2293165077
-// const eventSource = new DynamoEventSource(
-//   backend.data.resources.tables['Task'],
-//   {
-//     startingPosition: StartingPosition.LATEST,
-//   }
-// );
-// backend.myDynamoDBFunction.resources.lambda.addEventSource(eventSource);
-
-// Temp workaround:
-// https://github.com/aws-amplify/amplify-category-api/issues/2554#issuecomment-2140732707
-
 const taskTable = backend.data.resources.tables['Task'];
-
-new EventSourceMapping(Stack.of(taskTable), 'dynamoDB-function', {
-  target: backend.myDynamoDBFunction.resources.lambda,
-  eventSourceArn: taskTable.tableStreamArn,
-  startingPosition: StartingPosition.LATEST,
-});
 
 backend.myDynamoDBFunction.resources.lambda.role?.attachInlinePolicy(
   new Policy(Stack.of(taskTable), 'DynamoDBPolicy', {
@@ -57,12 +36,8 @@ backend.myDynamoDBFunction.resources.lambda.role?.attachInlinePolicy(
   })
 );
 
-new EventSourceMapping(
-  Stack.of(taskTable),
-  "dynamoDB-function",
-  {
-      target: backend.myDynamoDBFunction.resources.lambda,
-      eventSourceArn: taskTable.tableStreamArn,
-      startingPosition: StartingPosition.LATEST,
-  }
-);
+new EventSourceMapping(Stack.of(taskTable), 'dynamoDB-function', {
+  target: backend.myDynamoDBFunction.resources.lambda,
+  eventSourceArn: taskTable.tableStreamArn,
+  startingPosition: StartingPosition.LATEST,
+});
