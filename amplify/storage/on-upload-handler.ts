@@ -45,6 +45,8 @@ export const handler: S3Handler = async (event) => {
     const bucket = record.s3.bucket.name;
     const key = record.s3.object.key;
 
+    console.log('key: ', key);
+
     if (key.endsWith('/raw-images/play.back')) {
       console.log(`Processing file: ${key} in bucket: ${bucket}`);
 
@@ -66,8 +68,11 @@ export const handler: S3Handler = async (event) => {
       try {
         const response = await s3Client.send(command);
         const imageUrls = response.Contents?.filter(
-          (obj) => obj.Key && obj.Key !== key
-        ) // Exclude 'play.back' file
+          (obj) =>
+            obj.Key &&
+            obj.Key !== key &&
+            /\.(jpg|jpeg|png|gif|bmp)$/i.test(obj.Key)
+        ) // Exclude 'play.back' file and non-image files
           .map(
             (obj) =>
               `https://${bucket}.s3.${'ap-southeast-2'}.amazonaws.com/${
