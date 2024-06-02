@@ -62,11 +62,13 @@ export const createMedias = /* GraphQL */ `mutation CreateMedias(
     app
     appImage
     createdAt
+    dataPayload
     description
     difficulty
     id
     mediaId
     name
+    price
     updatedAt
     walletAddress
     __typename
@@ -84,11 +86,13 @@ export const createTask = /* GraphQL */ `mutation CreateTask(
     app
     appImage
     createdAt
+    dataPayload
     description
     difficulty
     id
     mediaId
     name
+    price
     updatedAt
     walletAddress
     __typename
@@ -164,11 +168,13 @@ export const deleteTask = /* GraphQL */ `mutation DeleteTask(
     app
     appImage
     createdAt
+    dataPayload
     description
     difficulty
     id
     mediaId
     name
+    price
     updatedAt
     walletAddress
     __typename
@@ -244,11 +250,13 @@ export const updateTask = /* GraphQL */ `mutation UpdateTask(
     app
     appImage
     createdAt
+    dataPayload
     description
     difficulty
     id
     mediaId
     name
+    price
     updatedAt
     walletAddress
     __typename

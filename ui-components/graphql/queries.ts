@@ -39,11 +39,13 @@ export const getTask = /* GraphQL */ `
       app
       appImage
       createdAt
+      dataPayload
       description
       difficulty
       id
       mediaId
       name
+      price
       updatedAt
       walletAddress
       __typename
@@ -120,11 +122,13 @@ export const listTasks = /* GraphQL */ `
         app
         appImage
         createdAt
+        dataPayload
         description
         difficulty
         id
         mediaId
         name
+        price
         updatedAt
         walletAddress
         __typename
