@@ -28,18 +28,25 @@ Our focus for HackFS is to solve the data problem but we intend on also training
 
 It should feel like minority report when you're using your computer, it's 2024!
 
-
 ## Overview
 
 This project contains the backend, frontend and aimodel in one repo. Our smart contracts and Coophive SoM model are in different repositories.
 
 The Backend uses a serverless approach combining tablesin DynamoDB (noSQL), Graphql endpoints, REST endpoints, and AWS Lambdas. Amplify Gen2 leverages the CDK (see amplify_outputs.json)
 
+## AI model
+
+- Located in the `aimodel` folder
+- Backend in the `amplify` folder
+- Frontend in the repo: `playbackFrontend` [here](https://github.com/feedback-box/playbackFrontend)
+
 ## Getting started
+
 ```
 npm i
 npm run dev
 ```
+
 This should start a local dev server at http://localhost:3000.
 
 ## Deploying to AWS
@@ -47,4 +54,5 @@ This should start a local dev server at http://localhost:3000.
 For detailed instructions on deploying your application, refer to the [deployment section](https://docs.amplify.aws/nextjs/start/quickstart/nextjs-pages-router/#deploy-a-fullstack-app-to-aws) of our documentation.
 
 ## Further reading
+
 https://docs.amplify.aws/nextjs/start/quickstart/nextjs-pages-router/
