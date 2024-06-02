@@ -2,46 +2,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createAIModel = /* GraphQL */ `
-  mutation CreateAIModel(
-    $condition: ModelAIModelConditionInput
-    $input: CreateAIModelInput!
-  ) {
-    createAIModel(condition: $condition, input: $input) {
-      accuracy
-      app
-      createdAt
-      description
-      id
-      name
-      ownersWallet
-      price
-      published
-      serialisedConfig
-      status
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const createAccount = /* GraphQL */ `
-  mutation CreateAccount(
-    $condition: ModelAccountConditionInput
-    $input: CreateAccountInput!
-  ) {
-    createAccount(condition: $condition, input: $input) {
-      balance
-      createdAt
-      id
-      medias
-      nftAddresses
-      updatedAt
-      verified
-      walletAddress
-      __typename
-    }
-  }
-`;
 export const createApp = /* GraphQL */ `
   mutation CreateApp(
     $condition: ModelAppConditionInput
@@ -68,10 +28,10 @@ export const createMedia = /* GraphQL */ `
   ) {
     createMedia(condition: $condition, input: $input) {
       createdAt
-      dataURL
+      fileName
       id
-      ocr
-      price
+      s3address
+      sizeMb
       taskId
       updatedAt
       walletAddress
@@ -93,57 +53,15 @@ export const createMedias = /* GraphQL */ `
       app
       appImage
       createdAt
+      dataPayload
       description
       difficulty
       id
       mediaId
-      medias
       name
+      price
       updatedAt
       walletAddress
-      __typename
-    }
-  }
-`;
-export const createNFT = /* GraphQL */ `
-  mutation CreateNFT(
-    $condition: ModelNFTConditionInput
-    $input: CreateNFTInput!
-  ) {
-    createNFT(condition: $condition, input: $input) {
-      blockAddress
-      cid
-      createdAt
-      id
-      metadata
-      ownersWallet
-      price
-      sizeGb
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const createSale = /* GraphQL */ `
-  mutation CreateSale(
-    $condition: ModelSaleConditionInput
-    $input: CreateSaleInput!
-  ) {
-    createSale(condition: $condition, input: $input) {
-      aiModelId
-      app
-      buyersWallet
-      createdAt
-      id
-      isAuction
-      priceListed
-      pricePaid
-      published
-      sellerssWallet
-      status
-      taskId
-      transactionLedgerId
-      updatedAt
       __typename
     }
   }
@@ -157,12 +75,13 @@ export const createTask = /* GraphQL */ `
       app
       appImage
       createdAt
+      dataPayload
       description
       difficulty
       id
       mediaId
-      medias
       name
+      price
       updatedAt
       walletAddress
       __typename
@@ -180,46 +99,6 @@ export const createTodo = /* GraphQL */ `
       id
       isDone
       updatedAt
-      __typename
-    }
-  }
-`;
-export const deleteAIModel = /* GraphQL */ `
-  mutation DeleteAIModel(
-    $condition: ModelAIModelConditionInput
-    $input: DeleteAIModelInput!
-  ) {
-    deleteAIModel(condition: $condition, input: $input) {
-      accuracy
-      app
-      createdAt
-      description
-      id
-      name
-      ownersWallet
-      price
-      published
-      serialisedConfig
-      status
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const deleteAccount = /* GraphQL */ `
-  mutation DeleteAccount(
-    $condition: ModelAccountConditionInput
-    $input: DeleteAccountInput!
-  ) {
-    deleteAccount(condition: $condition, input: $input) {
-      balance
-      createdAt
-      id
-      medias
-      nftAddresses
-      updatedAt
-      verified
-      walletAddress
       __typename
     }
   }
@@ -250,56 +129,13 @@ export const deleteMedia = /* GraphQL */ `
   ) {
     deleteMedia(condition: $condition, input: $input) {
       createdAt
-      dataURL
+      fileName
       id
-      ocr
-      price
+      s3address
+      sizeMb
       taskId
       updatedAt
       walletAddress
-      __typename
-    }
-  }
-`;
-export const deleteNFT = /* GraphQL */ `
-  mutation DeleteNFT(
-    $condition: ModelNFTConditionInput
-    $input: DeleteNFTInput!
-  ) {
-    deleteNFT(condition: $condition, input: $input) {
-      blockAddress
-      cid
-      createdAt
-      id
-      metadata
-      ownersWallet
-      price
-      sizeGb
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const deleteSale = /* GraphQL */ `
-  mutation DeleteSale(
-    $condition: ModelSaleConditionInput
-    $input: DeleteSaleInput!
-  ) {
-    deleteSale(condition: $condition, input: $input) {
-      aiModelId
-      app
-      buyersWallet
-      createdAt
-      id
-      isAuction
-      priceListed
-      pricePaid
-      published
-      sellerssWallet
-      status
-      taskId
-      transactionLedgerId
-      updatedAt
       __typename
     }
   }
@@ -313,12 +149,13 @@ export const deleteTask = /* GraphQL */ `
       app
       appImage
       createdAt
+      dataPayload
       description
       difficulty
       id
       mediaId
-      medias
       name
+      price
       updatedAt
       walletAddress
       __typename
@@ -336,46 +173,6 @@ export const deleteTodo = /* GraphQL */ `
       id
       isDone
       updatedAt
-      __typename
-    }
-  }
-`;
-export const updateAIModel = /* GraphQL */ `
-  mutation UpdateAIModel(
-    $condition: ModelAIModelConditionInput
-    $input: UpdateAIModelInput!
-  ) {
-    updateAIModel(condition: $condition, input: $input) {
-      accuracy
-      app
-      createdAt
-      description
-      id
-      name
-      ownersWallet
-      price
-      published
-      serialisedConfig
-      status
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const updateAccount = /* GraphQL */ `
-  mutation UpdateAccount(
-    $condition: ModelAccountConditionInput
-    $input: UpdateAccountInput!
-  ) {
-    updateAccount(condition: $condition, input: $input) {
-      balance
-      createdAt
-      id
-      medias
-      nftAddresses
-      updatedAt
-      verified
-      walletAddress
       __typename
     }
   }
@@ -406,56 +203,13 @@ export const updateMedia = /* GraphQL */ `
   ) {
     updateMedia(condition: $condition, input: $input) {
       createdAt
-      dataURL
+      fileName
       id
-      ocr
-      price
+      s3address
+      sizeMb
       taskId
       updatedAt
       walletAddress
-      __typename
-    }
-  }
-`;
-export const updateNFT = /* GraphQL */ `
-  mutation UpdateNFT(
-    $condition: ModelNFTConditionInput
-    $input: UpdateNFTInput!
-  ) {
-    updateNFT(condition: $condition, input: $input) {
-      blockAddress
-      cid
-      createdAt
-      id
-      metadata
-      ownersWallet
-      price
-      sizeGb
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const updateSale = /* GraphQL */ `
-  mutation UpdateSale(
-    $condition: ModelSaleConditionInput
-    $input: UpdateSaleInput!
-  ) {
-    updateSale(condition: $condition, input: $input) {
-      aiModelId
-      app
-      buyersWallet
-      createdAt
-      id
-      isAuction
-      priceListed
-      pricePaid
-      published
-      sellerssWallet
-      status
-      taskId
-      transactionLedgerId
-      updatedAt
       __typename
     }
   }
@@ -469,12 +223,13 @@ export const updateTask = /* GraphQL */ `
       app
       appImage
       createdAt
+      dataPayload
       description
       difficulty
       id
       mediaId
-      medias
       name
+      price
       updatedAt
       walletAddress
       __typename

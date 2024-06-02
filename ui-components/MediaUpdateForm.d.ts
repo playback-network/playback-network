@@ -19,28 +19,25 @@ export declare type ValidationFunction<T> = (value: T, validationResponse: Valid
 export declare type MediaUpdateFormInputValues = {
     walletAddress?: string;
     taskId?: string;
-    dataURL?: string;
-    ocr?: string;
-    price?: number;
-    createdAt?: string;
+    s3address?: string;
+    fileName?: string;
+    sizeMb?: number;
 };
 export declare type MediaUpdateFormValidationValues = {
     walletAddress?: ValidationFunction<string>;
     taskId?: ValidationFunction<string>;
-    dataURL?: ValidationFunction<string>;
-    ocr?: ValidationFunction<string>;
-    price?: ValidationFunction<number>;
-    createdAt?: ValidationFunction<string>;
+    s3address?: ValidationFunction<string>;
+    fileName?: ValidationFunction<string>;
+    sizeMb?: ValidationFunction<number>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type MediaUpdateFormOverridesProps = {
     MediaUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
     walletAddress?: PrimitiveOverrideProps<TextFieldProps>;
     taskId?: PrimitiveOverrideProps<TextFieldProps>;
-    dataURL?: PrimitiveOverrideProps<TextFieldProps>;
-    ocr?: PrimitiveOverrideProps<TextFieldProps>;
-    price?: PrimitiveOverrideProps<TextFieldProps>;
-    createdAt?: PrimitiveOverrideProps<TextFieldProps>;
+    s3address?: PrimitiveOverrideProps<TextFieldProps>;
+    fileName?: PrimitiveOverrideProps<TextFieldProps>;
+    sizeMb?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type MediaUpdateFormProps = React.PropsWithChildren<{
     overrides?: MediaUpdateFormOverridesProps | undefined | null;

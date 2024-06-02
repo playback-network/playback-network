@@ -2,40 +2,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getAIModel = /* GraphQL */ `
-  query GetAIModel($id: ID!) {
-    getAIModel(id: $id) {
-      accuracy
-      app
-      createdAt
-      description
-      id
-      name
-      ownersWallet
-      price
-      published
-      serialisedConfig
-      status
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const getAccount = /* GraphQL */ `
-  query GetAccount($id: ID!) {
-    getAccount(id: $id) {
-      balance
-      createdAt
-      id
-      medias
-      nftAddresses
-      updatedAt
-      verified
-      walletAddress
-      __typename
-    }
-  }
-`;
 export const getApp = /* GraphQL */ `
   query GetApp($id: ID!) {
     getApp(id: $id) {
@@ -56,50 +22,13 @@ export const getMedia = /* GraphQL */ `
   query GetMedia($id: ID!) {
     getMedia(id: $id) {
       createdAt
-      dataURL
+      fileName
       id
-      ocr
-      price
+      s3address
+      sizeMb
       taskId
       updatedAt
       walletAddress
-      __typename
-    }
-  }
-`;
-export const getNFT = /* GraphQL */ `
-  query GetNFT($id: ID!) {
-    getNFT(id: $id) {
-      blockAddress
-      cid
-      createdAt
-      id
-      metadata
-      ownersWallet
-      price
-      sizeGb
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const getSale = /* GraphQL */ `
-  query GetSale($id: ID!) {
-    getSale(id: $id) {
-      aiModelId
-      app
-      buyersWallet
-      createdAt
-      id
-      isAuction
-      priceListed
-      pricePaid
-      published
-      sellerssWallet
-      status
-      taskId
-      transactionLedgerId
-      updatedAt
       __typename
     }
   }
@@ -110,12 +39,13 @@ export const getTask = /* GraphQL */ `
       app
       appImage
       createdAt
+      dataPayload
       description
       difficulty
       id
       mediaId
-      medias
       name
+      price
       updatedAt
       walletAddress
       __typename
@@ -130,56 +60,6 @@ export const getTodo = /* GraphQL */ `
       id
       isDone
       updatedAt
-      __typename
-    }
-  }
-`;
-export const listAIModels = /* GraphQL */ `
-  query ListAIModels(
-    $filter: ModelAIModelFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listAIModels(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        accuracy
-        app
-        createdAt
-        description
-        id
-        name
-        ownersWallet
-        price
-        published
-        serialisedConfig
-        status
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const listAccounts = /* GraphQL */ `
-  query ListAccounts(
-    $filter: ModelAccountFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listAccounts(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        balance
-        createdAt
-        id
-        medias
-        nftAddresses
-        updatedAt
-        verified
-        walletAddress
-        __typename
-      }
-      nextToken
       __typename
     }
   }
@@ -217,66 +97,13 @@ export const listMedia = /* GraphQL */ `
     listMedia(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         createdAt
-        dataURL
+        fileName
         id
-        ocr
-        price
+        s3address
+        sizeMb
         taskId
         updatedAt
         walletAddress
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const listNFTS = /* GraphQL */ `
-  query ListNFTS(
-    $filter: ModelNFTFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listNFTS(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        blockAddress
-        cid
-        createdAt
-        id
-        metadata
-        ownersWallet
-        price
-        sizeGb
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const listSales = /* GraphQL */ `
-  query ListSales(
-    $filter: ModelSaleFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listSales(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        aiModelId
-        app
-        buyersWallet
-        createdAt
-        id
-        isAuction
-        priceListed
-        pricePaid
-        published
-        sellerssWallet
-        status
-        taskId
-        transactionLedgerId
-        updatedAt
         __typename
       }
       nextToken
@@ -295,12 +122,13 @@ export const listTasks = /* GraphQL */ `
         app
         appImage
         createdAt
+        dataPayload
         description
         difficulty
         id
         mediaId
-        medias
         name
+        price
         updatedAt
         walletAddress
         __typename

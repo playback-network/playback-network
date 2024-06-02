@@ -28,27 +28,29 @@ export default function TaskUpdateForm(props) {
   const initialValues = {
     mediaId: "",
     walletAddress: "",
-    medias: "",
     name: "",
     description: "",
+    price: "",
     difficulty: "",
+    dataPayload: "",
     app: "",
     appImage: "",
-    createdAt: "",
   };
   const [mediaId, setMediaId] = React.useState(initialValues.mediaId);
   const [walletAddress, setWalletAddress] = React.useState(
     initialValues.walletAddress
   );
-  const [medias, setMedias] = React.useState(initialValues.medias);
   const [name, setName] = React.useState(initialValues.name);
   const [description, setDescription] = React.useState(
     initialValues.description
   );
+  const [price, setPrice] = React.useState(initialValues.price);
   const [difficulty, setDifficulty] = React.useState(initialValues.difficulty);
+  const [dataPayload, setDataPayload] = React.useState(
+    initialValues.dataPayload
+  );
   const [app, setApp] = React.useState(initialValues.app);
   const [appImage, setAppImage] = React.useState(initialValues.appImage);
-  const [createdAt, setCreatedAt] = React.useState(initialValues.createdAt);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = taskRecord
@@ -56,17 +58,18 @@ export default function TaskUpdateForm(props) {
       : initialValues;
     setMediaId(cleanValues.mediaId);
     setWalletAddress(cleanValues.walletAddress);
-    setMedias(
-      typeof cleanValues.medias === "string" || cleanValues.medias === null
-        ? cleanValues.medias
-        : JSON.stringify(cleanValues.medias)
-    );
     setName(cleanValues.name);
-    setDescription(cleanValues.description);
+    setDescription(
+      typeof cleanValues.description === "string" ||
+        cleanValues.description === null
+        ? cleanValues.description
+        : JSON.stringify(cleanValues.description)
+    );
+    setPrice(cleanValues.price);
     setDifficulty(cleanValues.difficulty);
+    setDataPayload(cleanValues.dataPayload);
     setApp(cleanValues.app);
     setAppImage(cleanValues.appImage);
-    setCreatedAt(cleanValues.createdAt);
     setErrors({});
   };
   const [taskRecord, setTaskRecord] = React.useState(taskModelProp);
@@ -88,13 +91,13 @@ export default function TaskUpdateForm(props) {
   const validations = {
     mediaId: [],
     walletAddress: [],
-    medias: [{ type: "JSON" }],
     name: [],
-    description: [],
+    description: [{ type: "JSON" }],
+    price: [],
     difficulty: [],
+    dataPayload: [],
     app: [],
     appImage: [],
-    createdAt: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -113,23 +116,6 @@ export default function TaskUpdateForm(props) {
     setErrors((errors) => ({ ...errors, [fieldName]: validationResponse }));
     return validationResponse;
   };
-  const convertToLocal = (date) => {
-    const df = new Intl.DateTimeFormat("default", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      calendar: "iso8601",
-      numberingSystem: "latn",
-      hourCycle: "h23",
-    });
-    const parts = df.formatToParts(date).reduce((acc, part) => {
-      acc[part.type] = part.value;
-      return acc;
-    }, {});
-    return `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}`;
-  };
   return (
     <Grid
       as="form"
@@ -141,13 +127,13 @@ export default function TaskUpdateForm(props) {
         let modelFields = {
           mediaId: mediaId ?? null,
           walletAddress: walletAddress ?? null,
-          medias: medias ?? null,
           name: name ?? null,
           description: description ?? null,
+          price: price ?? null,
           difficulty: difficulty ?? null,
+          dataPayload: dataPayload ?? null,
           app: app ?? null,
           appImage: appImage ?? null,
-          createdAt: createdAt ?? null,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -210,13 +196,13 @@ export default function TaskUpdateForm(props) {
             const modelFields = {
               mediaId: value,
               walletAddress,
-              medias,
               name,
               description,
+              price,
               difficulty,
+              dataPayload,
               app,
               appImage,
-              createdAt,
             };
             const result = onChange(modelFields);
             value = result?.mediaId ?? value;
@@ -242,13 +228,13 @@ export default function TaskUpdateForm(props) {
             const modelFields = {
               mediaId,
               walletAddress: value,
-              medias,
               name,
               description,
+              price,
               difficulty,
+              dataPayload,
               app,
               appImage,
-              createdAt,
             };
             const result = onChange(modelFields);
             value = result?.walletAddress ?? value;
@@ -263,38 +249,6 @@ export default function TaskUpdateForm(props) {
         hasError={errors.walletAddress?.hasError}
         {...getOverrideProps(overrides, "walletAddress")}
       ></TextField>
-      <TextAreaField
-        label="Medias"
-        isRequired={false}
-        isReadOnly={false}
-        value={medias}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              mediaId,
-              walletAddress,
-              medias: value,
-              name,
-              description,
-              difficulty,
-              app,
-              appImage,
-              createdAt,
-            };
-            const result = onChange(modelFields);
-            value = result?.medias ?? value;
-          }
-          if (errors.medias?.hasError) {
-            runValidationTasks("medias", value);
-          }
-          setMedias(value);
-        }}
-        onBlur={() => runValidationTasks("medias", medias)}
-        errorMessage={errors.medias?.errorMessage}
-        hasError={errors.medias?.hasError}
-        {...getOverrideProps(overrides, "medias")}
-      ></TextAreaField>
       <TextField
         label="Name"
         isRequired={false}
@@ -306,13 +260,13 @@ export default function TaskUpdateForm(props) {
             const modelFields = {
               mediaId,
               walletAddress,
-              medias,
               name: value,
               description,
+              price,
               difficulty,
+              dataPayload,
               app,
               appImage,
-              createdAt,
             };
             const result = onChange(modelFields);
             value = result?.name ?? value;
@@ -327,7 +281,7 @@ export default function TaskUpdateForm(props) {
         hasError={errors.name?.hasError}
         {...getOverrideProps(overrides, "name")}
       ></TextField>
-      <TextField
+      <TextAreaField
         label="Description"
         isRequired={false}
         isReadOnly={false}
@@ -338,13 +292,13 @@ export default function TaskUpdateForm(props) {
             const modelFields = {
               mediaId,
               walletAddress,
-              medias,
               name,
               description: value,
+              price,
               difficulty,
+              dataPayload,
               app,
               appImage,
-              createdAt,
             };
             const result = onChange(modelFields);
             value = result?.description ?? value;
@@ -358,6 +312,42 @@ export default function TaskUpdateForm(props) {
         errorMessage={errors.description?.errorMessage}
         hasError={errors.description?.hasError}
         {...getOverrideProps(overrides, "description")}
+      ></TextAreaField>
+      <TextField
+        label="Price"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={price}
+        onChange={(e) => {
+          let value = isNaN(parseFloat(e.target.value))
+            ? e.target.value
+            : parseFloat(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              mediaId,
+              walletAddress,
+              name,
+              description,
+              price: value,
+              difficulty,
+              dataPayload,
+              app,
+              appImage,
+            };
+            const result = onChange(modelFields);
+            value = result?.price ?? value;
+          }
+          if (errors.price?.hasError) {
+            runValidationTasks("price", value);
+          }
+          setPrice(value);
+        }}
+        onBlur={() => runValidationTasks("price", price)}
+        errorMessage={errors.price?.errorMessage}
+        hasError={errors.price?.hasError}
+        {...getOverrideProps(overrides, "price")}
       ></TextField>
       <TextField
         label="Difficulty"
@@ -374,13 +364,13 @@ export default function TaskUpdateForm(props) {
             const modelFields = {
               mediaId,
               walletAddress,
-              medias,
               name,
               description,
+              price,
               difficulty: value,
+              dataPayload,
               app,
               appImage,
-              createdAt,
             };
             const result = onChange(modelFields);
             value = result?.difficulty ?? value;
@@ -396,6 +386,38 @@ export default function TaskUpdateForm(props) {
         {...getOverrideProps(overrides, "difficulty")}
       ></TextField>
       <TextField
+        label="Data payload"
+        isRequired={false}
+        isReadOnly={false}
+        value={dataPayload}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              mediaId,
+              walletAddress,
+              name,
+              description,
+              price,
+              difficulty,
+              dataPayload: value,
+              app,
+              appImage,
+            };
+            const result = onChange(modelFields);
+            value = result?.dataPayload ?? value;
+          }
+          if (errors.dataPayload?.hasError) {
+            runValidationTasks("dataPayload", value);
+          }
+          setDataPayload(value);
+        }}
+        onBlur={() => runValidationTasks("dataPayload", dataPayload)}
+        errorMessage={errors.dataPayload?.errorMessage}
+        hasError={errors.dataPayload?.hasError}
+        {...getOverrideProps(overrides, "dataPayload")}
+      ></TextField>
+      <TextField
         label="App"
         isRequired={false}
         isReadOnly={false}
@@ -406,13 +428,13 @@ export default function TaskUpdateForm(props) {
             const modelFields = {
               mediaId,
               walletAddress,
-              medias,
               name,
               description,
+              price,
               difficulty,
+              dataPayload,
               app: value,
               appImage,
-              createdAt,
             };
             const result = onChange(modelFields);
             value = result?.app ?? value;
@@ -438,13 +460,13 @@ export default function TaskUpdateForm(props) {
             const modelFields = {
               mediaId,
               walletAddress,
-              medias,
               name,
               description,
+              price,
               difficulty,
+              dataPayload,
               app,
               appImage: value,
-              createdAt,
             };
             const result = onChange(modelFields);
             value = result?.appImage ?? value;
@@ -458,40 +480,6 @@ export default function TaskUpdateForm(props) {
         errorMessage={errors.appImage?.errorMessage}
         hasError={errors.appImage?.hasError}
         {...getOverrideProps(overrides, "appImage")}
-      ></TextField>
-      <TextField
-        label="Created at"
-        isRequired={false}
-        isReadOnly={false}
-        type="datetime-local"
-        value={createdAt && convertToLocal(new Date(createdAt))}
-        onChange={(e) => {
-          let value =
-            e.target.value === "" ? "" : new Date(e.target.value).toISOString();
-          if (onChange) {
-            const modelFields = {
-              mediaId,
-              walletAddress,
-              medias,
-              name,
-              description,
-              difficulty,
-              app,
-              appImage,
-              createdAt: value,
-            };
-            const result = onChange(modelFields);
-            value = result?.createdAt ?? value;
-          }
-          if (errors.createdAt?.hasError) {
-            runValidationTasks("createdAt", value);
-          }
-          setCreatedAt(value);
-        }}
-        onBlur={() => runValidationTasks("createdAt", createdAt)}
-        errorMessage={errors.createdAt?.errorMessage}
-        hasError={errors.createdAt?.hasError}
-        {...getOverrideProps(overrides, "createdAt")}
       ></TextField>
       <Flex
         justifyContent="space-between"

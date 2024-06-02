@@ -18,37 +18,37 @@ export declare type ValidationFunction<T> = (value: T, validationResponse: Valid
 export declare type TaskCreateFormInputValues = {
     mediaId?: string;
     walletAddress?: string;
-    medias?: string;
     name?: string;
     description?: string;
+    price?: number;
     difficulty?: number;
+    dataPayload?: string;
     app?: string;
     appImage?: string;
-    createdAt?: string;
 };
 export declare type TaskCreateFormValidationValues = {
     mediaId?: ValidationFunction<string>;
     walletAddress?: ValidationFunction<string>;
-    medias?: ValidationFunction<string>;
     name?: ValidationFunction<string>;
     description?: ValidationFunction<string>;
+    price?: ValidationFunction<number>;
     difficulty?: ValidationFunction<number>;
+    dataPayload?: ValidationFunction<string>;
     app?: ValidationFunction<string>;
     appImage?: ValidationFunction<string>;
-    createdAt?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type TaskCreateFormOverridesProps = {
     TaskCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
     mediaId?: PrimitiveOverrideProps<TextFieldProps>;
     walletAddress?: PrimitiveOverrideProps<TextFieldProps>;
-    medias?: PrimitiveOverrideProps<TextAreaFieldProps>;
     name?: PrimitiveOverrideProps<TextFieldProps>;
-    description?: PrimitiveOverrideProps<TextFieldProps>;
+    description?: PrimitiveOverrideProps<TextAreaFieldProps>;
+    price?: PrimitiveOverrideProps<TextFieldProps>;
     difficulty?: PrimitiveOverrideProps<TextFieldProps>;
+    dataPayload?: PrimitiveOverrideProps<TextFieldProps>;
     app?: PrimitiveOverrideProps<TextFieldProps>;
     appImage?: PrimitiveOverrideProps<TextFieldProps>;
-    createdAt?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type TaskCreateFormProps = React.PropsWithChildren<{
     overrides?: TaskCreateFormOverridesProps | undefined | null;
