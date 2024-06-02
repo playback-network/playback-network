@@ -83,7 +83,7 @@ export const handler: S3Handler = async (event) => {
           const systemMessage = 'System message';
           const message = 'Hello!';
 
-          await sendTransaction(recipient, systemMessage, message, imageUrls);
+          // await sendTransaction(recipient, systemMessage, message, imageUrls);
         } else {
           console.log('No images found in the folder.');
         }
