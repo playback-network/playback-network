@@ -45,8 +45,6 @@ export const handler: S3Handler = async (event) => {
     const bucket = record.s3.bucket.name;
     const key = record.s3.object.key;
 
-    console.log('key: ', key);
-
     if (key.endsWith('/raw-images/play.back')) {
       console.log(`Processing file: ${key} in bucket: ${bucket}`);
 
