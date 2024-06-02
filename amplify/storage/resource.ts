@@ -1,4 +1,4 @@
-import { defineStorage } from '@aws-amplify/backend';
+import { defineFunction, defineStorage } from '@aws-amplify/backend';
 
 export const storage = defineStorage({
   name: 'medias',
@@ -8,4 +8,9 @@ export const storage = defineStorage({
       allow.guest.to(['read', 'write']),
     ],
   }),
+  triggers: {
+    onUpload: defineFunction({
+      entry: './on-upload-handler.ts',
+    }),
+  },
 });
