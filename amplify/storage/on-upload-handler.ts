@@ -437,15 +437,27 @@ async function getTaskNameFromFile(
   bucket: string,
   key: string
 ): Promise<string | undefined> {
+  console.log(`Initializing S3 client for region: ap-southeast-2`);
   const s3Client = new S3Client({ region: 'ap-southeast-2' });
+
+  console.log(`Preparing GetObjectCommand for bucket: ${bucket}, key: ${key}`);
   const command = new GetObjectCommand({ Bucket: bucket, Key: key });
 
   try {
+    console.log(`Sending GetObjectCommand to S3`);
     const response = await s3Client.send(command);
+
+    console.log(`Received response from S3, processing body`);
     const stream = response.Body as Readable;
     const data = await streamToString(stream);
-    // Assuming the file contains a JSON with a taskName field
+
+    console.log(`Converting stream to string`);
+    console.log(`Stream data: ${data}`);
+
+    console.log(`Parsing JSON from stream data`);
     const json = JSON.parse(data);
+
+    console.log(`Extracted taskName from JSON: ${json.taskName}`);
     return json.taskName;
   } catch (error) {
     console.error('Error reading play.back file from S3:', error);
@@ -464,9 +476,8 @@ function streamToString(stream: Readable): Promise<string> {
 }
 
 export const handler: S3Handler = async (event) => {
-  const objectKeys = event.Records.map((record) => record.s3.object.key);
-  console.log('This funciton will prepare and send the startChat on Galadriel');
-  console.log(`Upload handler invoked for objects [${objectKeys.join(', ')}]`);
+  console.log(event);
+  console.log('This function will prepare and send the startChat on Galadriel');
 
   const s3Client = new S3Client({ region: 'ap-southeast-2' });
 
@@ -501,7 +512,9 @@ export const handler: S3Handler = async (event) => {
       });
 
       try {
+        console.log(`Sending ListObjectsV2Command to S3`);
         const response = await s3Client.send(command);
+        console.log('Response: ', response);
         const imageUrls = response.Contents?.filter(
           (obj) =>
             obj.Key &&
@@ -521,37 +534,40 @@ export const handler: S3Handler = async (event) => {
           // Call sendTransaction with the extracted image URLs
           const recipient = walletAddress; // replace with actual recipient
           const systemMessage = `You are an expert at analyzing images extracted from screen recordings and understanding the actions being performed at a image and overall level to understand the task being completed in a given set of images. 
-          You effortlessly understand the actions by looking at the frames and can reflect on these to produce a description of the task being performed based on the input images.
-          Once you understand the task(s) being performed in a set of input images, you are able to accurately estimate the relevancy of the input images relative to a given task and calculate how many tokens should be rewarded for the submission.`;
+            You effortlessly understand the actions by looking at the frames and can reflect on these to produce a description of the task being performed based on the input images.
+            Once you understand the task(s) being performed in a set of input images, you are able to accurately estimate the relevancy of the input images relative to a given task and calculate how many tokens should be rewarded for the submission.`;
           const message = `TASK = "${taskName}"
-          the attached images are video frames extracted from a recording SUBMISSION depicting a person doing a TASK on their computer to contribute to a dataset showing how to do different tasks on computers
+            the attached images are video frames extracted from a recording SUBMISSION depicting a person doing a TASK on their computer to contribute to a dataset showing how to do different tasks on computers
+  
+  the filename of each image correlates to its timestamp
+  
+  Respond in the following way:
+  
+  First re-state the TASK that *should* be depicted in the SUBMISSION frames (note that the submitted video frames could be totally irrelevant and therefore the submission should be ignored). 
+  
+  analyse and reflect on these frames by constructing a table outlining each action that goes into completing the task
+  
+  then return a 10 word description of the task
+  
+  finally, estimate how many tokens you would give someone for submitting this recording to a database of recordings of every possible human task. 
+  
+  the points rewarded should depend both on complexity and how well it was executed relative the TASK above. 
+  
+  If the frames from the video submitted are completely unrelated to the TASK then 0 tokens should be awarded. If it is a perfect depiction of the required TASK and nothing else then it should be rewarded near 100 points.
+  
+  Calculate {tokens} as an estimated reward for this submission - integer between 0 and 100. Remember that SUBMISSION frames that are depicting a different task than the given TASK should be rewarded 0 tokens even if part of the actions are similar.  
+  
+  Estimate the difficulty of this task relative to every possible task that a human can complete on a computer in under 3 minutes and adjust the awarded tokens relative to the difficulty of this task. A perfectly completed and relevant SUBMISSION for a difficult task should receive 100 tokens while a perfectly completed submission for an easy task should only be awarded 10 or so tokens and a medium task should receive around 50 tokens.
+  
+  Summarize your steps in deciding how many tokens to award this SUBMISSION relative to the required TASK that the submission should match
+  
+  Write your reasoning then end your answer with the final line after a blank line:
+  
+  "Valuation: {tokens}"`;
 
-the filename of each image correlates to its timestamp
-
-Respond in the following way:
-
-First re-state the TASK that *should* be depicted in the SUBMISSION frames (note that the submitted video frames could be totally irrelevant and therefore the submission should be ignored). 
-
-analyse and reflect on these frames by constructing a table outlining each action that goes into completing the task
-
-then return a 10 word description of the task
-
-finally, estimate how many tokens you would give someone for submitting this recording to a database of recordings of every possible human task. 
-
-the points rewarded should depend both on complexity and how well it was executed relative the TASK above. 
-
-If the frames from the video submitted are completely unrelated to the TASK then 0 tokens should be awarded. If it is a perfect depiction of the required TASK and nothing else then it should be rewarded near 100 points.
-
-Calculate {tokens} as an estimated reward for this submission - integer between 0 and 100. Remember that SUBMISSION frames that are depicting a different task than the given TASK should be rewarded 0 tokens even if part of the actions are similar.  
-
-Estimate the difficulty of this task relative to every possible task that a human can complete on a computer in under 3 minutes and adjust the awarded tokens relative to the difficulty of this task. A perfectly completed and relevant SUBMISSION for a difficult task should receive 100 tokens while a perfectly completed submission for an easy task should only be awarded 10 or so tokens and a medium task should receive around 50 tokens.
-
-Summarize your steps in deciding how many tokens to award this SUBMISSION relative to the required TASK that the submission should match
-
-Write your reasoning then end your answer with the final line after a blank line:
-
-"Valuation: {tokens}"`;
-
+          console.log(
+            `Sending transaction with recipient: ${recipient}, systemMessage: ${systemMessage}, message: ${message}, imageUrls: ${imageUrls}`
+          );
           await sendTransaction(recipient, systemMessage, message, imageUrls);
         } else {
           console.log('No images found in the folder.');
