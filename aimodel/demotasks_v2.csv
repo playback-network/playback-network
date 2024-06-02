@@ -1,0 +1,11 @@
+Index,Category,Subcategory,App/Website,Task,Difficulty,Time Estimate (seconds),Price
+1,Collaboration,Team Communication,Zoom,Share your entire screen,15,10,20
+2,Finance and Banking,Cryptocurrency Trading,Uniswap,Trade Ethereum for a stablecoin on Uniswap,55,120,130
+3,Cloud Storage,Data Backup,Filecoin,Backup a 1GB folder to FileCoin,30,300,220
+4,News and Information,News Aggregation,Hacker News,Upvote the newest article on Hacker News,5,15,10
+5,Web Browsers,Window Management,Google Chrome,Split current tab 50% right of the screen and side-by-side the other tab,10,15,10
+6,Development & Design,Cryptocurrency Hackathons,ETHGlobal,Stake ETH to join an ETHGlobal hackathon,70,250,210
+7,Spreadsheet,Spreadsheet Manipulation,Google Sheets,Copy the table of US presidents from Wikipedia to a new Google Sheet,25,45,50
+8,Productivity,To-Do List Maintenance,Trello,Create a new card for a grocery list with checklist items in the card,10,15,20
+9,Web Development,Design,WordPress,Log in and change the theme on a Wordpress instance,40,90,110
+10,Calendar,Scheduling,Apple Calendar,"Create a recurring ""Send report"" invite for every Monday at 10 AM",15,10,15
